@@ -1,5 +1,3 @@
-<link href="./assets/css/header-footer.css" rel="stylesheet">
-
 <footer>
   <nav>
     <a href='#'>About</a>
@@ -8,4 +6,5 @@
   </nav>
 </footer>
 
+<script src="./assets/js/index.js"></script>
 <?php

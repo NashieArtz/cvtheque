@@ -27,9 +27,9 @@ if (isset($_POST) && !empty($_POST)) {
   </script>
 <?php
   $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-  $sql = "INSERT INTO `user`(`username`, `email`, `password`) VALUES (?, ?, ?)";
+  $sql = "INSERT INTO `user`(`username`, `email`, `pwd`, `role_id`) VALUES (?, ?, ?, ?)";
   $stmt = $pdo->prepare($sql);
-  $stmt->execute([$username, $email, $pwd]);
+  $stmt->execute([$username, $email, $pwd, $role_id]);
   $id = $pdo->lastInsertId();
   logAction("create", $username, $id);
   echo '<div class="sub-success"> Your account has been created! We are redirecting you :)) </div>';
@@ -76,12 +76,13 @@ if (isset($_POST) && !empty($_POST)) {
         </div>
 
         <div class="mb-3">
-          <label for="role" class="form-label visually-hidden">
+          <label for="role" class="form-label">
             Vous êtes :
-            <select>
-              <option value="1">Étudiant</option>
-              <option value="2">Recrutreur</option>
-            </select>
+          </label>
+          <select name="role">
+            <option value="1">Étudiant</option>
+            <option value="2">Recrutreur</option>
+          </select>
         </div>
         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3"
           style="background:#613F75; border-radius:8px;">S'inscrire

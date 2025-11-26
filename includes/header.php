@@ -1,16 +1,13 @@
-<?php?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link href="../assets/css/header-footer.css" rel="stylesheet">
-  <link href="./assets/css/header-footer.css" rel="stylesheet">
-  <link href="./assets/css/index.css" rel="stylesheet">
-</head>
-
-<body>
-
-  <p>Mon header</p>
+<?php
+if (isset($_SESSION)) {
+  $role_id = $_SESSION['user']['role_id'];
+  if ($role_id = 1) {
+    include("includes/header-student.php");
+  }
+  if ($role_id = 2) {
+    include("includes/header-employer");
+  }
+  if ($role_id = 3) {
+    include("includes/header-admin");
+  }
+} else include("includes/header-guest");

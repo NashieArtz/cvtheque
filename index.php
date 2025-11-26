@@ -1,5 +1,5 @@
 <?php
-include './config/db.php';
+include './config/config.php';
 
 
 $route = [
@@ -10,7 +10,7 @@ $route = [
   'profile-edit' => __DIR__ . '/pages/profile-edit.php',
   'profiles-list' => __DIR__ . '/pages/profiles-list.php',
   'dashboard' => __DIR__ . '/pages/dashboard.php',
-  'employer-list' => __DIR__ . '/pages/employer-list.php',
+  'companies-list' => __DIR__ . '/pages/companies-list.php',
 
   // Connection
   'login' => __DIR__ . '/pages/login.php',
@@ -18,7 +18,7 @@ $route = [
   'logout' => __DIR__ . '/pages/logout.php',
 
   'admin-dashboard' => __DIR__ . '/pages/admin-dashboard.php',
-  'admin-employer' => __DIR__ . '/pages/admin-employer.php',
+  'admin-companies' => __DIR__ . '/pages/admin-companies.php',
   'admin-students' => __DIR__ . '/pages/admin-students.php',
 
 
@@ -43,7 +43,7 @@ switch ($page) {
     break;
 }
 
-include("includes/header.php");
+include("includes/header-guest.php");
 ?>
 <main>
   <?php
@@ -51,5 +51,5 @@ include("includes/header.php");
 </main>
 
 <?php
-include("./includes/footer.php");
+include("includes/footer.php");
 ?>

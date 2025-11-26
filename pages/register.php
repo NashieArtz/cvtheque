@@ -4,6 +4,9 @@ include_once './config/db.php';
 include_once './pages/logger.php';
 session_start();
 
+$maxpwd = 45;
+$specialpwd = '/[!@#$%&*?A-Z\d]+/';
+$regexemail = '/^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/';
 $hasError = false;
 
 if (isset($_POST) && !empty($_POST)) {
@@ -11,6 +14,7 @@ if (isset($_POST) && !empty($_POST)) {
     $email = htmlspecialchars(trim($_POST["email"]));
     $pwd = htmlspecialchars(trim($_POST["pwd"]));
     $repwd = htmlspecialchars(trim($_POST["repwd"]));
+    $role_id = htmlspecialchars(trim($_POST["role"]));
 
     $sql = "SELECT id FROM user WHERE username = ?";
     $stmt = $pdo->prepare($sql);
@@ -18,18 +22,19 @@ if (isset($_POST) && !empty($_POST)) {
     $userExists = $stmt->fetch();
 
     $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO `user`(`username`, `email`, `pwd`) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO `user`(`username`, `email`, `pwd`, `role_id`) VALUES (?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$username, $email, $pwd]);
+    $stmt->execute([$username, $email, $pwd, $role_id]);
     $id = $pdo->lastInsertId();
     logAction("create", $username, $id);
     echo '<div class="sub-success"> Your account has been created! We are redirecting you :)) </div>';
     echo "<script>setTimeout(() => {
-    window.location.href = 'index.php';}, 100000); </script>";
-
+      window.location.href = 'index.php';
+    }, 100000); </script>";
 }
 ?>
 
+<link href="./assets/css/register-login.css" rel="stylesheet">
 <section class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
@@ -69,14 +74,24 @@ if (isset($_POST) && !empty($_POST)) {
                     </p>
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-4">
                     <label for="email" class="form-label visually-hidden">Email</label>
-                    <input type="email" name="email" id="email-register" class="form-control form-control-lg" placeholder="Email" required>
+                    <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="Email"
+                           required>
                     <p id="email-register-p">
 
                     </p>
                 </div>
 
+                <div class="mb-3">
+                    <label for="role" class="form-label">
+                        Vous êtes :
+                    </label>
+                    <select name="role">
+                        <option value="1">Étudiant</option>
+                        <option value="2">Recrutreur</option>
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary btn-lg w-100 mb-3"
                         style="background:#613F75; border-radius:8px;">S'inscrire
                 </button>

@@ -30,13 +30,21 @@
         <h2>Compétences</h2>
         <label for="competence-actuelle">Compétences actuelles</label>
         <input type="text" name="competence-actuelle" id="competence-actuelle">
-        <input type="submit" name="submit id="modifie-competence" value="Modifier les compétences">
+        <input type="submit" name="submit" id="modifie-competence" value="Modifier les compétences">
         <label></label>
         <input type="submit" name="submit" id="add-competence" value="Ajout de compétences">
     <label for="competence">OPTION: Compétence</label>
     <input type="text" name="competence" id="competence">
-    <label for="competence-actuelle">Compétences actuelles</label>
-    <input type="text" name="competence-actuelle" id="competence-actuelle">
+    <label for="competence-level">OPTION: Niveau compétence</label>
+    <input type="text" name="competence-level" id="competence-level">
+    <h2>Expériences</h2>
+    <label for="experience-name">Nom/Titre expérience</label>
+    <input type="text" name="experience-name" id="experience-name">
+    <label for="experience-year">Année expérience</label>
+    <input type="text" name="experience-year" id="experience-year">
+    <input type="submit" name="submit" id="modifie-experience" value="Modifier & Supprimer">
+    <label></label>
+    <input type="submit" name="submit" id="add-experience" value="Ajouter expérience">
     <input type="submit" name="button" id="button"
 
 

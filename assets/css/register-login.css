@@ -53,13 +53,28 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
+.text-success {
+    color: green;
+}
+
+.text-danger {
+    color: red;
+}
+
+
 #pwd-condition {
     display: none;
 }
 
-#pwd:focus ~ #pwd-condition {
+#pwd-condition ~ li  {
+    font-size: small;
+}
+
+#pwd-register:focus ~ #pwd-condition {
     display: block;
 }
+
+
 
 
 

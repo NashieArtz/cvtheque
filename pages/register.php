@@ -4,9 +4,6 @@ include_once './config/db.php';
 include_once './pages/logger.php';
 session_start();
 
-$maxpwd = 45;
-$specialpwd = '/[!@#$%&*?A-Z\d]+/';
-$regexemail = '/^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/';
 $hasError = false;
 
 if (isset($_POST) && !empty($_POST)) {
@@ -20,11 +17,8 @@ if (isset($_POST) && !empty($_POST)) {
     $stmt->execute([$username]);
     $userExists = $stmt->fetch();
 
-    ?>
-    <script> registerVerify() </script>
-    <?php
     $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO `user`(`username`, `email`, `password`) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO `user`(`username`, `email`, `pwd`) VALUES (?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$username, $email, $pwd]);
     $id = $pdo->lastInsertId();
@@ -36,7 +30,6 @@ if (isset($_POST) && !empty($_POST)) {
 }
 ?>
 
-<link href="./assets/css/register-login.css" rel="stylesheet">
 <section class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
@@ -45,32 +38,43 @@ if (isset($_POST) && !empty($_POST)) {
 
                 <div class="mb-3">
                     <label for="username" class="form-label visually-hidden">Nom d'utilisateur</label>
-                    <input type="text" name="username" id="username" class="form-control form-control-lg"
+                    <input type="text" name="username" id="username-register" class="form-control form-control-lg"
                            placeholder="Nom d'utilisateur" required>
+                    <p id="username-register-p">
+
+                    </p>
                 </div>
 
                 <div class="mb-3">
                     <label for="pwd" class="form-label visually-hidden">Mot de passe</label>
-                    <input id="pwd" type="password" name="pwd" class="form-control form-control-lg"
+                    <input id="pwd-register" type="password" name="pwd" class="form-control form-control-lg"
                            placeholder="Mot de passe" required>
-                    <ul class="text-muted small mt-2 list-unstyled" id="pwd-condition">
-                        <li><small>45 caractères maximum</small></li>
-                        <li><small>Doit inclure un caractère spécial</small></li>
-                        <li><small>Doit contenir au moins une majuscule</small></li>
-                        <li><small>Doit contenir un chiffre</small></li>
+                    <ul class="text-muted small mt-2" id="pwd-condition">
+                        <li id="pwd-45">45 caractères maximum</li>
+                        <li id="pwd-specialchar" class="pwd-danger">Doit inclure un caractère spécial</li>
+                        <li id="pwd-maj" class="pwd-danger">Doit contenir au moins une majuscule</li>
+                        <li id="pwd-number" class="pwd-danger">Doit contenir un chiffre</li>
                     </ul>
+                    <p id="pwd-register-p">
+
+                    </p>
                 </div>
 
                 <div class="mb-3">
                     <label for="repwd" class="form-label visually-hidden">Confirmation mot de passe</label>
-                    <input id="repwd" type="password" name="repwd" class="form-control form-control-lg"
+                    <input id="repwd-register" type="password" name="repwd" class="form-control form-control-lg"
                            placeholder="Confirmer le mot de passe" required>
+                    <p id="repwd-register-p">
+
+                    </p>
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-3">
                     <label for="email" class="form-label visually-hidden">Email</label>
-                    <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="Email"
-                           required>
+                    <input type="email" name="email" id="email-register" class="form-control form-control-lg" placeholder="Email" required>
+                    <p id="email-register-p">
+
+                    </p>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg w-100 mb-3"

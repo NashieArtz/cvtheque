@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <title>CVthèque</title>
-  <link href="./assets/css/index.css" rel="stylesheet">
-  <link href="./assets/css/header-footer.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-lg" style="background:#5a3f78;">
+ <nav class="navbar navbar-expand-lg" style="background:#5a3f78;">
     <div class="container-fluid">
       <a class="navbar-brand text-white fs-3" href="?page=dashboard">
         Cvthèque
@@ -46,5 +34,4 @@
       </div>
     </div>
   </nav>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <?php

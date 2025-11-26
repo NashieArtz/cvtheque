@@ -27,10 +27,14 @@
 
 body {
     margin: 0;
+    min-height: 100vh;
     font-family: 'Nunito', sans-serif;
     background-color: #F8F8F8;
 }
 
+main {
+    flex-grow: 1;
+}
 
 footer{
     margin: 0 auto;

@@ -1,5 +1,5 @@
 <?php
-include './config/config.php';
+include './config/db.php';
 
 
 $route = [
@@ -43,7 +43,7 @@ switch ($page) {
     break;
 }
 
-include("includes/header-guest.php");
+include("includes/header.php");
 ?>
 <main>
   <?php

@@ -4,9 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <title>CVthèque</title>
+
   <link href="../assets/css/header-footer.css" rel="stylesheet">
   <link href="./assets/css/header-footer.css" rel="stylesheet">
   <link href="./assets/css/index.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -18,8 +20,8 @@
       <nav>
         <a href='../index.php'>Acceuil</a>
         <a href='#'>Entreprise</a>
-        <a href='#'>Voir CV</a>
-        <a href='#' class="cta">Fonction Adminisateur</a>
+        <a href='#' class="cta">Profil</a>
+        <a href='#' class="cta">Mon CV</a>
       </nav>
     </div>
 

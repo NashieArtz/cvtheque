@@ -70,7 +70,7 @@ if (isset($_POST) && !empty($_POST)) {
             placeholder="Confirmer le mot de passe" required>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
           <label for="email" class="form-label visually-hidden">Email</label>
           <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="Email" required>
         </div>

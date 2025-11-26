@@ -1,0 +1,54 @@
+.nav-link:hover {
+    color: #F39199 !important;
+}
+
+.btn {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+.cta-second {
+    border: 2px solid #AC748F;
+    border-radius: 14px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+
+}
+.cta-second:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+body {
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    background-color: #F8F8F8;
+}
+
+
+footer{
+    margin: 0 auto;
+    background-color:#613F75;
+    display: flex;
+    flex-direction: column;
+    color: #fffdfd;
+    padding: 15px 30px;
+    align-items:center;
+    font-family: 'Nunito', sans-serif;
+}
+
+footer nav a{
+    color:white;
+    text-decoration: none;
+    border-radius:30px;
+    padding: 10px 20px;
+}
+footer a:hover {
+    color: #F39199;
+}

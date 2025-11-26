@@ -1,5 +1,5 @@
 <?php
-include './config/db.php';
+include './config/config.php';
 
 
 $route = [

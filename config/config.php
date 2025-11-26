@@ -19,3 +19,7 @@ try {
     exit;
 }
 return $pdo;
+
+if (!isset($_SESSION)) {
+    session_start();
+}

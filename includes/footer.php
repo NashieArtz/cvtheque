@@ -1,11 +1,12 @@
-<link href="../assets/css/header-footer.css" rel="stylesheet" >
+<link href="../assets/css/header-footer.css" rel="stylesheet">
 
+</body>
 <footer>
-    <nav>
-        <a href='#'>About</a>
-        <a href='#'>Contact</a>
-        <a href='#'>Privacy Policy</a>
-    </nav>
+  <nav>
+    <a href='#'>About</a>
+    <a href='#'>Contact</a>
+    <a href='#'>Privacy Policy</a>
+  </nav>
 </footer>
 
-<?php
+</html>

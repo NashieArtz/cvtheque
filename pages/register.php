@@ -82,9 +82,10 @@ if (isset($_POST) && !empty($_POST)) {
               <option value="1">Étudiant</option>
               <option value="2">Recrutreur</option>
             </select>
-            <button type="submit" class="btn btn-primary btn-lg w-100 mb-3"
-              style="background:#613F75; border-radius:8px;">S'inscrire
-            </button>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg w-100 mb-3"
+          style="background:#613F75; border-radius:8px;">S'inscrire
+        </button>
       </form>
 
       <button class="btn btn-secondary btn-lg w-100" type="button">

@@ -18,4 +18,40 @@ items.forEach((item) => item.addEventListener('click', toggleAccordion));
 
 
 // PAGE REGISTER
+let username = "<?php $username; ?>";
+
+function registerVerify() {
+
+
+    if ($username === '') {
+        $hasError = true;
+    }
+    if ($userExists) {
+        echo('user empty');
+        $hasError = true;
+    }
+    if ($pwd === '') {
+        echo('user empty');
+        $hasError = true;
+    }
+    if (strlen($pwd) > $maxpwd || !preg_match($specialpwd, $pwd)) {
+        echo('user empty');
+        $hasError = true;
+    }
+    if ($repwd === '' || $pwd !== $repwd) {
+        echo('user empty');
+        $hasError = true;
+    }
+    if ($email === '') {
+        echo('user empty');
+        $hasError = true;
+    }
+    if (!preg_match($regexemail, $email)) {
+        echo('user empty');
+        $hasError = true;
+    }
+    if ($hasError) {
+        header("Location: index.php?page=register");
+    }
+}
 

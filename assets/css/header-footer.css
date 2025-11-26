@@ -2,18 +2,13 @@
     color: #F39199 !important;
 }
 
-.cta {
-    background-color: #AC748F;
-    border-radius: 14px;
-    margin: 0 10px;
+.btn {
     cursor: pointer;
     transition: all 0.3s ease;
-
-
 }
-.cta:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.btn:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
 }
 .cta-second {
     border: 2px solid #AC748F;

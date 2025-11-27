@@ -1,7 +1,8 @@
 <?php
-// PHP non modifié
+session_start();
+var_dump($_SESSION);
 ?>
-<link href="./assets/css/profile.css" rel="stylesheet">
+
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-12">

@@ -25,7 +25,7 @@ if (isset($_POST) && !empty($_POST)) {
     echo '<div class="sub-success"> Your account has been created! We are redirecting you :)) </div>';
     echo "<script>setTimeout(() => {
       window.location.href = 'index.php';
-    }, 100000); </script>";
+    }, 2000); </script>";
 }
 ?>
 

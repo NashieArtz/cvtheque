@@ -28,7 +28,7 @@ if (isset($_POST) && !empty($_POST)) {
 }
 ?>
 
-<section class="container my-5">
+<section class="container my-5 register-page">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
             <h1 class="text-center mb-4">Inscription</h1>
@@ -61,7 +61,7 @@ if (isset($_POST) && !empty($_POST)) {
                 <div class="mb-3">
                     <label for="repwd" class="form-label visually-hidden">Confirmation mot de passe</label>
                     <input id="repwd-register" type="password" name="repwd" class="form-control"
-                           placeholder="Confirmer le mot de passe" required>
+                           placeholder="Confirmer le mot de passe" maxlength="255" required>
                     <p id="repwd-register-p">
 
                     </p>
@@ -69,7 +69,7 @@ if (isset($_POST) && !empty($_POST)) {
 
                 <div class="mb-4">
                     <label for="email" class="form-label visually-hidden">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
+                    <input type="email" name="email" id="email-register" class="form-control" placeholder="Email" required>
                     <p id="email-register-p">
 
                     </p>
@@ -81,7 +81,7 @@ if (isset($_POST) && !empty($_POST)) {
                     </label>
                     <select name="role">
                         <option value="1">Étudiant</option>
-                        <option value="2">Recrutreur</option>
+                        <option value="2">Recruteur</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg w-100 mb-3"

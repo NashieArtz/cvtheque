@@ -10,7 +10,7 @@ $route = [
   'profile-edit' => __DIR__ . '/pages/profile-edit.php',
   'profiles-list' => __DIR__ . '/pages/profiles-list.php',
   'dashboard' => __DIR__ . '/pages/dashboard.php',
-  'companies-list' => __DIR__ . '/pages/companies-list.php',
+  'employer-list' => __DIR__ . '/pages/employer-list.php',
 
   // Connection
   'login' => __DIR__ . '/pages/login.php',
@@ -18,9 +18,9 @@ $route = [
   'logout' => __DIR__ . '/pages/logout.php',
 
   'admin-dashboard' => __DIR__ . '/pages/admin-dashboard.php',
-  'admin-companies' => __DIR__ . '/pages/admin-companies.php',
+  'admin-employer' => __DIR__ . '/pages/admin-employer.php',
   'admin-students' => __DIR__ . '/pages/admin-students.php',
-
+aria_chk -r C:\xampp\mysql\data\mysql\db 
 
   // ERROR
   '404' => __DIR__ . '/pages/404.php',

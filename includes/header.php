@@ -13,7 +13,7 @@
 <body>
 
   <?php
-  if ($_SESSION['user']['role_id']) {
+  if (isset($_SESSION['user']['role_id'])) {
     $role_id = $_SESSION['user']['role_id'];
     if ($role_id == 1) {
       include("includes/header-student.php");

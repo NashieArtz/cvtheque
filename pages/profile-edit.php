@@ -2,6 +2,8 @@
 ?>
 <link href="./assets/css/register-login.css" rel="stylesheet">
 <form method="post">
+    <label for="image">Photo de profil</label>
+    <input type="file" name="image" id="image">
     <label for="name">Nom</label>
     <input type="text" name="name" id="name">
     <label for="forname">Prenom</label>

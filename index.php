@@ -10,7 +10,7 @@ $route = [
   'profile-edit' => __DIR__ . '/pages/profile-edit.php',
   'profiles-list' => __DIR__ . '/pages/profiles-list.php',
   'dashboard' => __DIR__ . '/pages/dashboard.php',
-  'companies-list' => __DIR__ . '/pages/companies-list.php',
+  'employer-list' => __DIR__ . '/pages/employer-list.php',
 
   // Connection
   'login' => __DIR__ . '/pages/login.php',

@@ -4,11 +4,6 @@ include_once './config/db.php';
 include_once './pages/logger.php';
 session_start();
 
-$maxpwd = 45;
-$specialpwd = '/[!@#$%&*?A-Z\d]+/';
-$regexemail = '/^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/';
-$hasError = false;
-
 if (isset($_POST) && !empty($_POST)) {
     $username = htmlspecialchars(trim($_POST["username"]));
     $email = htmlspecialchars(trim($_POST["email"]));
@@ -33,7 +28,6 @@ if (isset($_POST) && !empty($_POST)) {
     }, 100000); </script>";
 }
 ?>
-
 <link href="./assets/css/register-login.css" rel="stylesheet">
 <section class="container my-5">
     <div class="row justify-content-center">

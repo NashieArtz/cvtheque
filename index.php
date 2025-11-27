@@ -20,7 +20,6 @@ $route = [
   'admin-dashboard' => __DIR__ . '/pages/admin-dashboard.php',
   'admin-employer' => __DIR__ . '/pages/admin-employer.php',
   'admin-students' => __DIR__ . '/pages/admin-students.php',
-aria_chk -r C:\xampp\mysql\data\mysql\db 
 
   // ERROR
   '404' => __DIR__ . '/pages/404.php',

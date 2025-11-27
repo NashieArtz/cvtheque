@@ -1,8 +1,8 @@
 <?php
 
 if (isset($_POST) && !empty($_POST)) {
-  $username = htmlspecialchars(trim($_POST['username']));
-  $pwd = htmlspecialchars(trim($_POST['pwd']));
+    $username = htmlspecialchars(trim($_POST['username']));
+    $pwd = htmlspecialchars(trim($_POST['pwd']));
 
   $sql = "SELECT * FROM `user` WHERE `username` LIKE '$username'";
   $stmt = $pdo->query($sql)->fetch();

@@ -28,31 +28,31 @@ if (isset($_POST) && !empty($_POST)) {
     }, 100000); </script>";
 }
 ?>
-<link href="./assets/css/register-login.css" rel="stylesheet">
+
 <section class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
             <h1 class="text-center mb-4">Inscription</h1>
-            <form action="#" method="post" class="needs-validation" novalidate>
+            <form action="#" method="post" class="needs-validation">
 
                 <div class="mb-3">
                     <label for="username" class="form-label visually-hidden">Nom d'utilisateur</label>
-                    <input type="text" name="username" id="username-register" class="form-control form-control-lg"
+                    <input type="text" name="username" id="username-register" class="form-control"
                            placeholder="Nom d'utilisateur" required>
-                    <p id="username-register-p">
+                    <p id="username-register-p" class="text-danger">
 
                     </p>
                 </div>
 
                 <div class="mb-3">
                     <label for="pwd" class="form-label visually-hidden">Mot de passe</label>
-                    <input id="pwd-register" type="password" name="pwd" class="form-control form-control-lg"
+                    <input id="pwd-register" type="password" name="pwd" class="form-control"
                            placeholder="Mot de passe" required>
                     <ul class="text-muted small mt-2" id="pwd-condition">
-                        <li id="pwd-45">45 caractères maximum</li>
-                        <li id="pwd-specialchar" class="pwd-danger">Doit inclure un caractère spécial</li>
-                        <li id="pwd-maj" class="pwd-danger">Doit contenir au moins une majuscule</li>
-                        <li id="pwd-number" class="pwd-danger">Doit contenir un chiffre</li>
+                        <li id="pwd-45" class="text-danger">45 caractères maximum</li>
+                        <li id="pwd-specialchar" class="text-danger">Doit inclure un caractère spécial</li>
+                        <li id="pwd-maj" class="text-danger">Doit contenir au moins une majuscule</li>
+                        <li id="pwd-number" class="text-danger">Doit contenir un chiffre</li>
                     </ul>
                     <p id="pwd-register-p">
 
@@ -61,7 +61,7 @@ if (isset($_POST) && !empty($_POST)) {
 
                 <div class="mb-3">
                     <label for="repwd" class="form-label visually-hidden">Confirmation mot de passe</label>
-                    <input id="repwd-register" type="password" name="repwd" class="form-control form-control-lg"
+                    <input id="repwd-register" type="password" name="repwd" class="form-control"
                            placeholder="Confirmer le mot de passe" required>
                     <p id="repwd-register-p">
 
@@ -70,8 +70,7 @@ if (isset($_POST) && !empty($_POST)) {
 
                 <div class="mb-4">
                     <label for="email" class="form-label visually-hidden">Email</label>
-                    <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="Email"
-                           required>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
                     <p id="email-register-p">
 
                     </p>

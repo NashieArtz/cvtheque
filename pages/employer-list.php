@@ -1,4 +1,4 @@
-<div class="container py-4">
+<div class="container-fluid py-4">
 
     <div class="row mb-4 align-items-center">
 
@@ -10,6 +10,7 @@
                 <i class="fas fa-filter me-1"></i> Filter
             </button>
         </div>
+
         <div class="col-12 col-md-7">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Hinted search text" aria-label="Search">
@@ -18,5 +19,38 @@
                 </button>
             </div>
         </div>
+    </div>
+    <h2 class="mb-4">Liste des employeurs</h2>
 
+    <div class="row g-4 d-flex flex-wrap">
+
+        <?php for ($i = 0; $i < 6; $i++): ?>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body">
+                        <div class="row align-items-start">
+
+                            <div class="col-3 col-sm-4 text-center">
+                                <div class="bg-light d-flex justify-content-center align-items-center"
+                                     style="width: 70px; height: 70px; margin-top: 5px;">
+                                    <i class="fas fa-user-circle fa-2x text-muted"></i>
+                                </div>
+                            </div>
+
+                            <div class="col-9 col-sm-10">
+                                <h5 class="card-title fw-bold mb-0">NOM entreprise</h5>
+                                <p class="text-secondary small">Ville</p>
+                            </div>
+                        </div>
+                        <div class="mt-3 d-flex justify-content-end gap-2">
+                            <button class="btn btn-sm" style="background-color: #ac748f; color: white;">
+                                <i class="far fa-star me-1"></i> Voir l'entreprise
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endfor; ?>
+    </div>
+</div>
 <?php

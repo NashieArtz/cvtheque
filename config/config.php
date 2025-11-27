@@ -1,5 +1,7 @@
 <?php
-include("db.php");
-include("roles.php");
+include './config/db.php';
+include './config/roles.php';
 
-session_start();
+if (isset($_SESSION)) {
+  session_start();
+}

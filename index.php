@@ -43,7 +43,7 @@ switch ($page) {
     break;
 }
 
-include("includes/header-guest.php");
+include("includes/header.php");
 ?>
 <main>
   <?php

@@ -1,19 +1,3 @@
-<?php
-if (isset($_SESSION)) {
-  $role_id = $_SESSION['user']['role_id'];
-  if ($role_id = 1) {
-    include("includes/header-student.php");
-  }
-  if ($role_id = 2) {
-    include("includes/header-employer");
-  }
-  if ($role_id = 3) {
-    include("includes/header-admin");
-  }
-} else include("includes/header-guest");
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,3 +10,20 @@ if (isset($_SESSION)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+
+<?php
+if (isset($_SESSION)) {
+  $role_id = $_SESSION['user']['role_id'];
+  if ($role_id = 1) {
+    include("includes/header-student.php");
+  }
+  if ($role_id = 2) {
+    include("includes/header-employer.php");
+  }
+  if ($role_id = 3) {
+    include("includes/header-admin.php");
+  }
+} else include("includes/header-guest.php");
+
+?>
+

@@ -1,4 +1,4 @@
- <nav class="navbar navbar-expand-lg" style="background:#5a3f78;">
+<nav class="navbar navbar-expand-lg" style="background:#5a3f78;">
     <div class="container-fluid">
       <a class="navbar-brand text-white fs-3" href="?page=dashboard">
         Cvthèque
@@ -13,7 +13,7 @@
             <a class="nav-link text-white fs-5" href="?page=dashboard">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="?page=companies-list">Entreprise</a>
+            <a class="nav-link text-white fs-5" href="?page=employer-list">Entreprise</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white fs-5" href="?page=profiles-list">Voir CV</a>

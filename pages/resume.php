@@ -1,4 +1,5 @@
 <link href="./assets/css/resume.css" rel="stylesheet">
+<div id="content">
 <div class="cv">
     <div class="cv-row">
         <div class="cv-wrap">
@@ -129,6 +130,7 @@
     </div>
 
 </div>
+</div>
 
 <div id="editor"></div>
 <button id="cmd">Generate PDF</button>
@@ -137,4 +139,4 @@ check out url - https://scotch.io/@nagasaiaytha/generate-pdf-from-html-using-jqu
 -->
 <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
-<script src="assets/js.resume.js"></script>
+<script src="./assets/js/resume.js"></script>

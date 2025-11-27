@@ -13,16 +13,18 @@
 <body>
 
   <?php
-  if (isset($_SESSION['user']['role_id'])) {
-    $role_id = $_SESSION['user']['role_id'];
-    if ($role_id == 1) {
-      include("includes/header-student.php");
-    }
-    if ($role_id == 2) {
-      include("includes/header-employer.php");
-    }
-    if ($role_id == 3) {
-      include("includes/header-admin.php");
-    }
-  } else include("includes/header-guest.php");
+  if (isset($_SESSION)) {
+      if ($_SESSION['user']['role_id']) {
+          $role_id = $_SESSION['user']['role_id'];
+          if ($role_id == 1) {
+              include("includes/header-student.php");
+          }
+          if ($role_id == 2) {
+              include("includes/header-employer.php");
+          }
+          if ($role_id == 3) {
+              include("includes/header-admin.php");
+          }
+      } else include("includes/header-guest.php");
+  }
   ?>

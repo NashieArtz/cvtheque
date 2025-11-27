@@ -2,7 +2,6 @@
 
 include_once './config/db.php';
 include_once './pages/logger.php';
-session_start();
 
 if (isset($_POST) && !empty($_POST)) {
     $username = htmlspecialchars(trim($_POST["username"]));

@@ -18,7 +18,7 @@ $route = [
   'logout' => __DIR__ . '/pages/logout.php',
 
   'admin-dashboard' => __DIR__ . '/pages/admin-dashboard.php',
-  'admin-companies' => __DIR__ . '/pages/admin-companies.php',
+  'admin-employer' => __DIR__ . '/pages/admin-employer.php',
   'admin-students' => __DIR__ . '/pages/admin-students.php',
 
 

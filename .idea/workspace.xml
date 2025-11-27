@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="" />
+    <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/logout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register.php" afterDir="false" />
+    </list>
     <list id="b8697c67-535d-4448-bffe-c9fbffdf3e00" name="Changes by coolmathieu" comment="">
+      <change beforePath="$PROJECT_DIR$/includes/header-admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/header-employer.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-employer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/header-student.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-student.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin-employer.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin-employer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/employer-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/employer-list.php" afterDir="false" />
     </list>
     <list id="899236c5-f74d-4787-ae6d-17bd3a35d9d5" name="Changes by FZYSK" comment="" />
@@ -83,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1764144981036</updated>
       <workItem from="1764144982158" duration="21388000" />
-      <workItem from="1764230971377" duration="2610000" />
+      <workItem from="1764230971377" duration="6412000" />
     </task>
     <servers />
   </component>

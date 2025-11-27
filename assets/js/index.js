@@ -32,17 +32,31 @@ const repwdRegisterP = document.getElementById("repwd-register-p");
 const emailRegisterP = document.getElementById("email-register-p");
 
 const maxpwd = 45;
-const regexPWD = /[!@#$%&*?A-Z\d]+/;
+const regexSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+const regexMaj = /[A-Z]+/;
+const regexNumber = /[0-9]+/;
 const regexEmail = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
 
 usernameRegister.addEventListener("input", usernameVerify);
 pwdRegister.addEventListener("input", pwdVerify);
 
 function updateStyle(element, isValid) {
-    element.classList.remove("text-succes", "text-danger");
+    element.classList.remove("text-success", "text-danger");
     if (isValid) {
         element.classList.add("text-success");
     } else element.classList.add("text-danger");
+}
+
+function usernameVerify() {
+    const username = usernameRegister.value;
+
+    const usernameLength = username.length;
+    const isFocused = (document.activeElement === usernameRegister)
+    if (isFocused && usernameLength <= 0) {
+        usernameRegisterP.textContent = "Username is empty!";
+    } else {
+        usernameRegisterP.textContent = "";
+    }
 }
 
 function pwdVerify(){
@@ -50,13 +64,17 @@ function pwdVerify(){
     const pwdLength = pwd.length;
 
     const validLength = (pwdLength > 0 && pwdLength <= maxpwd);
+    const validChar = (pwd === regexSpecial);
+    const validMaj = (pwd === regexMaj);
+    const validNum = (pwd === regexNumber);
     updateStyle(pwd45, validLength);
+    updateStyle(pwdSpecialChar, validChar);
+    updateStyle(pwdMaj, validMaj);
+    updateStyle(pwdNumber,validNum);
+    console.log(validNum);
+
 }
-function usernameVerify(username) {
-    if (username === '') {
-        usernameRegisterP.textContent = "Username is empty!";
-    }
-}
+
 
 function registerVerify() {
 

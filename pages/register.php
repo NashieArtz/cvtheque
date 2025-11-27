@@ -39,7 +39,7 @@ if (isset($_POST) && !empty($_POST)) {
                     <label for="username" class="form-label visually-hidden">Nom d'utilisateur</label>
                     <input type="text" name="username" id="username-register" class="form-control form-control-lg"
                            placeholder="Nom d'utilisateur" required>
-                    <p id="username-register-p">
+                    <p id="username-register-p" class="text-danger">
 
                     </p>
                 </div>
@@ -49,10 +49,10 @@ if (isset($_POST) && !empty($_POST)) {
                     <input id="pwd-register" type="password" name="pwd" class="form-control form-control-lg"
                            placeholder="Mot de passe" required>
                     <ul class="text-muted small mt-2" id="pwd-condition">
-                        <li id="pwd-45">45 caractères maximum</li>
-                        <li id="pwd-specialchar" class="pwd-danger">Doit inclure un caractère spécial</li>
-                        <li id="pwd-maj" class="pwd-danger">Doit contenir au moins une majuscule</li>
-                        <li id="pwd-number" class="pwd-danger">Doit contenir un chiffre</li>
+                        <li id="pwd-45" class="text-danger">45 caractères maximum</li>
+                        <li id="pwd-specialchar" class="text-danger">Doit inclure un caractère spécial</li>
+                        <li id="pwd-maj" class="text-danger">Doit contenir au moins une majuscule</li>
+                        <li id="pwd-number" class="text-danger">Doit contenir un chiffre</li>
                     </ul>
                     <p id="pwd-register-p">
 

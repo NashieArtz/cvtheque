@@ -40,10 +40,12 @@ let registerValid = {
     pwdValid: false,
     repwdValid: false,
     emailValid: false
-    // MORE VALUES TO ADD
 
 }
 
+/**
+ * TODO: JS firing only when on register.php
+ */
 usernameRegister.addEventListener("input", usernameVerify);
 pwdRegister.addEventListener("input", pwdVerify);
 repwdRegister.addEventListener("input", repwdVerify)

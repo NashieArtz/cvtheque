@@ -7,16 +7,24 @@ function generatePdf() {
         return;
     }
 
-    // version simple et compatible
-    const pdf = new jsPDF('p', 'pt', 'letter');
+    html2canvas(htmlElement, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: false
+    }).then(canvas => {
 
-    pdf.html(htmlElement, {
-        callback: function (doc) {
-            doc.save("Test.pdf");
-        },
-        margin: [20, 20, 20, 20],
-        html2canvas: {
-            scale: 2,
-        }
+        const imgData = canvas.toDataURL("image/png");
+
+        const pdf = new jsPDF({
+            orientation: "p",
+            unit: "px",
+            format: [canvas.width, canvas.height]
+        });
+
+        pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+
+        pdf.save("CV.pdf");
+    }).catch(err => {
+        console.error("HTML2Canvas Error:", err);
     });
 }

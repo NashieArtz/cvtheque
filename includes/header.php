@@ -18,12 +18,12 @@ if (isset($_SESSION)) {
     include("includes/header-student.php");
   }
   if ($role_id = 2) {
-    include("includes/header-employer");
+    include("includes/header-employer.php");
   }
   if ($role_id = 3) {
-    include("includes/header-admin");
+    include("includes/header-admin.php");
   }
-} else include("includes/header-guest");
+} else include("includes/header-guest.php");
 
 ?>
 

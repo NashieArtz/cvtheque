@@ -10,6 +10,13 @@
                 <i class="fas fa-filter me-1"></i> Filter
             </button>
         </div>
-
+        <div class="col-12 col-md-7">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Hinted search text" aria-label="Search">
+                <button class="btn" type="button" style="background-color: #613F75; color: white;">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
 
 <?php

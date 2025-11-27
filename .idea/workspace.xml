@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header-guest.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-guest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profiles-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profiles-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register.php" afterDir="false" />
-    </list>
+    <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="" />
     <list id="b8697c67-535d-4448-bffe-c9fbffdf3e00" name="Changes by coolmathieu" comment="">
-      <change beforePath="$PROJECT_DIR$/includes/header-guest.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-guest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/employer-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/employer-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile-edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-edit.php" afterDir="false" />
     </list>
     <list id="899236c5-f74d-4787-ae6d-17bd3a35d9d5" name="Changes by FZYSK" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,14 +33,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/includes/header-guest.php">
-      <ranges>
-        <range start1="0" end1="1" start2="0" end2="1" changelist="4ede8a12-f2f2-4c9c-8026-c254202a4ece" />
-        <range start1="15" end1="16" start2="15" end2="16" changelist="b8697c67-535d-4448-bffe-c9fbffdf3e00" />
-      </ranges>
-    </file>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -100,7 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1764144981036</updated>
       <workItem from="1764144982158" duration="21388000" />
-      <workItem from="1764230971377" duration="2311000" />
+      <workItem from="1764230971377" duration="2610000" />
     </task>
     <servers />
   </component>

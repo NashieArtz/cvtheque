@@ -5,7 +5,7 @@ if (isset($_POST) && !empty($_POST)) {
 
   $sql = "SELECT * FROM `user` WHERE `username` LIKE '$username'";
   $stmt = $pdo->query($sql)->fetch();
-  if (password_verify($pwd, $stmt['password'])) {
+  if (password_verify($pwd, $stmt['pwd'])) {
     session_start();
     $_SESSION['user'] = [
       'id' => $stmt['id'],
@@ -20,12 +20,12 @@ if (isset($_POST) && !empty($_POST)) {
 ?>
 <link href="./assets/css/register-login.css" rel="stylesheet">
 <form method="post">
-    <label for="username">Nom d'utilisateur</label>
-    <input type="text" name="username" id="username">
-    <label for="password">Mots de passe</label>
-    <input type="password" name="password" id="password">
-    <input type="submit" name="button" id="button">
-    <button class="btn btn-secondary btn-lg w-100" type="button">
-        <a href="?page=dashboard" class="text-white text-decoration-none d-block">Accueil</a>
-    </button>
+  <label for="username">Nom d'utilisateur</label>
+  <input type="text" name="username" id="username">
+  <label for="pwd">Mots de passe</label>
+  <input type="password" name="pwd" id="pwd">
+  <input type="submit" name="button" id="button">
+  <button class="btn btn-secondary btn-lg w-100" type="button">
+    <a href="?page=dashboard" class="text-white text-decoration-none d-block">Accueil</a>
+  </button>
 </form>

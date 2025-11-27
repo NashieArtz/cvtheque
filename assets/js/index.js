@@ -15,8 +15,6 @@ function toggleAccordion() {
 items.forEach((item) => item.addEventListener('click', toggleAccordion));
 
 
-
-
 // PAGE REGISTER
 const usernameRegister = document.getElementById("username-register");
 const pwdRegister = document.getElementById("pwd-register");
@@ -37,8 +35,19 @@ const regexMaj = /[A-Z]+/;
 const regexNumber = /[0-9]+/;
 const regexEmail = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
 
+let registerValid = {
+    usernameValid: false,
+    pwdValid: false,
+    repwdValid: false,
+    emailValid: false
+    // MORE VALUES TO ADD
+
+}
+
 usernameRegister.addEventListener("input", usernameVerify);
 pwdRegister.addEventListener("input", pwdVerify);
+repwdRegister.addEventListener("input", repwdVerify)
+registerVerify();
 
 function updateStyle(element, isValid) {
     element.classList.remove("text-success", "text-danger");
@@ -49,65 +58,59 @@ function updateStyle(element, isValid) {
 
 function usernameVerify() {
     const username = usernameRegister.value;
+    let bool = false;
 
     const usernameLength = username.length;
     const isFocused = (document.activeElement === usernameRegister)
     if (isFocused && usernameLength <= 0) {
         usernameRegisterP.textContent = "Username is empty!";
+        registerValid.usernameValid = false;
     } else {
         usernameRegisterP.textContent = "";
+        registerValid.usernameValid = true;
     }
 }
 
-function pwdVerify(){
+function pwdVerify() {
     const pwd = pwdRegister.value;
     const pwdLength = pwd.length;
 
     const validLength = (pwdLength > 0 && pwdLength <= maxpwd);
-    const validChar = (pwd === regexSpecial);
-    const validMaj = (pwd === regexMaj);
-    const validNum = (pwd === regexNumber);
+    const validChar = (regexSpecial.test(pwd));
+    const validMaj = (regexMaj.test(pwd));
+    const validNum = (regexNumber.test(pwd));
     updateStyle(pwd45, validLength);
     updateStyle(pwdSpecialChar, validChar);
     updateStyle(pwdMaj, validMaj);
-    updateStyle(pwdNumber,validNum);
-    console.log(validNum);
-
+    updateStyle(pwdNumber, validNum);
+    if (pwd45.classList.contains("text-success")
+        && pwdSpecialChar.classList.contains("text-success")
+        && pwdMaj.classList.contains("text-success")
+        && pwdNumber.classList.contains("text-success")) {
+        registerValid.pwdValid = true;
+    }
 }
 
+function repwdVerify () {
+    const repwd = repwdRegister.value;
+    const validRePWD = (repwd === pwdRegister.value);
+    if (!validRePWD) {
+        repwdRegisterP.textContent = "Passwords do not match";
+        registerValid.repwdValid = false;
+    }
+     else {
+         repwdRegisterP.textContent = "";
+         registerValid.repwdValid = true;
+    }
+    updateStyle(repwdRegisterP, validRePWD);
+}
 
 function registerVerify() {
-
-
-    if ($username === '') {
-        $hasError = true;
-    }
-    if ($userExists) {
-        echo('user empty');
-        $hasError = true;
-    }
-    if ($pwd === '') {
-        echo('user empty');
-        $hasError = true;
-    }
-    if (strlen($pwd) > $maxpwd || !preg_match($specialpwd, $pwd)) {
-        echo('user empty');
-        $hasError = true;
-    }
-    if ($repwd === '' || $pwd !== $repwd) {
-        echo('user empty');
-        $hasError = true;
-    }
-    if ($email === '') {
-        echo('user empty');
-        $hasError = true;
-    }
-    if (!preg_match($regexemail, $email)) {
-        echo('user empty');
-        $hasError = true;
-    }
-    if ($hasError) {
-        header("Location: index.php?page=register");
+    console.log(registerValid);
+    if ( registerValid.usernameValid
+    && registerValid.pwdValid
+    && registerValid.repwdValid
+    && registerValid.emailValid) {
+        // CHECK HERE
     }
 }
-

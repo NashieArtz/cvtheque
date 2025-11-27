@@ -21,6 +21,7 @@ label {
 input[type="text"],
 input[type="submit"],
 input[type="password"],
+input[type="email"],
 textarea,
 select {
     width: 100%;
@@ -35,13 +36,13 @@ select {
 /* Effet focus */
 input:focus,
 textarea:focus,
-select:focus {
+select:focus{
     border-color: #613F75;
     outline: none;
 }
 
 /* Bouton */
-input[type="submit"] {
+button[type="submit"] {
     width: 100%;
     padding: 12px;
     background-color: #613F75;

@@ -1,4 +1,4 @@
-<div class="container py-4">
+<div class="container-fluid py-4">
 
     <div class="row mb-4 align-items-center">
 
@@ -22,10 +22,10 @@
     </div>
     <h2 class="mb-4">Liste des employeurs</h2>
 
-    <div class="row g-4">
+    <div class="row g-4 d-flex flex-wrap">
 
         <?php for ($i = 0; $i < 6; $i++): ?>
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-sm-6 col-lg-4">
                 <div class="card shadow-sm border-0 h-100">
                     <div class="card-body">
                         <div class="row align-items-start">

@@ -1,54 +1,106 @@
 <?php
+// PHP non modifié
 ?>
 <link href="./assets/css/profile.css" rel="stylesheet">
-<section id="profile-icon-name">
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="row align-items-center gap-4 justify-content-center text-center">
-                <div class="col-md-3">
-                    <img src="https://picsum.photos/300/300" alt="icon user">
-                </div>
-                <div class="col-md-3">
-                    <h2>Nom     Prénom </h2>
-                    <p class="role-text"style="color : #613F75">student</p>
-                    <p class="grey-text">username</p>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+
+            <div class="card shadow-sm mb-4 border-0">
+                <div class="card-body p-4 p-md-5" style="background-color: #f0f0f0;">
+                    <div class="row align-items-center">
+
+                        <div class="col-12 col-md-3 text-center mb-4 mb-md-0">
+                            <img src="https://picsum.photos/300/300" alt="Icone utilisateur" class="img-fluid rounded-circle shadow-lg" style="width: 150px; height: 150px; object-fit: cover;">
+                        </div>
+
+                        <div class="col-12 col-md-6 text-center text-md-start">
+                            <h1 class="display-5 fw-bold mb-0">Nom Prénom</h1>
+                            <p class="lead" style="color: #613F75;">Étudiant / Postulant</p>
+                            <p class="text-muted mb-0">@username</p>
+                        </div>
+
+                        <div class="col-12 col-md-3 text-center text-md-end">
+                            <a href="?page=profile-edit" class="btn btn-sm text-white" style="background-color: #ac748f;">
+                                Modifier le Profil
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-dark ms-2">
+                                Générer CV
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<section>
-    <h2>Cordonnées :</h2>
-    <div class="grey-text">Email : lebgdu76@gmail.com</div>
-    <div class="grey-text">Numéro  : 06 XX XX XX XX</div>
-    <div><input type="checkbox" name="permis" id="permis"  class="role-text" disabled>Permis</div>
-    <div><input type="checkbox" name="hide-name" id="hide-name" class="role-text" disabled>Masquer nom et prénom</div>
-    <div><input type="checkbox" name="hide-photo" id="hide-photo" class="role-text"disabled>Inclure photo de profil</div>
-</section>
 
-<section>
-    <h2>Mots de passe :</h2>
-    <div class="grey-text">Mots de passe : .......</div>
-</section>
-<section>
-    <h2>Mes données de localisation :</h2>
-    <div class="grey-text">Pays : France</div>
-    <div class="container-fluid py-0">
-        <div class="d-flex justify-content-between">
-            <div class="col-md-2 grey-text">Ville : Rouen</div>
-            <div class="col-md-9 grey-text">Code Postale : 76570</div>
+            <div class="card shadow-sm mb-4">
+                <div class="card-header fw-bold">Détails Personnels & Localisation</div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <h5 class="fw-bold">Coordonnées</h5>
+                            <p class="mb-1 text-muted"><i class="fas fa-envelope me-2"></i> Email : lebgdu76@gmail.com</p>
+                            <p class="mb-1 text-muted"><i class="fas fa-phone me-2"></i> Numéro : 06 XX XX XX XX</p>
+                            <p class="mb-0 text-muted"><i class="fas fa-key me-2"></i> Mots de passe : ••••••••</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="fw-bold">Localisation</h5>
+                            <p class="mb-1 text-muted"><i class="fas fa-globe-europe me-2"></i> Pays : France</p>
+                            <p class="mb-1 text-muted"><i class="fas fa-city me-2"></i> Ville : Rouen</p>
+                            <p class="mb-0 text-muted"><i class="fas fa-map-pin me-2"></i> Code Postal : 76570</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header fw-bold">Compétences Actuelles</div>
+                <div class="card-body">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><span class="badge bg-primary fs-6">HTML5/CSS3</span></li>
+                        <li class="list-inline-item"><span class="badge bg-secondary fs-6">JavaScript</span></li>
+                        <li class="list-inline-item"><span class="badge bg-info fs-6">Bootstrap</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header fw-bold">Expériences Professionnelles</div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4 text-dark fw-normal">Web Développeur (Google)</dt>
+                        <dd class="col-sm-8 text-muted">10 novembre 2025 à 24 décembre 2025</dd>
+                        <dt class="col-sm-4"></dt>
+                        <dd class="col-sm-8 small fst-italic">Description courte de la mission.</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header fw-bold">Options de Visibilité</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="profile-edit-permis" disabled checked>
+                                <label class="form-check-label text-muted" for="profile-edit-permis">Permis de Conduire</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="profile-edit-hide-name" disabled>
+                                <label class="form-check-label text-muted" for="profile-edit-hide-name">Masquer nom et prénom</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="profile-edit-hide-photo" disabled checked>
+                                <label class="form-check-label text-muted" for="profile-edit-hide-photo">Inclure photo de profil</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-</section>
-<section>
-    <h2>Compétences actuelles : </h2>
-    <ul>
-        <li class="grey-text">HTML5/CSS3</li>
-    </ul>
-</section>
-<section>
-    <h2>Expériences professionnel : </h2>
-    <ul>
-        <li class="grey-text">Web Développeur - 10 novembre 2025 à 24 décembre 2025 - Google</li>
-    </ul>
-</section>
+</div>

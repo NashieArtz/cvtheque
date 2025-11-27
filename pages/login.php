@@ -1,21 +1,20 @@
 <?php
 if (isset($_POST) && !empty($_POST)) {
     $username = htmlspecialchars(trim($_POST['username']));
-    $pwd = htmlspecialchars(trim($_POST['pwd']));
+    $pwd = htmlspecialchars(trim($_POST['password']));
 
-  $sql = "SELECT * FROM `user` WHERE `username` LIKE '$username'";
-  $stmt = $pdo->query($sql)->fetch();
-  if (password_verify($pwd, $stmt['pwd'])) {
-
-    $_SESSION['user'] = [
-      'id' => $stmt['id'],
-      'username' => $stmt['username'],
-      'email' => $stmt['email'],
-      'role_id' => $stmt['role_id']
-    ];
-    session_start();
-    header('Location: ./index.php');
-  }
+    $sql = "SELECT * FROM `user` WHERE `username` LIKE '$username'";
+    $stmt = $pdo->query($sql)->fetch();
+    if (password_verify($pwd, $stmt['pwd'])) {
+        session_start();
+        $_SESSION['user'] = [
+                'id' => $stmt['id'],
+                'username' => $stmt['username'],
+                'email' => $stmt['email'],
+                'role_id' => $stmt['role_id']
+        ];
+        header('Location: index.php?page=profile&id=' . $stmt['id']);
+    }
 }
 
 ?>

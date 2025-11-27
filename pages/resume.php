@@ -1,6 +1,6 @@
 <link href="./assets/css/resume.css" rel="stylesheet">
-<div id="#doc-target">
-<div class="cv">
+<div id="doc-target">
+    <div class="cv">
     <div class="cv-row">
         <div class="cv-wrap">
             <div class="cv-name">Nom Prenom</div>
@@ -139,6 +139,6 @@
 <!--Add External Libraries - JQuery and jspdf
 check out url - https://scotch.io/@nagasaiaytha/generate-pdf-from-html-using-jquery-and-jspdf
 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"></script>
     <script src="./assets/js/resume.js"></script>

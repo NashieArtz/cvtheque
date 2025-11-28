@@ -1,24 +1,5 @@
 <?php
-
-if (isset($_SESSION)) {
-  if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
-    if (isset($_POST) && !empty($_POST)) {
-      $user_id = ($_SESSION['user']['id']);
-      $username = htmlspecialchars(trim($_POST['username']));
-      $firstname = htmlspecialchars(trim($_POST['firstname']));
-      $lastname = htmlspecialchars(trim($_POST['lastname']));
-      $phone = htmlspecialchars(trim($_POST['phone']));
-      $job_title = htmlspecialchars(trim($_POST['job_title']));
-
-      $sqlUser = "UPDATE `user` SET username = '$username', firstname = '$firstname', lastname = '$lastname', phone = '$phone', job_title = '$job_title' WHERE `id` = '$user_id'";
-      $stmt = $pdo->prepare($sqlUser);
-      $stmt->execute();
-
-
-    }
-  }
-} else header("Location: ./index.php");
-
+include './config/update.php'
 ?>
 <link href="./assets/css/register-login.css" rel="stylesheet">
 <form method="post">

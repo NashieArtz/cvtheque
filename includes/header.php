@@ -14,8 +14,8 @@
 
   <?php
   if (isset($_SESSION)) {
-    if ($_SESSION['user']['role_id']) {
-      $role_id = $_SESSION['user']['role_id'];
+    if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
+      $role_id = ($_SESSION['user']['role_id']) ?? null;
       if ($role_id == 1) {
         include("includes/header-student.php");
       }

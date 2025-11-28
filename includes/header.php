@@ -8,6 +8,7 @@
   <link href="./assets/css/register-login.css" rel="stylesheet">
   <link href="./assets/css/header-footer.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/dark-mode.css" />
 </head>
 
 <body>

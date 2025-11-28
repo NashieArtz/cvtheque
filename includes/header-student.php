@@ -31,6 +31,12 @@
               Se déconnecter
             </a>
           </li>
+            <li class="nav-item">
+                <input type="checkbox" id="toggle" data-theme-toggler>
+                <label id="switch" for="toggle">
+                    <div id="circle"></div>
+                </label>
+            </li>
         </ul>
       </div>
     </div>

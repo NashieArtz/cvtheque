@@ -1,6 +1,24 @@
 <?php
-$user_id = ($_SESSION['user']['id']);
-$profile_id = 
+
+if (isset($_SESSION)) {
+  if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
+    if (isset($_POST) && !empty($_POST)) {
+      $user_id = ($_SESSION['user']['id']);
+      $username = htmlspecialchars(trim($_POST['username']));
+      $firstname = htmlspecialchars(trim($_POST['firstname']));
+      $lastname = htmlspecialchars(trim($_POST['lastname']));
+      $phone = htmlspecialchars(trim($_POST['phone']));
+      $job_title = htmlspecialchars(trim($_POST['job_title']));
+
+      $sqlUser = "UPDATE `user` SET username = '$username', firstname = '$firstname', lastname = '$lastname', phone = '$phone', job_title = '$job_title' WHERE `id` = '$user_id'";
+      $stmt = $pdo->prepare($sqlUser);
+      $stmt->execute();
+
+
+    }
+  }
+} else header("Location: ./index.php");
+
 ?>
 <link href="./assets/css/register-login.css" rel="stylesheet">
 <form method="post">
@@ -8,10 +26,10 @@ $profile_id =
   <input type="file" name="image" id="profile-edit-image">
 
   <label for="profile-edit-name">Nom</label>
-  <input type="text" name="name" id="profile-edit-name">
+  <input type="text" name="lastname" id="profile-edit-name">
 
-  <label for="profile-edit-forname">Prenom</label>
-  <input type="text" name="forname" id="profile-edit-forname">
+  <label for="profile-edit-forname">Prénom</label>
+  <input type="text" name="firstname" id="profile-edit-forname">
 
   <label for="profile-edit-username">Nom d'utilisateur</label>
   <input type="text" name="username" id="profile-edit-username">
@@ -42,11 +60,11 @@ $profile_id =
   <input type="text" name="city" id="profile-edit-city">
 
   <label for="profile-edit-cp">Code Postale</label>
-  <input type="number" name="cp" id="profile-edit-cp">
+  <input type="number" name="area_code" id="profile-edit-cp">
 
   <h2>Compétences</h2>
   <label for="profile-edit-competence-actuelle">Compétences actuelles</label>
-  <input type="text" name="competence-actuelle" id="profile-edit-competence-actuelle">
+  <input type="text" name="skills" id="profile-edit-competence-actuelle">
 
   <input type="submit" name="submit-competence-modifie" id="profile-edit-modifie-competence"
     value="Modifier les compétences">

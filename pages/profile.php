@@ -31,7 +31,6 @@ function edit_btn()
 $user = userInfo($pdo);
 $address = userAddress($pdo);
 $experience = userExperience($pdo);
-echo ($address['streetname'])
 ?>
 
 <div class="container myo-5">

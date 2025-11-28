@@ -36,7 +36,7 @@ if (isset($_POST) && !empty($_POST)) {
 
                 <div class="mb-3">
                     <label for="username" class="form-label visually-hidden">Nom d'utilisateur</label>
-                    <input type="text" name="username" id="username-register" class="form-control"
+                    <input type="text" name="username" id="username-register" class="form-control register-input"
                            placeholder="Nom d'utilisateur" required>
                     <p id="username-register-p" class="text-danger">
 
@@ -45,7 +45,7 @@ if (isset($_POST) && !empty($_POST)) {
 
                 <div class="mb-3">
                     <label for="pwd" class="form-label visually-hidden">Mot de passe</label>
-                    <input id="pwd-register" type="password" name="pwd" class="form-control"
+                    <input id="pwd-register" type="password" name="pwd" class="form-control register-input"
                            placeholder="Mot de passe" required>
                     <ul class="text-muted small mt-2" id="pwd-condition">
                         <li id="pwd-45" class="text-danger">45 caractères maximum</li>
@@ -60,8 +60,8 @@ if (isset($_POST) && !empty($_POST)) {
 
                 <div class="mb-3">
                     <label for="repwd" class="form-label visually-hidden">Confirmation mot de passe</label>
-                    <input id="repwd-register" type="password" name="repwd" class="form-control"
-                           placeholder="Confirmer le mot de passe" maxlength="255" required>
+                    <input id="repwd-register" type="password" name="repwd" class="form-control register-input"
+                           placeholder="Confirmer le mot de passe" required>
                     <p id="repwd-register-p">
 
                     </p>

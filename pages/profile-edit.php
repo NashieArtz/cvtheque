@@ -40,19 +40,19 @@ if (!empty($_POST) && isset($_POST)) {
   <input type="text" name="firstname" id="profile-edit-forname" value="<?= $user['firstname'] ?>">
 
   <label for="profile-edit-username">Nom d'utilisateur</label>
-  <input type="text" name="username" id="profile-edit-username">
+  <input type="text" name="username" id="profile-edit-username" value="<?= $user['username'] ?>">
 
   <label for="profile-edit-password">Mots de passe</label>
-  <input type="password" name="password" id="profile-edit-password">
+  <input type="password" name="password" id="profile-edit-password" value="0000000000">
 
   <label for="profile-edit-Rpassword">Retaper votre Mots de passe</label>
   <input type="password" name="Rpassword" id="profile-edit-Rpassword">
 
   <label for="profile-edit-email">Email</label>
-  <input type="email" name="email" id="profile-edit-email">
+  <input type="email" name="email" id="profile-edit-email" value="<?= $user['email'] ?>">
 
   <label for="profile-edit-job_title">Quel métier souhaitez-vous exercer ?</label>
-  <input type="text" name="job_title" id="profile-edit-job_title">
+  <input type="text" name="job_title" id="profile-edit-job_title" value="<?= $user['job_title'] ?>">
 
   <label for="profile-edit-permis">Permis</label>
   <input type="checkbox" name="driver_licence" id="profile-edit-permis>
@@ -65,7 +65,7 @@ if (!empty($_POST) && isset($_POST)) {
 
   <h2>Modifier les données de localisation</h2>
   <label for="profile-edit-country">Pays</label>
-  <input type="text" name="country" id="profile-edit-country">
+  <input type="text" name="country" id="profile-edit-country" value="<?= $user['job_title'] ?>">
 
   <label for="profile-edit-city">Ville</label>
   <input type="text" name="city" id="profile-edit-city">

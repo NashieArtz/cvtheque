@@ -53,7 +53,7 @@ foreach ($userSkllisLinks as $link) {
     <div class="cv-row">
         <div class="cv-wrap">
             <div class="cv-name"><?= htmlspecialchars($user['lastname']) . ' ' . htmlspecialchars($user['firstname']) ?></div>
-            <div class="cv-subname">Fonction rechercher</div>
+            <div class="cv-subname"><?= htmlspecialchars($user['job_title']) ?></div>
             <div class="cv-content">
                 <div class="head-title">Expérience</div>
 

@@ -98,9 +98,9 @@ include './config/roles/admin.php';
 
                         <div class="mt-3 d-flex justify-content-end gap-2">
                             <a href="?page=profile&id=<?= $user['id'] ?>" class="btn btn-sm btn-outline-secondary">Editer profil</a>
-                            <button class="btn bg-danger btn-sm" style="color: white;">
+                            <a class="btn bg-danger btn-sm" style="color: white;" href="?page=delete&id=<?= $user['id'] ?>">
                                 <i class="far fa-star me-1"></i> supprimer
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

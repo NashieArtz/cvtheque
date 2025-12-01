@@ -13,6 +13,7 @@ $route = [
   'dashboard' => __DIR__ . '/pages/dashboard.php',
   'employer-list' => __DIR__ . '/pages/employer-list.php',
   'resume' => __DIR__ . '/pages/resume.php',
+  'delete' => __DIR__ . '/pages/delete.php',
 
   // Connection
   'login' => __DIR__ . '/pages/login.php',

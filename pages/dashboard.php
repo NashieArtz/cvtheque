@@ -43,7 +43,7 @@
                 facilement consultable par nos entreprises partenaires. Mettez votre profil à jour en quelques clics et
                 gagnez en visibilité immédiate sur le marché du travail.
             </p>
-            <img src="https://picsum.photos/600/300" alt="Image d'illustration des fonctionnalités du CV">
+            <img src="./assets/img/zen.jpg" alt="Image d'illustration des fonctionnalités du CV">
         </div>
         <a href="?page=profile-edit" class="btn btn-primary btn-lg mt-4" style="background:#613F75; border-radius:8px;">
             Accéder à mon Édition de CV

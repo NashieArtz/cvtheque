@@ -14,22 +14,19 @@
             <a class="nav-link text-white fs-5" href="?page=dashboard">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="?page=employer-list">Entreprise</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="?page=profiles-list">Voir CV</a>
+            <a class="nav-link text-white fs-5" href="?page=profiles-list">Voir CVs</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white fs-5" href="?page=admin-dashboard">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="?page=admin-students">Admin students</a>
+            <a class="nav-link text-white fs-5" href="?page=admin-students">Liste Étudiants</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="?page=admin-employer">Admin employer</a>
+            <a class="nav-link text-white fs-5" href="?page=admin-employer">Liste Entreprises</a>
           </li>
           <li class="nav-item">
-            <a class="btn px-4 py-2 text-white fs-5" style="background:#b6859a; border-radius:20px;" href="?page=logout">
+            <a class="btn px-4 py-2 text-white fs-5 .btn-custom-secondary"  href="?page=logout">
               Se déconnecter
             </a>
           </li>

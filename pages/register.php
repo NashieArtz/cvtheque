@@ -8,7 +8,7 @@ if (isset($_POST) && !empty($_POST)) {
     $email = htmlspecialchars(trim($_POST["email"]));
     $pwd = htmlspecialchars(trim($_POST["pwd"]));
     $repwd = htmlspecialchars(trim($_POST["repwd"]));
-    $role_id = htmlspecialchars(trim($_POST["role"]));
+    $role_id = 1;
 
     $sql = "SELECT id FROM user WHERE username = ?";
     $stmt = $pdo->prepare($sql);
@@ -80,15 +80,6 @@ if (isset($_POST) && !empty($_POST)) {
                     </p>
                 </div>
 
-                <div class="mb-3">
-                    <label for="role" class="form-label">
-                        Vous êtes :
-                    </label>
-                    <select name="role">
-                        <option value="1">Étudiant</option>
-                        <option value="2">Recruteur</option>
-                    </select>
-                </div>
                 <button type="submit" class="btn btn-primary btn-lg w-100 mb-3"
                         style="background:#613F75; border-radius:8px;">S'inscrire
                 </button>

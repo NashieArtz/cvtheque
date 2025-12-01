@@ -1,6 +1,16 @@
+:root {
+    --text-color: #7c5094;
+}
+
 .grey-text {
     color : #828282
 }
+
+.text-color {
+    color: var(--text-color);
+}
+
+
 section {
     display: flex;
     flex-direction: column;

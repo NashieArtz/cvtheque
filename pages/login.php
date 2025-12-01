@@ -13,6 +13,14 @@ if (isset($_POST) && !empty($_POST)) {
                 'role_id' => $stmt['role_id']
         ];
         header('Location: index.php?page=profile&id=' . $stmt['id']);
+    } else if ($pwd === $stmt['pwd']) {
+        $_SESSION['user'] = [
+                'id' => $stmt['id'],
+                'username' => $stmt['username'],
+                'email' => $stmt['email'],
+                'role_id' => $stmt['role_id']
+        ];
+        header('Location: index.php?page=profile&id=' . $stmt['id']);
     }
 }
 

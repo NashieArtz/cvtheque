@@ -1,4 +1,5 @@
 <?php
+include'./config/release.php';
 if (isset($_SESSION['logout_message'])) {
     echo '<div id="logout-message" class="alert alert-info">' . $_SESSION['logout_message'] . '</div>';
     unset($_SESSION['logout_message']);

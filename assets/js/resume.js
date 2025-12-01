@@ -1,30 +1,37 @@
-window.jsPDF = window.jspdf.jsPDF;
-function generatePdf() {
-    const htmlElement = document.getElementById('doc-target');
+window.generatePDF = function () {
+    const element = document.getElementById('doc-target');
 
-    if (!htmlElement) {
-        console.error("Element #doc-target introuvable");
+    if (!element) {
+        console.error("❌ #doc-target introuvable !");
         return;
     }
 
-    html2canvas(htmlElement, {
-        scale: 2,
-        useCORS: true,
-        allowTaint: false
-    }).then(canvas => {
+    // Appliquer mode PDF
+    element.classList.add("pdf-mode");
 
-        const imgData = canvas.toDataURL("image/png");
+    const options = {
+        margin: 0,
+        filename: 'cv.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,
+            useCORS: true,
+            scrollY: 0
+        },
+        jsPDF: {
+            unit: "pt",
+            format: "a4",
+            orientation: "portrait"
+        },
+        pagebreak: { mode: ['css', 'legacy'] }
+    };
 
-        const pdf = new jsPDF({
-            orientation: "p",
-            unit: "px",
-            format: [canvas.width, canvas.height]
+    html2pdf()
+        .set(options)
+        .from(element)
+        .save()
+        .then(() => {
+            // Retirer le mode PDF après la génération
+            element.classList.remove("pdf-mode");
         });
-
-        pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
-
-        pdf.save("CV.pdf");
-    }).catch(err => {
-        console.error("HTML2Canvas Error:", err);
-    });
-}
+};

@@ -80,7 +80,7 @@ foreach ($userSkllisLinks as $link) {
         </div>
         <div class="cv-wrap">
             <div class="avatar">
-                <img src=" <?= $user['picture'] ?>" alt="photo de profil" />
+                <img src=" <?= $user['picture'] ?>" alt="photo de profil" width="512px" height="512px"/>
             </div>
             <div class="info">
                 <div class="title">Contact</div>
@@ -157,14 +157,20 @@ foreach ($userSkllisLinks as $link) {
 
 </div>
 </div>
+    </div>
+</div>
 
 <div id="container">
     <p>
-<button class="btn btn-outline-dark" onclick="generatePdf()">Download PDF</button>
+
+        <button onclick="generatePDF()" style="display:block;margin:20px auto;padding:10px 20px;background:#007BFF;color:#fff;border:none;border-radius:5px;cursor:pointer;">
+            Télécharger en PDF
+        </button>
+
     </p>
 <!--Add External Libraries - JQuery and jspdf
 check out url - https://scotch.io/@nagasaiaytha/generate-pdf-from-html-using-jquery-and-jspdf
 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./assets/js/resume.js"></script>

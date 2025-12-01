@@ -19,7 +19,7 @@
             <a class="nav-link text-white fs-5" href="?page=profiles-list">Voir CV</a>
           </li>
             <li class="nav-item">
-                <a class="nav-link text-white fs-5" href="?page=#">Création CV</a>
+                <a class="nav-link text-white fs-5" href="?page=resume">Création CV</a>
             </li>
             <a class="btn px-4 py-2 fs-5"
                style="background:#FFFFFF; color:#b6859a;  border:2px solid #b6859a; border-radius:20px;"
@@ -31,6 +31,12 @@
               Se déconnecter
             </a>
           </li>
+            <li class="nav-item">
+                <input type="checkbox" id="toggle" data-theme-toggler>
+                <label id="switch" for="toggle">
+                    <div id="circle"></div>
+                </label>
+            </li>
         </ul>
       </div>
     </div>

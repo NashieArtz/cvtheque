@@ -25,6 +25,12 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+=======
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/dark-mode.js"></script>
+>>>>>>> e35a6db9a997892e7b878d84018d64703bd7482d
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="./assets/js/index.js"></script>

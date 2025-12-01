@@ -1,4 +1,3 @@
-<link href="./assets/css/resume.css" rel="stylesheet">
 <div id="doc-target">
     <div class="cv">
     <div class="cv-row">
@@ -134,7 +133,7 @@
 
 <div id="container">
     <p>
-<button class="btn" onclick="generatePdf()">Download PDF</button>
+<button class="btn btn-outline-dark" onclick="generatePdf()">Download PDF</button>
     </p>
 <!--Add External Libraries - JQuery and jspdf
 check out url - https://scotch.io/@nagasaiaytha/generate-pdf-from-html-using-jquery-and-jspdf

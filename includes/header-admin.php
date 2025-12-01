@@ -20,10 +20,10 @@
             <a class="nav-link text-white fs-5" href="?page=profiles-list">Voir CV</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="?page=admin-dashboard">Admin dashboard</a>
+            <a class="nav-link text-white fs-5" href="?page=admin-dashboard">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="?page=admin-students">Adminstudents</a>
+            <a class="nav-link text-white fs-5" href="?page=admin-students">Admin students</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white fs-5" href="?page=admin-employer">Admin employer</a>
@@ -33,6 +33,11 @@
               Se déconnecter
             </a>
           </li>
+            <li class="nav-item">
+                <input type="checkbox" id="toggle" data-theme-toggler>
+                <label id="switch" for="toggle">
+                    <div id="circle"></div>
+                </label>
         </ul>
       </div>
     </div>

@@ -1,3 +1,9 @@
+<?php
+if (isset($_SESSION['logout_message'])) {
+    echo '<div id="logout-message" class="alert alert-info">' . $_SESSION['logout_message'] . '</div>';
+    unset($_SESSION['logout_message']);
+}
+?>
 <section id="hero">
     <div class="container-fluid py-5 banniere-cv">
         <div class="container py-5">

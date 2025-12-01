@@ -1,4 +1,10 @@
 <?php
+
+if (isset($_SESSION['welcome_message'])) {
+    echo '<div class="alert alert-success">' . $_SESSION['welcome_message'] . '</div>';
+    unset($_SESSION['welcome_message']);
+}
+
 ?>
 
 <div class="container my-5">

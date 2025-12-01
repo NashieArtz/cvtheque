@@ -23,7 +23,40 @@
     <h2 class="mb-4">Liste des employeurs</h2>
 
     <div class="row g-4 d-flex flex-wrap">
+        <?php
+        // Récupérer tous les utilisateurs avec leurs compétences
+        $stmt = $pdo->prepare("
+    SELECT u.id AS user_id, u.firstname, u.lastname, u.picture, a.city, u.job_title, s.hard_skills
+    FROM `user` u
+    LEFT JOIN user_has_skills uhs ON u.id = uhs.user_id
+    LEFT JOIN skills s ON uhs.skills_id = s.id
+    LEFT JOIN address a ON a.user_id = u.id
+    ORDER BY u.id
+");
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        // Regrouper les compétences par utilisateur en évitant les doublons
+        $users = [];
+        foreach ($results as $row) {
+            $user_id = $row['user_id'];
+            if (!isset($users[$user_id])) {
+                $users[$user_id] = [
+                        'id' => $user_id,
+                        'firstname' => $row['firstname'] ?? '',
+                        'lastname' => $row['lastname'] ?? '',
+                        'job_title' => $row['job_title'] ?? '',
+                        'picture' => $row['picture'] ?? '',
+                        'city' => $row['city'] ?? 'Ville',
+                        'skills' => []
+
+                ];
+            }
+            if (!empty($row['hard_skills']) && !in_array($row['hard_skills'], $users[$user_id]['skills'])) {
+                $users[$user_id]['skills'][] = $row['hard_skills'];
+            }
+        }
+        ?>
         <?php for ($i = 0; $i < 6; $i++): ?>
             <div class="col-12 col-sm-6 col-lg-4">
                 <div class="card shadow-sm border-0 h-100">

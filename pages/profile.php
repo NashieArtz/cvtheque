@@ -16,7 +16,7 @@ if (isset($_SESSION['welcome_message'])) {
           <div class="row align-items-center">
 
             <div class="col-12 col-md-3 text-center mb-4 mb-md-0">
-              <img src="https://picsum.photos/300/300" alt="Icone utilisateur"
+              <img src="<?= $user['picture'] ?>" alt="Icone utilisateur"
                 class="img-fluid rounded-circle shadow-lg" style="width: 150px; height: 150px; object-fit: cover;">
             </div>
 
@@ -32,6 +32,7 @@ if (isset($_SESSION['welcome_message'])) {
             </div>
 
             <div class="col-12 col-md-3 text-center text-md-end">
+              <?= edit_btn() ?>
               <?= edit_btn() ?>
             </div>
 

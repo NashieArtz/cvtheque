@@ -14,9 +14,6 @@
             <a class="nav-link text-white fs-5" href="?page=dashboard">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="?page=employer-list">Entreprise</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link text-white fs-5" href="?page=profiles-list">Voir CV</a>
           </li>
           <li class="nav-item">

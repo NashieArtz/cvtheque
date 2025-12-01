@@ -12,16 +12,16 @@
         </div>
         <div class="class=container row py-1 col-md-3 ">
         <div class="col">
-            <a href="#"> <img src="https://picsum.photos/40/40" class="img-fluid" alt="facebook"></a>
+            <a href="#"> <img src="./assets/img/facebook.png" class="img-fluid" alt="facebook"></a>
         </div>
         <div class="col">
-            <a href="#">  <img src="https://picsum.photos/40/40" class="img-fluid" alt="Instagram"></a>
+            <a href="#">  <img src="./assets/img/instagram.png" class="img-fluid" alt="Instagram"></a>
         </div>
         <div class="col">
-            <a href="#">  <img src="https://picsum.photos/40/40" class="img-fluid" alt="Youtube"></a>
+            <a href="#">  <img src="./assets/img/youtube.png" class="img-fluid" alt="Youtube"></a>
         </div>
         <div class="col">
-            <a href="#">   <img src="https://picsum.photos/40/40" class="img-fluid" alt="Tiktok"></a>
+            <a href="#">   <img src="./assets/img/linkdin.png" class="img-fluid" alt="linkdin"></a>
         </div>
         </div>
     </div>

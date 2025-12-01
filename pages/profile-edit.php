@@ -1,16 +1,43 @@
 <?php
-include './config/update.php'
+include './config/release.php';
+include './config/update.php';
+
+if (!empty($_POST) && isset($_POST)) {
+  $email = htmlspecialchars(trim($_POST['email']));
+  $firtname = htmlspecialchars(trim($_POST['firstname']));
+  $lastname = htmlspecialchars(trim($_POST['lastname']));
+  $job_title = htmlspecialchars(trim($_POST['job_title']));
+  $picture = file_get_contents($_FILES['picture']);
+  $phone = htmlspecialchars(trim($_POST['phone']));
+  if (isset($_POST['driver_licence'])) $driver_licence = 1;
+  else $driver_licence = 0;
+  $username = htmlspecialchars(trim($_POST['username']));
+  $country = htmlspecialchars(trim($_POST['country']));
+  $city = htmlspecialchars(trim($_POST['city']));
+  $area_code = htmlspecialchars(trim($_POST['area_code']));
+
+
+  $user_column = ["email", "firstname", "lastname", "job_title", "picture", "phone", "driver_licence", "username"];
+  $user_values = [$email, $firtname, $lastname, $job_title, $picture, $phone, $driver_licence, $username];
+  $address_columns = ["area_code", "city"];
+  $adress_values = [$city, $area_code];
+  $country_columns = "country";
+
+  update($pdo, "user", $user_column, $user_values);
+  update($pdo, "address", $adress_column, $address_values);
+  update($pdo, "country", $country_columns, $country);
+}
 ?>
 <link href="./assets/css/register-login.css" rel="stylesheet">
 <form method="post">
   <label for="profile-edit-image">Photo de profil</label>
-  <input type="file" name="image" id="profile-edit-image">
+  <input type="file" name="picture" id="profile-edit-image">
 
   <label for="profile-edit-name">Nom</label>
-  <input type="text" name="lastname" id="profile-edit-name">
+  <input type="text" name="lastname" id="profile-edit-name" value="<?= $user['lastname'] ?>">
 
   <label for="profile-edit-forname">Prénom</label>
-  <input type="text" name="firstname" id="profile-edit-forname">
+  <input type="text" name="firstname" id="profile-edit-forname" value="<?= $user['firstname'] ?>">
 
   <label for="profile-edit-username">Nom d'utilisateur</label>
   <input type="text" name="username" id="profile-edit-username">
@@ -24,10 +51,13 @@ include './config/update.php'
   <label for="profile-edit-email">Email</label>
   <input type="email" name="email" id="profile-edit-email">
 
-  <label for="profile-edit-permis">Permis</label>
-  <input type="checkbox" name="permis" id="profile-edit-permis">
+  <label for="profile-edit-job_title">Quel métier souhaitez-vous exercer ?</label>
+  <input type="text" name="job_title" id="profile-edit-job_title">
 
-  <label for="profile-edit-hide-name">Masquer nom et prénom</label>
+  <label for="profile-edit-permis">Permis</label>
+  <input type="checkbox" name="driver_licence" id="profile-edit-permis>
+
+  <label for=" profile-edit-hide-name">Masquer nom et prénom</label>
   <input type="checkbox" name="hide-name" id="profile-edit-hide-name">
 
   <label for="profile-edit-hide-photo">Inclure photo de profil</label>

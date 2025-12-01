@@ -26,7 +26,7 @@
     <?php
     // Récupérer tous les utilisateurs avec leurs compétences
     $stmt = $pdo->prepare("
-    SELECT u.id AS user_id, u.firstname, u.lastname, a.city, u.job_title, s.hard_skills
+    SELECT u.id AS user_id, u.firstname, u.lastname, u.picture, a.city, u.job_title, s.hard_skills
     FROM `user` u
     LEFT JOIN user_has_skills uhs ON u.id = uhs.user_id
     LEFT JOIN skills s ON uhs.skills_id = s.id
@@ -46,6 +46,7 @@
                     'firstname' => $row['firstname'] ?? '',
                     'lastname' => $row['lastname'] ?? '',
                     'job_title' => $row['job_title'] ?? '',
+                    'picture' => $row['picture'] ?? '',
                     'city' => $row['city'] ?? 'Ville',
                     'skills' => []
 
@@ -66,7 +67,11 @@
                             <div class="col-3 col-sm-2 text-center">
                                 <div class="rounded-circle bg-light d-flex justify-content-center align-items-center"
                                      style="width: 70px; height: 70px; margin-top: 5px;">
-                                    <i class="fas fa-user-circle fa-2x text-muted"></i>
+                                    <?php if (!empty($user['picture'])): ?>
+                                        <img src="<?= htmlspecialchars($user['picture']) ?>" class="rounded-circle" style="width:70px; height:70px; object-fit:cover;"/>
+                                    <?php else: ?>
+                                        <i class="fas fa-user-circle fa-2x text-muted"></i>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="col-9 col-sm-10">

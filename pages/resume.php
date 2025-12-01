@@ -1,90 +1,117 @@
+<?php
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user']["id"])) {
+    die("Utilisateur non connecté.");
+}
+
+$id = $_SESSION['user']["id"];
+
+// Requête préparée pour éviter les injections SQL
+$stmt = $pdo->prepare("SELECT * FROM `user` WHERE `id` = :id");
+$stmt->execute(['id' => $id]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$user) {
+    die("Utilisateur introuvable.");
+}
+$stmt2 = $pdo->prepare("SELECT * FROM `experience` WHERE `user_id` = :id");
+$stmt2->execute(['id' => $id]);
+$experiences = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+$stmt3 = $pdo->prepare("SELECT education_id FROM `user_has_education` WHERE `user_id` = :id");
+$stmt3->execute(['id' => $id]);
+$userEducationLinks = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+$educations = [];
+
+foreach ($userEducationLinks as $link) {
+    $stmt4 = $pdo->prepare("SELECT * FROM `education` WHERE `id` = :id");
+    $stmt4->execute(['id' => $link['education_id']]);
+    $edu = $stmt4->fetch(PDO::FETCH_ASSOC);
+
+    if ($edu) {
+        $educations[] = $edu;
+    }
+}
+$stmt5 = $pdo->prepare("SELECT skills_id FROM `user_has_skills` WHERE `user_id` = :id");
+$stmt5->execute(['id' => $id]);
+$userSkllisLinks = $stmt5->fetchAll(PDO::FETCH_ASSOC);
+$skills = [];
+
+foreach ($userSkllisLinks as $link) {
+    $stmt6 = $pdo->prepare("SELECT * FROM `skills` WHERE `id` = :id");
+    $stmt6->execute(['id' => $link['skills_id']]);
+    $skil = $stmt6->fetch(PDO::FETCH_ASSOC);
+
+    if ($skil) {
+        $skills[] = $skil;
+    }
+}
+?>
+
+
 <div id="doc-target">
     <div class="cv">
     <div class="cv-row">
         <div class="cv-wrap">
-            <div class="cv-name">Nom Prenom</div>
+            <div class="cv-name"><?= htmlspecialchars($user['lastname']) . ' ' . htmlspecialchars($user['firstname']) ?></div>
             <div class="cv-subname">Fonction rechercher</div>
             <div class="cv-content">
                 <div class="head-title">Expérience</div>
-                <div class="cv-content-item">
-                    <div class="title">nom du poste</div>
-                    <div class="subtitle">Enterprise Name</div>
-                    <div class="time">date </div>
-                    <div class="exprecince">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a ante pulvinar, consectetur ante et.</div>
-                </div>
-                <div class="cv-content-item">
-                    <div class="title">Frontend Developer</div>
-                    <div class="subtitle">Enterprise Name</div>
-                    <div class="time">Jan 2017 - 3 year, Turkey</div>
-                    <div class="exprecince">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a ante pulvinar, consectetur ante et.</div>
-                </div>
-                <div class="cv-content-item">
-                    <div class="title">Frontend Developer</div>
-                    <div class="subtitle">Enterprise Name</div>
-                    <div class="time">Oct 2015 - 2 year, Turkey</div>
-                    <div class="exprecince">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a ante pulvinar, consectetur ante et.</div>
-                </div>
-                <div class="cv-content-item">
-                    <div class="title">Frontend Developer</div>
-                    <div class="subtitle">Enterprise Name</div>
-                    <div class="time">Nov 2018 - 1 year, USA</div>
-                    <div class="exprecince">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a ante pulvinar, consectetur ante et.</div>
-                </div>
+
+                <?php foreach ($experiences as $experience): ?>
+                    <div class="cv-content-item">
+                        <div class="title"><?= htmlspecialchars($experience['jobtitle']) ?></div>
+                        <div class="subtitle"><?= htmlspecialchars($experience['employer']) ?></div>
+                        <div class="time"><?= htmlspecialchars($experience['date_start']) . ' - ' . htmlspecialchars($experience['date_end']) ?></div>
+                        <div class="exprecince"><?= htmlspecialchars($experience['description']) ?></div>
+                    </div>
+                <?php endforeach; ?>
 
             </div>
             <div class="cv-content">
-                <div class="head-title">Education</div>
-                <div class="cv-content-item">
-                    <div class="title">Front-End development courses from W3C
+                <?php foreach ($educations as $edu): ?>
+                    <div class="cv-content-item">
+                        <div class="title"><?= htmlspecialchars($edu['current_studies']) ?></div>
+                        <div class="subtitle"><?= htmlspecialchars($edu['diploma']) ?></div>
+                        <div class="subtitle"><?= htmlspecialchars($edu['school']) ?></div>
+                        <div class="time"><?= htmlspecialchars($edu['date_start']) . ' - ' . htmlspecialchars($edu['date_end']) ?></div>
                     </div>
-                    <div class="subtitle">Enterprise Name</div>
-                    <div class="time">Aug 2017 - Present - 3 year, Turkey</div>
-                    <div class="exprecince">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a ante pulvinar, consectetur ante et.</div>
-                </div>
-                <div class="cv-content-item">
-                    <div class="title">Front-end development courses from freeCodeCamp.org Curriculum</div>
-                    <div class="subtitle">Enterprise Name</div>
-                    <div class="time">Aug 2015 - 1 year, Paris</div>
-                    <div class="exprecince">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a ante pulvinar, consectetur ante et.</div>
-                </div>
-
+                <?php endforeach; ?>
             </div>
         </div>
         <div class="cv-wrap">
             <div class="avatar">
-                <img src="https://image-aws-us-west-2.vsco.co/04d5df/155672998/5ee7bf4f43a34b5b3c000002/720x960/vsco5ee7bf53b94de.jpg" alt="" />
+                <img src=" <?= $user['picture'] ?>" alt="photo de profil" width="512px" height="512px"/>
             </div>
             <div class="info">
                 <div class="title">Contact</div>
-                <p><a href="mailto:info@ahmetaksungur.com">info@yourmail.com</a></p>
-                <p><a href="tel:+905555554444">+90 555 444 1500</a></p>
+                <p><a href="mailto:<?= htmlspecialchars($user['email']) ?>"><?= htmlspecialchars($user['email']) ?></a></p>
+                <p><a href="tel:<?= htmlspecialchars($user['phone']) ?>"><?= htmlspecialchars($user['phone']) ?></a></p>
                 <p></p>
             </div>
             <div class="cv-skills">
                 <div class="head-title">Primary Skills
                 </div>
                 <div class="cv-skills-item">
-                    <div class="title">HTML</div>
-                    <div class="title">CSS </div>
-                    <div class="title">JAVASCRİPT</div>
-                    <div class="title">PHP</div>
-                </div>
+                        <div class="cv-content-item">
+                            <?php foreach ($skills as $skil): ?>
+                                <?php if (!empty($skil['hard_skills'])): ?>
+                                    <div class="subtitle"><?= htmlspecialchars($skil['hard_skills']) ?></div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+
 
             </div>
             <div class="cv-skills">
                 <div class="head-title">Secondary Skills
                 </div>
                 <div class="cv-skills-item">
-                    <div class="title">jQuery</div>
-                    <div class="title">AJAX</div>
-                    <div class="title">Bower</div>
-                    <div class="title">NPM</div>
-                    <div class="title">Grunt/Gulp</div>
-                    <div class="title">Git</div>
-                    <div class="title">Bootstrap</div>
-                    <div class="title">WordPress</div>
-                    <div class="title">SharePoint</div>
-                    <div class="title">PowerShell</div>
+                    <div class="cv-content-item">
+                        <?php foreach ($skills as $skil): ?>
+                            <?php if (!empty($skil['soft_skills'])): ?>
+                                <div class="subtitle"><?= htmlspecialchars($skil['soft_skills']) ?></div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                 </div>
 
             </div>
@@ -130,14 +157,20 @@
 
 </div>
 </div>
+    </div>
+</div>
 
 <div id="container">
     <p>
-<button class="btn btn-outline-dark" onclick="generatePdf()">Download PDF</button>
+
+        <button onclick="generatePDF()" style="display:block;margin:20px auto;padding:10px 20px;background:#007BFF;color:#fff;border:none;border-radius:5px;cursor:pointer;">
+            Télécharger en PDF
+        </button>
+
     </p>
 <!--Add External Libraries - JQuery and jspdf
 check out url - https://scotch.io/@nagasaiaytha/generate-pdf-from-html-using-jquery-and-jspdf
 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./assets/js/resume.js"></script>

@@ -1,3 +1,9 @@
+<?php
+if (isset($_SESSION['logout_message'])) {
+    echo '<div id="logout-message" class="alert alert-info">' . $_SESSION['logout_message'] . '</div>';
+    unset($_SESSION['logout_message']);
+}
+?>
 <section id="hero">
     <div class="container-fluid py-5 banniere-cv">
         <div class="container py-5">
@@ -9,7 +15,7 @@
                     </a>
                 </div>
                 <div class="col-md-6">
-                    <img src="https://picsum.photos/600/300" class="img-fluid rounded shadow" alt="Illustration d'un CV en ligne">
+                    <img src="./assets/img/pc_with_cv.jpg" class="img-fluid rounded shadow" alt="Illustration d'un CV en ligne">
                 </div>
             </div>
         </div>
@@ -19,15 +25,15 @@
     <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-md-4 d-flex align-items-center gap-2">
-                <img src="https://picsum.photos/60/60" alt="Icône simplicité">
+                <img src="./assets/img/smile.png" alt="Icône simplicité">
                 <p class="fw-bold">Facilité d’utilisation</p>
             </div>
             <div class="col-md-4 d-flex align-items-center gap-2">
-                <img src="https://picsum.photos/60/60" alt="Icône partage">
+                <img src="./assets/img/share.png" alt="Icône partage">
                 <p class="fw-bold">Générez et partagez votre profil</p>
             </div>
             <div class="col-md-4 d-flex align-items-center gap-2">
-                <img src="https://picsum.photos/60/60" alt="Icône employeur">
+                <img src="./assets/img/people.png" alt="Icône employeur">
                 <p class="fw-bold">Visibilité auprès de nombreux employeurs</p>
             </div>
         </div>
@@ -43,7 +49,7 @@
                 facilement consultable par nos entreprises partenaires. Mettez votre profil à jour en quelques clics et
                 gagnez en visibilité immédiate sur le marché du travail.
             </p>
-            <img src="https://picsum.photos/600/300" alt="Image d'illustration des fonctionnalités du CV">
+            <img src="./assets/img/zen.jpg" alt="Image d'illustration des fonctionnalités du CV">
         </div>
         <a href="?page=profile-edit" class="btn btn-primary btn-lg mt-4" style="background:#613F75; border-radius:8px;">
             Accéder à mon Édition de CV

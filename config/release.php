@@ -5,16 +5,10 @@ function userInfo(PDO $pdo)
   $sql = "SELECT * FROM `user` WHERE `id` LIKE '$user_id'";
   return $pdo->query($sql)->fetch();
 };
-function userAddress(PDO $pdo)
+function userdata(PDO $pdo, $table)
 {
   $user_id = ($_SESSION['user']['id']);
-  $sql = "SELECT * FROM `address` RIGHT JOIN `country` ON address.country_id = country.id WHERE `user_id` LIKE '$user_id'";
-  return $pdo->query($sql)->fetch();
-};
-function userExperience(PDO $pdo)
-{
-  $user_id = ($_SESSION['user']['id']);
-  $sql = "SELECT * FROM `experience` WHERE `user_id` LIKE '$user_id'";
+  $sql = "SELECT * FROM `$table` WHERE `user_id` LIKE '$user_id'";
   return $pdo->query($sql)->fetch();
 };
 function edit_btn()
@@ -29,5 +23,8 @@ function edit_btn()
 };
 
 $user = userInfo($pdo);
-$address = userAddress($pdo);
-$experience = userExperience($pdo);
+$address = userdata($pdo, "address");
+$country = userdata($pdo, "country");
+$experience = userdata($pdo, "experience");
+$skils = userdata($pdo, "skills");
+$education = userdata($pdo, "education");

@@ -68,7 +68,7 @@ if (!empty($_POST) && isset($_POST)) {
   <input type="text" name="country" id="profile-edit-country" value="<?= $user['job_title'] ?>">
 
   <label for="profile-edit-city">Ville</label>
-  <input type="text" name="city" id="profile-edit-city">
+  <input type="text" name="city" id="profile-edit-city" value="<?= $adresse ?>">
 
   <label for="profile-edit-cp">Code Postale</label>
   <input type="number" name="area_code" id="profile-edit-cp">

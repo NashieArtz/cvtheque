@@ -1,30 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" data-theme="light">
+
 
 <head>
-  <meta charset="UTF-8">
-  <title>CVthèque</title>
-  <link href="./assets/css/index.css" rel="stylesheet">
-  <link href="./assets/css/register-login.css" rel="stylesheet">
-  <link href="./assets/css/header-footer.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>CVthèque</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/css/dark-mode.css" rel="stylesheet"/>
+    <link href="./assets/css/header-footer.css" rel="stylesheet">
+    <link href="./assets/css/index.css" rel="stylesheet">
+    <link href="./assets/css/register-login.css" rel="stylesheet">
     <link href="./assets/css/resume.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/dark-mode.css" />
+
 </head>
 
 <body>
 
-  <?php
-  if (isset($_SESSION)) {
-      if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
-          $role_id = $_SESSION['user']['role_id'] ?? null;
+<?php
+if (isset($_SESSION)) {
+    if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
+        $role_id = $_SESSION['user']['role_id'] ?? null;
 
-          if ($role_id == 1) {
-              include("includes/header-student.php");
-          }
-          if ($role_id == 3) {
-              include("includes/header-admin.php");
-          }
-      } else include("includes/header-guest.php");
-  }
-  ?>
+        if ($role_id == 1) {
+            include("includes/header-student.php");
+        }
+        if ($role_id == 3) {
+            include("includes/header-admin.php");
+        }
+    } else include("includes/header-guest.php");
+}
+?>

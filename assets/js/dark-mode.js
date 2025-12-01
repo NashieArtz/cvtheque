@@ -1,36 +1,20 @@
-(function () {
+let darkmode = localStorage.getItem('dark');
+const themeSwitch = document.getElementById('theme-switch');
+const html = document.getElementsByTagName("html");
 
-    const root = document.documentElement;
+const enableDarkmode = () => {
+    html.body.classList.add('dark');
+    localStorage.setItem('dark', 'active');
+}
 
-    function toggleDarkMode() {
-        const currentTheme = root.getAttribute("data-theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-        const checkbox = document.querySelector('[data-theme-toggler]');
-        if (checkbox) {
-            checkbox.checked = newTheme === "dark";
-        }
-    }
+const disableDarkmode = () => {
+    html.body.classList.remove('dark');
+    localStorage.setItem('dark', null);
+}
 
-    function init() {
-        const storedPreference = localStorage.getItem("theme");
-        const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const theme = storedPreference || (systemPrefersDark ? "dark" : "light");
-        root.setAttribute("data-theme", theme);
-        const checkbox = document.querySelector('[data-theme-toggler]');
-        if (checkbox) {
-            checkbox.checked = theme === "dark";
-        }
-    }
+if (darkmode === "active") enableDarkmode();
 
-    init();
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const togglers = document.querySelectorAll("[data-theme-toggler]");
-        togglers.forEach((toggler) => {
-            toggler.addEventListener("click", toggleDarkMode);
-        });
-    });
-
-})();
+themeSwitch.addEventListener("click", () => {
+    darkmode = localStorage.getItem('dark');
+    darkmode !== "active" ? enableDarkmode() : disableDarkmode();
+})

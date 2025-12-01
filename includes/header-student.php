@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg" style="background:#5a3f78;">
+<nav class="navbar navbar-expand-lg navheader">
     <div class="container-fluid">
-      <a class="navbar-brand text-white fs-3" href="?page=dashboard">
+      <a class="navbar-brand text-white fs-3 logo" href="?page=dashboard">
         Cvthèque
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVisiteur"
@@ -10,27 +10,28 @@
       <div class="collapse navbar-collapse" id="navbarVisiteur">
         <ul class="navbar-nav ms-auto align-items-center gap-4">
           <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="?page=dashboard">Accueil</a>
+            <a class="nav-link fs-5" href="?page=dashboard">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="?page=profiles-list">Voir CVs</a>
+            <a class="nav-link  fs-5" href="?page=profiles-list">Voir CVs</a>
           </li>
             <li class="nav-item">
-                <a class="nav-link text-white fs-5" href="?page=resume">Mon CV</a>
+                <a class="nav-link fs-5" href="?page=resume">Mon CV</a>
             </li>
-            <a class="btn px-4 py-2 fs-5 btn-view-profile"
+            <a class="btn px-4 py-2 fs-5 btn-bg-primary"
                href="?page=profile">
                 Mon Profile
             </a>
           <li class="nav-item">
-            <a class="btn px-4 py-2 text-white fs-5 btn-custom-secondary"  href="?page=logout">
+            <a class="btn px-4 py-2 fs-5 btn-bg-secondary"  href="?page=logout">
               Se déconnecter
             </a>
           </li>
-            <li class="nav-item">
-                <input type="checkbox" id="toggle" data-theme-toggler>
-                <label id="switch" for="toggle">
-                    <div id="circle"></div>
+            <li class="nav-item theme-position">
+                <img class="moon-sun-icon" src="./assets/img/moon.png" alt="Logo dark or light mode" height="20px" width="20px">
+                <input type="checkbox" data-theme-toggle class="theme-toggle-input">
+                <label for="toggle" class="theme-switch"">
+                    <div class="theme-circle"></div>
                 </label>
             </li>
         </ul>

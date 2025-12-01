@@ -5,15 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/dark-mode.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/dark-mode.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/header-footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/header-footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/dark-mode.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/dark-mode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/release.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/release.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/header-student.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-student.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register.php" afterDir="false" />
     </list>
-    <list id="b8697c67-535d-4448-bffe-c9fbffdf3e00" name="Changes by coolmathieu" comment="">
-      <change beforePath="$PROJECT_DIR$/pages/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile.php" afterDir="false" />
-    </list>
+    <list id="b8697c67-535d-4448-bffe-c9fbffdf3e00" name="Changes by coolmathieu" comment="" />
     <list id="899236c5-f74d-4787-ae6d-17bd3a35d9d5" name="Changes by FZYSK" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,9 +30,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package.json" />
-        <option value="PHP File" />
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="PHP File" />
       </list>
     </option>
   </component>
@@ -77,8 +80,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-PS-252.27397.112" />
-        <option value="bundled-php-predefined-a98d8de5180a-b35feea871ed-com.jetbrains.php.sharedIndexes-PS-252.27397.112" />
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-PS-252.28238.9" />
+        <option value="bundled-php-predefined-a98d8de5180a-58f58c5035b3-com.jetbrains.php.sharedIndexes-PS-252.28238.9" />
       </set>
     </attachedChunks>
   </component>
@@ -91,6 +94,9 @@
       <updated>1764144981036</updated>
       <workItem from="1764144982158" duration="21388000" />
       <workItem from="1764230971377" duration="17822000" />
+      <workItem from="1764579505916" duration="18776000" />
+      <workItem from="1764616545669" duration="1286000" />
+      <workItem from="1764619221729" duration="1743000" />
     </task>
     <servers />
   </component>
@@ -124,7 +130,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/assets/js/resume.js</url>
           <line>1</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

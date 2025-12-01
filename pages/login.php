@@ -12,11 +12,17 @@ if (isset($_POST) && !empty($_POST)) {
                 'email' => $stmt['email'],
                 'role_id' => $stmt['role_id']
         ];
+        $_SESSION['welcome_message'] = "Bienvenue " . htmlspecialchars($stmt['username']) . "!";
+
         header('Location: index.php?page=profile&id=' . $stmt['id']);
+        exit;
+    } else {
+        $error = "Nom d'utilisateur ou mot de passe incorrect.";
     }
 }
 
 ?>
+
 
 <section class="container my-5">
     <div class="row justify-content-center">

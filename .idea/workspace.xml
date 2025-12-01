@@ -9,13 +9,10 @@
       <change beforePath="$PROJECT_DIR$/assets/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register.php" afterDir="false" />
     </list>
     <list id="b8697c67-535d-4448-bffe-c9fbffdf3e00" name="Changes by coolmathieu" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/js/resume.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/resume.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/resume.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/resume.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile.php" afterDir="false" />
     </list>
     <list id="899236c5-f74d-4787-ae6d-17bd3a35d9d5" name="Changes by FZYSK" comment="" />
     <option name="SHOW_DIALOG" value="false" />

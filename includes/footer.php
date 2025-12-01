@@ -12,21 +12,22 @@
         </div>
         <div class="class=container row py-1 col-md-3 ">
         <div class="col">
-            <a href="#"> <img src="https://picsum.photos/40/40" class="img-fluid" alt="facebook"></a>
+            <a href="https://facebook.com"> <img src="./assets/img/facebook.png" class="img-fluid" alt="facebook"></a>
         </div>
         <div class="col">
-            <a href="#">  <img src="https://picsum.photos/40/40" class="img-fluid" alt="Instagram"></a>
+            <a href="https://instagram.com">  <img src="./assets/img/instagram.png" class="img-fluid" alt="Instagram"></a>
         </div>
         <div class="col">
-            <a href="#">  <img src="https://picsum.photos/40/40" class="img-fluid" alt="Youtube"></a>
+            <a href="https://youtube.com">  <img src="./assets/img/youtube.png" class="img-fluid" alt="Youtube"></a>
         </div>
         <div class="col">
-            <a href="#">   <img src="https://picsum.photos/40/40" class="img-fluid" alt="Tiktok"></a>
+            <a href="https://linkedin.com">   <img src="./assets/img/linkedin.png" class="img-fluid" alt="linkedin"></a>
         </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/dark-mode.js"></script>
 </footer>
 
 <?php

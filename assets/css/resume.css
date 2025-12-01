@@ -41,19 +41,19 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Forcer le CV à rester au format A4 */
 .cv {
-    background: white;
-    width: 70%;
+    width: 210mm;        /* largeur A4 */
+    min-height: 297mm;   /* hauteur A4 */
+    max-height: 297mm;
     margin: 0 auto;
+    padding: 30px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: white;
     display: flex;
     flex-direction: column;
-    padding: 30px;
-    border-top: 8px solid black;
-    position: relative;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    overflow: hidden;
-    border-radius: 5px;
 }
 .cv-row {
     display: flex;
@@ -235,4 +235,10 @@ body {
     width: 30px;
     overflow: hidden;
 }
+.pdf-mode .cv-row {
+    display: flex !important;
+}
 
+.pdf-mode .cv-wrap {
+    width: 100% !important;
+}

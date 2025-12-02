@@ -1,31 +1,35 @@
 <?php
+
 include './config/release.php';
 include './config/update.php';
 
-if (!empty($_POST) && isset($_POST)) {
-  $email = htmlspecialchars(trim($_POST['email']));
-  $firtname = htmlspecialchars(trim($_POST['firstname']));
-  $lastname = htmlspecialchars(trim($_POST['lastname']));
-  $job_title = htmlspecialchars(trim($_POST['job_title']));
-  $picture = file_get_contents($_FILES['picture']);
-  $phone = htmlspecialchars(trim($_POST['phone']));
-  if (isset($_POST['driver_licence'])) $driver_licence = 1;
-  else $driver_licence = 0;
-  $username = htmlspecialchars(trim($_POST['username']));
-  $country = htmlspecialchars(trim($_POST['country']));
-  $city = htmlspecialchars(trim($_POST['city']));
-  $area_code = htmlspecialchars(trim($_POST['area_code']));
+
+if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
+  if (!empty($_POST) && isset($_POST)) {
+    $email = htmlspecialchars(trim($_POST['email']));
+    $firtname = htmlspecialchars(trim($_POST['firstname']));
+    $lastname = htmlspecialchars(trim($_POST['lastname']));
+    $job_title = htmlspecialchars(trim($_POST['job_title']));
+    $picture = file_get_contents($_FILES['picture']);
+    $phone = htmlspecialchars(trim($_POST['phone']));
+    if (isset($_POST['driver_licence'])) $driver_licence = 1;
+    else $driver_licence = 0;
+    $username = htmlspecialchars(trim($_POST['username']));
+    $country = htmlspecialchars(trim($_POST['country']));
+    $city = htmlspecialchars(trim($_POST['city']));
+    $area_code = htmlspecialchars(trim($_POST['area_code']));
 
 
-  $user_column = ["email", "firstname", "lastname", "job_title", "picture", "phone", "driver_licence", "username"];
-  $user_values = [$email, $firtname, $lastname, $job_title, $picture, $phone, $driver_licence, $username];
-  $address_columns = ["area_code", "city"];
-  $adress_values = [$city, $area_code];
-  $country_columns = "country";
+    $user_column = ["email", "firstname", "lastname", "job_title", "picture", "phone", "driver_licence", "username"];
+    $user_values = [$email, $firtname, $lastname, $job_title, $picture, $phone, $driver_licence, $username];
+    $address_columns = ["area_code", "city"];
+    $adress_values = [$city, $area_code];
+    $country_columns = "country";
 
-  update($pdo, "user", $user_column, $user_values);
-  update($pdo, "address", $adress_column, $address_values);
-  update($pdo, "country", $country_columns, $country);
+    update($pdo, "user", $user_column, $user_values);
+    update($pdo, "address", $adress_column, $address_values);
+    update($pdo, "country", $country_columns, $country);
+  };
 }
 ?>
 <link href="./assets/css/register-login.css" rel="stylesheet">

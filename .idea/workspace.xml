@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/header-footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/header-footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin-students.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin-students.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profiles-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profiles-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/release.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/release.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile-edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-edit.php" afterDir="false" />
     </list>
     <list id="b8697c67-535d-4448-bffe-c9fbffdf3e00" name="Changes by coolmathieu" comment="" />
     <list id="899236c5-f74d-4787-ae6d-17bd3a35d9d5" name="Changes by FZYSK" comment="" />
@@ -57,7 +55,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "ange",
+    "git-widget-placeholder": "Merging ange",
     "last_opened_file_path": "C:/Users/Angel/Coding/Full-Stack/NFS/1bcigit/cvtheque",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -94,7 +92,7 @@
       <workItem from="1764616545669" duration="1286000" />
       <workItem from="1764619221729" duration="1743000" />
       <workItem from="1764623234748" duration="10790000" />
-      <workItem from="1764678922288" duration="8453000" />
+      <workItem from="1764678922288" duration="10973000" />
     </task>
     <servers />
   </component>

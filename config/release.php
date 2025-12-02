@@ -1,30 +1,31 @@
 <?php
-//function userInfo(PDO $pdo)
-//{
-//  $user_id = ($_SESSION['user']['id']);
-//  $sql = "SELECT * FROM `user` WHERE `id` LIKE '$user_id'";
-//  return $pdo->query($sql)->fetch();
-//};
-//function userdata(PDO $pdo, $table)
-//{
-//  $user_id = ($_SESSION['user']['id']);
-//  $sql = "SELECT * FROM `$table` WHERE `user_id` LIKE '$user_id'";
-//  return $pdo->query($sql)->fetch();
-//};
-//function edit_btn()
-//{
-//  if (isset($_SESSION)) {
-//    if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
-//      echo '<a href="?page=profile-edit" class="btn btn-sm text-color">Modifier le Profil</a>
-//<a href="#" class="btn btn-sm ms-2">Générer CV</a>
-//</div>';
-//    }
-//  }
-//};
-//
-//$user = userInfo($pdo);
-//$address = userdata($pdo, "address");
-//$country = userdata($pdo, "country");
-//$experience = userdata($pdo, "experience");
-//$skils = userdata($pdo, "skills");
-//$education = userdata($pdo, "education");
+include './db.php';
+//parcourir toutes les tables pour en extraire les données
+//pour chaque colonne d'un tableau, récupérer les données
+
+function userAll(PDO $pdo)
+{
+    $sql = "SELECT * FROM `user`
+          LEFT JOIN `user_has_skills` ON user_has_skills.user_id = user.id
+          LEFT JOIN `skills` ON user_has_skills.skills_id = skills.id
+          LEFT JOIN `user_has_education` ON user_has_education.user_id = user.id
+          LEFT JOIN `education` ON user_has_education.education_id = education.id
+          LEFT JOIN `experience` ON experience.user_id = user.id 
+          LEFT JOIN `country` ON user.country.user_id = country.id 
+          LEFT JOIN `address` ON address.user_id = user.id";
+    return $pdo->query($sql)->fetchAll();
+};
+
+function userData(PDO $pdo, $user_id)
+{
+    $sql = "SELECT * FROM `user`
+          LEFT JOIN `user_has_skills` ON user_has_skills.user_id = user.id
+          LEFT JOIN `skills` ON user_has_skills.skills_id = skills.id
+          LEFT JOIN `user_has_education` ON user_has_education.user_id = user.id
+          LEFT JOIN `education` ON user_has_education.education_id = education.id
+          LEFT JOIN `experience` ON experience.user_id = user.id 
+          LEFT JOIN `country` ON user.country.user_id = country.id 
+          LEFT JOIN `address` ON address.user_id = user.id
+          WHERE id='$user_id'";
+    return $pdo->query($sql)->fetchAll();
+}

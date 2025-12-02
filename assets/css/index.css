@@ -1,4 +1,60 @@
 @import url('https://fonts.googleapis.com/css?family=Hind:300,400&display=swap');
+
+[data-theme = "light"] {
+
+    --bg-color: #F1F1F1;
+    --bg2-color: #f5f5f5;
+    --text-color: #010101;
+    --text-color-inverse: #f1f1f1;
+    --profile-bg-card: #797777;
+
+    --guest-main: #613F75;
+    --guest-hover: #7d5c9c;
+    --guest-primary: #b6859a;
+    --guest-secondary: #965e78;
+    --guest-tertiary: #F39199;
+
+    --student-main: var(--student-primary);
+    --student-hover: #5C90C7;
+    --student-primary: #7fb1e0;
+    --student-secondary: #77d5ea;
+    --student-tertiary: #A6D4FF;
+
+    --admin-main: var(--admin-primary);
+    --admin-hover: #C75C5C;
+    --admin-primary: #E38A8A;
+    --admin-secondary: #c75c75;
+    --admin-tertiary: #FFA6A6;
+}
+
+[data-theme = "dark"] {
+    --bg-color: #0F1203;
+    --bg2-color: #242528;
+    --text-color: #ececec;
+    --text-color-inverse: #ececec;
+    --faq-blue-color: #adacac;
+    --tertiary: #F39199;
+
+    --guest-primary: #b6859a;
+    --guest-secondary: #965e78;
+    --guest-tertiary: var(--tertiary);
+    --guest-main: #1a1a1a;
+    --guest-hover: #4a4a4a;
+
+    --student-primary: #5C90C7;
+    --student-secondary: #3D76B1;
+    --student-tertiary: #A6D4FF;
+    --student-main: var(--student-primary);
+    --student-hover: var(--student-secondary);
+
+    --admin-primary: #C75C5C;
+    --admin-secondary: #9B4545;
+    --admin-tertiary: #FFA6A6;
+    --admin-main: var(--admin-primary);
+    --admin-hover: var(--admin-secondary);
+}
+
+
 * {
     box-sizing: border-box;
 }
@@ -100,6 +156,7 @@ a {
     height: 2px;
     background: currentColor;
 }
+
 .accordion button .icon::after {
     display: block;
     position: absolute;
@@ -114,15 +171,18 @@ a {
 .accordion button[aria-expanded='true'] {
     color: var(--faq-blue-color);
 }
+
 .accordion button[aria-expanded='true'] .icon::after {
     width: 0;
 }
+
 .accordion button[aria-expanded='true'] + .accordion-content {
     opacity: 1;
     max-height: 9em;
     transition: all 200ms linear;
     will-change: opacity, max-height;
 }
+
 .accordion .accordion-content {
     opacity: 0;
     max-height: 0;
@@ -130,6 +190,7 @@ a {
     transition: opacity 200ms linear, max-height 200ms linear;
     will-change: opacity, max-height;
 }
+
 .accordion .accordion-content p {
     font-size: 1rem;
     font-weight: 300;
@@ -145,6 +206,7 @@ a {
     background-color: rgba(229, 195, 221, 0.6);
 
 }
+
 #DESC {
     text-align: center;
     align-items: center;

@@ -1,15 +1,20 @@
+const moonSunIcon = document.getElementsByClassName("moon-sun-icon")[0];
+
+const themeSwitch = document.getElementById('toggle');
 let darkmode = localStorage.getItem('dark');
-const themeSwitch = document.getElementById('theme-switch');
-const html = document.getElementsByTagName("html");
 
 const enableDarkmode = () => {
-    html.body.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+    moonSunIcon.setAttribute('src', './assets/img/sun.png');
+    themeSwitch.checked = true;
     localStorage.setItem('dark', 'active');
 }
 
 const disableDarkmode = () => {
-    html.body.classList.remove('dark');
-    localStorage.setItem('dark', null);
+    document.documentElement.setAttribute('data-theme', 'light');
+    moonSunIcon.setAttribute('src', './assets/img/moon.png');
+    themeSwitch.checked = false;
+    localStorage.removeItem('dark');
 }
 
 if (darkmode === "active") enableDarkmode();

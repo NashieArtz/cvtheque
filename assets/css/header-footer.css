@@ -1,98 +1,99 @@
-[data-theme = "light"] {
-    --bg-color: #ececec;
-    --bg2-color: #e5e5e5;
-    --text-color: #212121;
-
-    --primary: #b6859a;
-    --secondary: #965e78;
-    --tertiary: #F39199;
-    --purple-main: #613F75;
-    --purple-hover: #a86ec9;
-
-
-    --header-bg: #5a3f78;
-    --footer-bg: var(--purple-main);
-    --text-color-inverse: #fffdfd;
+.navbar-guest {
+    background-color: var(--guest-main);
 }
 
-[data-theme = "dark"] {
-    --bg-color: #0F1203;
-    --bg2-color: #242528;
-    --text-color: #ececec;
+.navbar-student {
+    background-color: var(--student-main);
+}
+
+.navbar-admin {
+    background-color: var(--admin-main);
+}
 
 
-    --primary: #b6859a;
-    --secondary: #965e78;
-    --tertiary: #F39199;
-    --purple-main: #613F75;
-    --purple-hover: #4a2f5a;
-
-
-    --header-bg: #1a1a1a;
-    --footer-bg: #000000;
-    --text-color-inverse: #ececec;
+.navbar {
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
 }
 
 .nav-link {
-    color: var(--bg-color);
+    color: var(--text-color-inverse);
+    transition: color 0.3s ease;
 }
 
-.nav-link:hover {
-    color: var(--tertiary);
+.nav-link-guest:hover {
+    color: var(--guest-tertiary);
 }
 
-.navheader {
-    background-color: var(--header-bg);
+.nav-link-student:hover {
+    color: var(--student-tertiary);
+}
+
+.nav-link-admin:hover {
+    color: var(--admin-tertiary);
+}
+
+.btn {
+    margin: 0 auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .btn:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    background-color: var(--purple-hover);
 }
 
-
-.btn-bg-primary {
-    color: var(--secondary);
-    background-color: var(--bg-color);
+.btn-guest-primary, .btn-student-primary, .btn-admin-primary {
+    background-color: var(--text-color-inverse);
 }
 
-.btn-bg-secondary {
-    background-color: var(--tertiary);
-    color: var(--text-color);
+.btn-guest-secondary {
+    background-color: var(--guest-primary);
+}
+
+.btn-guest-primary:hover, .btn-guest-secondary:hover {
+    background-color: var(--guest-hover);
+}
+
+.btn-student-secondary {
+    background-color: var(--student-secondary);
+}
+
+.btn-student-primary:hover, .btn-student-secondary:hover {
+    background-color: var(--student-hover);
+}
+
+.btn-admin-secondary {
+    background-color: var(--admin-secondary);
+}
+
+.btn-admin-secondary:hover {
+    background-color: var(--admin-hover);
+}
+
+.logo {
+    color: var(--text-color-inverse);
 }
 
 .logo:hover {
     transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
 
-.dark-light-mode {
-
+.btn {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
 }
 
-footer {
-    background-color: var(--header-bg);
-    display: flex;
-    flex-direction: column;
-    color: var(--bg2-color);
-    padding: 15px 30px;
-    align-items: center;
-    font-family: 'Nunito', sans-serif;
+.btn-color-primary {
+    background-color: var(--guest-main);
 }
 
-footer nav a {
-    color: var(--bg2-color);
-    text-decoration: none;
-    border-radius: 30px;
-    padding: 10px 20px;
-}
-
-footer a:hover {
-    color: var(--tertiary);
-}
-
-input[type="checkbox"] {
-    display: none;
+.btn-color-primary:hover {
+    background-color: var(--guest-hover);
 }
 
 .theme-position {
@@ -102,10 +103,15 @@ input[type="checkbox"] {
 }
 
 .moon-sun-icon {
-    margin: auto; 
+    margin-bottom: 5px;
+}
+
+.theme-toggle-input {
+    display: none;
 }
 
 .theme-switch {
+    margin: 0 auto;
     position: relative;
     display: block;
     width: 40px;
@@ -113,17 +119,61 @@ input[type="checkbox"] {
     background-color: rgb(241, 161, 12);
     border-radius: 175px;
     cursor: pointer;
-    margin: 0.2rem 0;
 }
 
 .theme-circle {
     width: 15px;
     height: 15px;
     background-color: white;
+    background-size: 650px;
     position: relative;
     top: 3px;
     left: 3px;
     border: 2px solid white;
     border-radius: 15px;
     transition: 0.4s ease left, 0.4s ease background-position;
+    z-index: 2;
+}
+
+#toggle:checked + .theme-switch .theme-circle {
+    left: 23px;
+    background-position: -20px 0;
+}
+
+#toggle:checked + .theme-switch {
+    background: #212121;
+}
+
+
+
+
+
+.footer-link>li>a {
+    transition: all 0.3s ease;
+}
+
+.social-icon {
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.05);
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.footer-link>li>a:hover {
+    color: var(--text-color-inverse);
+}
+
+.footer-guest {
+    background-color: var(--guest-main);
+}
+
+.footer-student {
+    background-color: var(--student-main);
+}
+
+.footer-admin {
+    background-color: var(--admin-main);
 }

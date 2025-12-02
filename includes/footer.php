@@ -37,13 +37,13 @@
                 <p class="small text-white-50 mb-3">Restez connecté avec notre communauté.</p>
                 <div class="d-flex gap-3">
                     <a href="#" class="social-icon">
-                        <img src="https://picsum.photos/32/32?random=1" class="rounded-circle border border-light" alt="Facebook">
+                        <img src="./assets/img/facebook.png" class="rounded-circle border border-light" alt="Facebook">
                     </a>
                     <a href="#" class="social-icon">
-                        <img src="https://picsum.photos/32/32?random=2" class="rounded-circle border border-light" alt="Instagram">
+                        <img src="./assets/img/instagram.png" class="rounded-circle border border-light" alt="Instagram">
                     </a>
                     <a href="#" class="social-icon">
-                        <img src="https://picsum.photos/32/32?random=3" class="rounded-circle border border-light" alt="LinkedIn">
+                        <img src="./assets/img/linkedin.png" class="rounded-circle border border-light" alt="LinkedIn">
                     </a>
                 </div>
             </div>

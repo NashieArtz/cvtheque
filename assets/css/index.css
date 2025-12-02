@@ -31,7 +31,7 @@
     --bg-color: #0F1203;
     --bg2-color: #242528;
     --text-color: #ececec;
-    --text-color-inverse: #ececec;
+    --text-color-inverse: #000000;
     --faq-blue-color: #adacac;
     --tertiary: #F39199;
 
@@ -205,6 +205,15 @@ a {
 .banniere-cv {
     background-color: rgba(229, 195, 221, 0.6);
 
+}
+
+.btn-color-primary {
+    background-color: var(--text-color-inverse);
+    color: var(--text-color)
+}
+
+.btn-color-primary:hover {
+    background-color: var(--guest-hover);
 }
 
 #DESC {

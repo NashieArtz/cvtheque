@@ -36,47 +36,47 @@ $user_id = ($_SESSION['user']['id']);
 $user = userData($pdo, $user_id);
 foreach ($user as $u) {
 ?>
-<link href="./assets/css/register-login.css" rel="stylesheet">
+  <link href="./assets/css/register-login.css" rel="stylesheet">
 
-<form method="post">
+  <form method="post">
 
-  <label for="profile-edit-image">Photo de profil
-    <input type="file" name="picture" id="profile-edit-image">
-  </label>
-  <label for="profile-edit-name">Nom
-    <input type="text" name="lastname" id="profile-edit-name" value="<?= $u['lastname'] ?>">
-  </label>
-  <label for="profile-edit-forname">Prénom
-    <input type="text" name="firstname" id="profile-edit-forname" value="<?= $u['firstname'] ?>">
-  </label>
-  <label for="profile-edit-username">Nom d'utilisateur
-    <input type="text" name="username" id="profile-edit-username" value="<?= $u['username'] ?>">
-  </label>
-  <label for="profile-edit-password">Mots de passe
-    <input type="password" name="password" id="profile-edit-password" value="0000000000">
-  </label>
-  <label for="profile-edit-Rpassword">Retaper votre Mots de passe
-    <input type="password" name="Rpassword" id="profile-edit-Rpassword">
-  </label>
-  <label for="profile-edit-email">Email
-    <input type="email" name="email" id="profile-edit-email" value="<?= $u['email'] ?>">
-  </label>
-  <label for="profile-edit-job_title">Quel métier souhaitez-vous exercer ?
-    <input type="text" name="job_title" id="profile-edit-job_title" value="<?= $u['job_title'] ?>">
-  </label>
-  <label for="profile-edit-permis">Permis
-    <input type="checkbox" name="driver_licence" id="profile-edit-permis">
-  </label>
-  <label for=" profile-edit-hide-name">Masquer nom et prénom
-    <input type="checkbox" name="hide-name" id="profile-edit-hide-name">
-  </label>
-  <label for="profile-edit-hide-photo">Inclure photo de profil
-    <input type="checkbox" name="hide-photo" id="profile-edit-hide-photo">
-  </label>
+    <label for="profile-edit-image">Photo de profil
+      <input type="file" name="picture" id="profile-edit-image">
+    </label>
+    <label for="profile-edit-name">Nom
+      <input type="text" name="lastname" id="profile-edit-name" value="<?= $u['lastname'] ?>">
+    </label>
+    <label for="profile-edit-forname">Prénom
+      <input type="text" name="firstname" id="profile-edit-forname" value="<?= $u['firstname'] ?>">
+    </label>
+    <label for="profile-edit-username">Nom d'utilisateur
+      <input type="text" name="username" id="profile-edit-username" value="<?= $u['username'] ?>">
+    </label>
+    <label for="profile-edit-password">Mots de passe
+      <input type="password" name="password" id="profile-edit-password" value="0000000000">
+    </label>
+    <label for="profile-edit-Rpassword">Retaper votre Mots de passe
+      <input type="password" name="Rpassword" id="profile-edit-Rpassword">
+    </label>
+    <label for="profile-edit-email">Email
+      <input type="email" name="email" id="profile-edit-email" value="<?= $u['email'] ?>">
+    </label>
+    <label for="profile-edit-job_title">Quel métier souhaitez-vous exercer ?
+      <input type="text" name="job_title" id="profile-edit-job_title" value="<?= $u['job_title'] ?>">
+    </label>
+    <label for="profile-edit-permis">Permis
+      <input type="checkbox" name="driver_licence" id="profile-edit-permis">
+    </label>
+    <label for=" profile-edit-hide-name">Masquer nom et prénom
+      <input type="checkbox" name="hide-name" id="profile-edit-hide-name">
+    </label>
+    <label for="profile-edit-hide-photo">Inclure photo de profil
+      <input type="checkbox" name="hide-photo" id="profile-edit-hide-photo">
+    </label>
 
-  <h2>Modifier les données de localisation</h2>
-  <label for="profile-edit-country">Pays
-    <?php
+    <h2>Modifier les données de localisation</h2>
+    <label for="profile-edit-country">Pays
+      <?php
       // fonction pour récupérer la liste des pays
       function selectCountry(PDO $pdo)
       {
@@ -86,52 +86,58 @@ foreach ($user as $u) {
       $country = selectCountry($pdo);
       foreach ($country as $c) {
       ?>
-    <option value="<?= $u['name'] ?> ">
-    </option>
-    <?php
+        <option value="<?= $u['name'] ?> ">
+        </option>
+      <?php
       };
       ?>
-  </label>
-  <label for="profile-edit-city">Ville
-    <input type="text" name="city" id="profile-edit-city" value="<?= $u['adress']['city'] ?> ">
-  </label>
-  <label for="profile-edit-cp">Code Postale
-    <input type="number" name="area_code" id="profile-edit-cp" value="<?= $u['address']['area_code'] ?>">
-  </label>
+    </label>
+    <label for="profile-edit-city">Ville
+      <input type="text" name="city" id="profile-edit-city" value="<?= $u['adress']['city'] ?> ">
+    </label>
+    <label for="profile-edit-cp">Code Postale
+      <input type="number" name="area_code" id="profile-edit-cp" value="<?= $u['address']['area_code'] ?>">
+    </label>
 
-  <h2>Compétences</h2>
-  <?php
-    function selectSkills(PDO $pdo)
-    {
-      $user_id = ($_SESSION['user']['id']);
-      $sql = "SELECT * FROM `skills` WHERE user_id='$user_id'";
-      return $pdo->query($sql)->fetchAll();
-    };
+    <section id="skills">
+      <h2>Compétences</h2>
+      <?php
+      function selectSkills(PDO $pdo)
+      {
+        $user_id = ($_SESSION['user']['id']);
+        $sql = "SELECT * FROM `skills` WHERE user_id='$user_id'";
+        return $pdo->query($sql)->fetchAll();
+      };
 
-    $skills = selectSkills($pdo);
-    foreach ($skills as $s)
-    ?>
-  <label for=" profile-edit-competence-actuelle">Hard Skills
-    <input type="text" name="skills" id="profile-edit-competence-actuelle" value="<?= $s['hard_skills'] ?>">
-  </label>
+      $skills = selectSkills($pdo);
+      foreach ($skills as $s)
+      ?>
+      <label for=" profile-edit-competence-actuelle">Hard Skills
+        <input type="text" name="skills" class="profile-edit-competence-actuelle" id="hardSkills"
+          placeholder="Ajouter une compétence">
+        <button type="submit" id="hardSkillSubmit">Ajouter</button>>
+        <section class="skillList">
+          <ul is="list">
+          </ul>
+        </section>
+      </label>
+      <script src="assets/js/skill-edit.js"></script>
+    </section>
+    <h2>Expériences</h2>
 
-  <?php } ?>
-  <h2>Expériences</h2>
+    <label for=" profile-edit-experience-name">Nom/Titre expérience</label>
+    <input type="text" name="experience-name" id="profile-edit-experience-name">
 
-  <label for=" profile-edit-experience-name">Nom/Titre expérience</label>
-  <input type="text" name="experience-name" id="profile-edit-experience-name">
+    <label for="profile-edit-experience-year">Année expérience</label>
+    <input type="text" name="experience-year" id="profile-edit-experience-year">
 
-  <label for="profile-edit-experience-year">Année expérience</label>
-  <input type="text" name="experience-year" id="profile-edit-experience-year">
+    <input type="submit" name="submit-experience-modifie" id="profile-edit-modifie-experience"
+      value="Modifier & Supprimer">
+    <label></label>
+    <input type="submit" name="submit-experience-add" id="profile-edit-add-experience" value="Ajouter expérience">
 
-  <input type="submit" name="submit-experience-modifie" id="profile-edit-modifie-experience"
-    value="Modifier & Supprimer">
-  <label></label>
-  <input type="submit" name="submit-experience-add" id="profile-edit-add-experience" value="Ajouter expérience">
+    <input type="submit" name="submit-save-all" id="profile-edit-save-button" value="Sauvegarder le Profil">
 
-  <input type="submit" name="submit-save-all" id="profile-edit-save-button" value="Sauvegarder le Profil">
+  </form>
 
-</form>
-
-<?php
-};
+<?php } ?>

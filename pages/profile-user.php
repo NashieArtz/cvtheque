@@ -35,8 +35,9 @@ foreach ($release as $r) {
               </p>
             </div>
             <div class="col-12 col-md-3 text-center text-md-end">
-              <a class="btn px-4 py-2 fs-5 btn-student-primary" href="?page=profile&id=<?= $_SESSION['user']['id'] ?>">
-                Mon Profil
+              <a class="btn px-4 py-2 fs-5 btn-student-primary"
+                href="?page=profile-edit&id=<?= $_SESSION['user']['id'] ?>">
+                Modifier mon profile
               </a>
             </div>
 

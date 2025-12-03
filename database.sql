@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `cvtheque`.`country` (
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id` (`id`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 AUTO_INCREMENT = 249
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin;
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `cvtheque`.`user` (
     REFERENCES `cvtheque`.`role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_country1`
+  CONSTRAINT `fk_user_country`
     FOREIGN KEY (`country_id`)
     REFERENCES `cvtheque`.`country` (`id`)
     ON DELETE NO ACTION

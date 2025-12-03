@@ -1,4 +1,5 @@
 <?php
+
 include 'config/release.php';
 
 if (isset($_SESSION['welcome_message'])) {
@@ -6,25 +7,23 @@ if (isset($_SESSION['welcome_message'])) {
     unset($_SESSION['welcome_message']);
 }
 
-$user_id = $_GET['id'];
+$user_id = ($_SESSION['user']['id']);
+
 $release = userData($pdo, $user_id);
 foreach ($release as $r) {
 
-?>
+    ?>
 
-<div class="container myo-5">
+    <div class="container myo-5">
 
-    <div class="row justify-content-center">
-        <div class="col-lg-10 col-md-12">
-            <div class="card shadow-sm mb-4 border-0">
-                <div class="card-body p-4 p-md-5" style="background-color: #f0f0f0;">
-                    <div class="row align-items-center">
-
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12">
+                <div class="card shadow-sm mb-4 border-0">
+                    <div class="card-body p-4 p-md-5" style="background-color: #f0f0f0;">
                         <div class="col-12 col-md-3 text-center mb-4 mb-md-0">
-                            <img src="https://picsum.photos/300/300" alt="Icone utilisateur"
-                                 class="img-fluid rounded-circle shadow-lg" style="width: 150px; height: 150px; object-fit: cover;">
+                            <img src="https://picsum.photos/300/300" alt="Icone utilisateur" class="img-fluid rounded-circle shadow-lg"
+                                 style="width: 150px; height: 150px; object-fit: cover;">
                         </div>
-
                         <div class="col-12 col-md-6 text-center text-md-start">
                             <h1 class="display-5 fw-bold mb-0">
                                 <?= $r['firstname'] ?>
@@ -35,9 +34,10 @@ foreach ($release as $r) {
                                 <?= $r['username'] ?>
                             </p>
                         </div>
-
                         <div class="col-12 col-md-3 text-center text-md-end">
-                            <?= edit_btn() ?>
+                            <a class="btn px-4 py-2 fs-5 btn-student-primary" href="?page=profile&id=<?= $_SESSION['user']['id'] ?>">
+                                Mon Profil
+                            </a>
                         </div>
 
                         <div class="card shadow-sm mb-4">
@@ -159,6 +159,7 @@ foreach ($release as $r) {
                 </div>
             </div>
         </div>
-        <?php
-        };
-        ?>
+    </div>
+    <?php
+};
+?>

@@ -21,7 +21,7 @@ if (isset($_POST) && !empty($_POST)) {
             ];
             $_SESSION['welcome_message'] = "Bienvenue " . htmlspecialchars($user['username']) . "!";
 
-            header('Location: index.php?page=profile&id=' . $user['id']);
+            header('Location: index.php?page=profile-user&id=' . $user['id']);
             exit;
         } elseif ($user && $pwd === $user['pwd']) {
             $_SESSION['user'] = [

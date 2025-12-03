@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Hind:300,400&display=swap');
+* {
+    box-sizing: border-box;
+}
+
 
 [data-theme = "light"] {
 
@@ -79,6 +83,7 @@ a {
     text-decoration: none;
     color: var(--text-color);
 }
+
 
 
 #FAQ {

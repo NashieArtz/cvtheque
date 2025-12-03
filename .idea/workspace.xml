@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/header-footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/header-footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/release.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/release.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header-student.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-student.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/database.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register.php" afterDir="false" />
     </list>
@@ -97,7 +97,7 @@
       <workItem from="1764623234748" duration="10790000" />
       <workItem from="1764678922288" duration="10973000" />
       <workItem from="1764706203370" duration="3142000" />
-      <workItem from="1764750292116" duration="6627000" />
+      <workItem from="1764750292116" duration="13875000" />
     </task>
     <servers />
   </component>

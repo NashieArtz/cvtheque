@@ -17,7 +17,7 @@ if (isset($_POST) && !empty($_POST)) {
   $pwd = password_hash($pwd, PASSWORD_DEFAULT);
   $sql = "INSERT INTO `user`(`username`, `email`, `pwd`) VALUES (?, ?, ?)";
   $stmt = $pdo->prepare($sql);
-  $stmt->execute([$username, $email, $pwd, $role_id]);
+  $stmt->execute([$username, $email, $pwd]);
   $id = $pdo->lastInsertId();
   logAction("create", $username, $id);
   echo '<div class="sub-success"> Your account has been created! We are redirecting you :)) </div>';

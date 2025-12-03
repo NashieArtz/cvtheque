@@ -1,4 +1,5 @@
 <?php
+
 include 'config/release.php';
 
 if (isset($_SESSION['welcome_message'])) {
@@ -7,6 +8,7 @@ if (isset($_SESSION['welcome_message'])) {
 }
 
 $user_id = ($_SESSION['user']['id']);
+
 $release = userData($pdo, $user_id);
 foreach ($release as $r) {
 
@@ -33,7 +35,6 @@ foreach ($release as $r) {
               </p>
             </div>
             <div class="col-12 col-md-3 text-center text-md-end">
-              <a href=""></a>
               <a class="btn px-4 py-2 fs-5 btn-student-primary" href="?page=profile&id=<?= $_SESSION['user']['id'] ?>">
                 Mon Profil
               </a>
@@ -158,6 +159,7 @@ foreach ($release as $r) {
         </div>
       </div>
     </div>
-  <?php
+  </div>
+<?php
 };
-  ?>
+?>

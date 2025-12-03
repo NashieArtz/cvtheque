@@ -6,6 +6,12 @@ if (isset($_SESSION['logout_message'])) {
 }
 
 ?>
+
+
+
+
+
+
 <section id="hero">
     <div class="container-fluid py-5 banniere-cv">
         <div class="container py-5">

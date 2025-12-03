@@ -72,8 +72,7 @@ if (isset($_POST) && !empty($_POST)) {
 
                 <div class="mb-4">
                     <label for="email" class="form-label visually-hidden">Email</label>
-                    <input type="email" name="email" id="email-register" class="form-control" placeholder="Email"
-                           required>
+                    <input type="email" name="email" id="email-register" class="form-control" placeholder="Email" required>
                     <p id="email-register-p">
 
                     </p>

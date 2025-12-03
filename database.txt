@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `cvtheque`.`user` (
     REFERENCES `cvtheque`.`role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_country1`
+  CONSTRAINT `fk_user_country`
     FOREIGN KEY (`country_id`)
     REFERENCES `cvtheque`.`country` (`id`)
     ON DELETE NO ACTION

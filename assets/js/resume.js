@@ -26,12 +26,12 @@ window.generatePDF = function () {
         pagebreak: { mode: ['css', 'legacy'] }
     };
 
-    html2pdf()
-        .set(options)
-        .from(element)
-        .save()
-        .then(() => {
-            // Retirer le mode PDF après la génération
-            element.classList.remove("pdf-mode");
-        });
+    // html2pdf()
+    //     .set(options)
+    //     .from(element)
+    //     .save()
+    //     .then(() => {
+    //         // Retirer le mode PDF après la génération
+    //         element.classList.remove("pdf-mode");
+    //     });
 };

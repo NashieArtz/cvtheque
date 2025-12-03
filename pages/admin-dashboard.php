@@ -2,6 +2,10 @@
 
 include './config/roles/admin.php';
 
+if (!isset($_SESSION) || $_SESSION['user']['role_id'] != 3) {
+    header('location: http://localhost/1bcigit/cvtheque/index.php');
+}
+
 
 ?>
 <div class="container py-4">
@@ -18,23 +22,25 @@ include './config/roles/admin.php';
         </div>
 
         <form method="get" class="d-flex mb-3">
-            <input type="search" name="s" class="form-control" placeholder="Rechercher un utilisateur..." value="<?= $_GET['s'] ?? '' ?>">
+            <input type="search" name="s" class="form-control" placeholder="Rechercher un utilisateur..."
+                   value="<?= $_GET['s'] ?? '' ?>">
             <button class="btn btn-primary ms-2" type="submit">Rechercher</button>
+            <div class="livesearch"></div>
         </form>
     </div>
 
     <h2 class="mb-4">Profiles Étudiants</h2>
 
-    <?php
-    // Récupérer tous les utilisateurs avec leurs compétences
-    $stmt = $pdo->prepare("
-    SELECT u.id AS user_id, u.firstname, u.lastname, u.picture, a.city, u.job_title, s.hard_skills
-    FROM `user` u
-    LEFT JOIN user_has_skills uhs ON u.id = uhs.user_id
-    LEFT JOIN skills s ON uhs.skills_id = s.id
-    LEFT JOIN address a ON a.user_id = u.id
-    ORDER BY u.id
-");
+    <!--    --><?php
+    //    // Récupérer tous les utilisateurs avec leurs compétences
+    //    $stmt = $pdo->prepare("
+    //    SELECT u.id AS user_id, u.firstname, u.lastname, u.picture, a.city, u.job_title, s.hard_skills
+    //    FROM `user` u
+    //    LEFT JOIN user_has_skills uhs ON u.id = uhs.user_id
+    //    LEFT JOIN skills s ON uhs.skills_id = s.id
+    //    LEFT JOIN address a ON a.user_id = u.id
+    //    ORDER BY u.id
+    //");
     $stmt->execute();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -70,7 +76,8 @@ include './config/roles/admin.php';
                                 <div class="rounded-circle bg-light d-flex justify-content-center align-items-center"
                                      style="width: 70px; height: 70px; margin-top: 5px;">
                                     <?php if (!empty($user['picture'])): ?>
-                                        <img src="<?= htmlspecialchars($user['picture']) ?>" class="rounded-circle" style="width:70px; height:70px; object-fit:cover;"/>
+                                        <img src="<?= htmlspecialchars($user['picture']) ?>" class="rounded-circle"
+                                             style="width:70px; height:70px; object-fit:cover;"/>
                                     <?php else: ?>
                                         <i class="fas fa-user-circle fa-2x text-muted"></i>
                                     <?php endif; ?>
@@ -97,8 +104,10 @@ include './config/roles/admin.php';
                         </ul>
 
                         <div class="mt-3 d-flex justify-content-end gap-2">
-                            <a href="?page=profile&id=<?= $user['id'] ?>" class="btn btn-sm btn-outline-secondary">Editer profil</a>
-                            <a class="btn bg-danger btn-sm" style="color: white;" href="?page=delete&id=<?= $user['id'] ?>">
+                            <a href="?page=profile&id=<?= $user['id'] ?>" class="btn btn-sm btn-outline-secondary">Editer
+                                profil</a>
+                            <a class="btn bg-danger btn-sm" style="color: white;"
+                               href="?page=delete&id=<?= $user['id'] ?>">
                                 <i class="far fa-star me-1"></i> supprimer
                             </a>
                         </div>

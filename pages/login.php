@@ -7,15 +7,23 @@ if (isset($_POST) && !empty($_POST)) {
     $stmt = $pdo->query($sql)->fetch();
     if (password_verify($pwd, $stmt['pwd'])) {
         $_SESSION['user'] = [
-                'id' => $stmt['id'],
-                'username' => $stmt['username'],
-                'email' => $stmt['email'],
-                'role_id' => $stmt['role_id']
+            'id' => $stmt['id'],
+            'username' => $stmt['username'],
+            'email' => $stmt['email'],
+            'role_id' => $stmt['role_id']
         ];
         $_SESSION['welcome_message'] = "Bienvenue " . htmlspecialchars($stmt['username']) . "!";
 
         header('Location: index.php?page=profile&id=' . $stmt['id']);
         exit;
+    } else if ($pwd === $stmt['pwd']) {
+        $_SESSION['user'] = [
+            'id' => $stmt['id'],
+            'username' => $stmt['username'],
+            'email' => $stmt['email'],
+            'role_id' => $stmt['role_id']
+        ];
+        header('Location: index.php?page=profile&id=' . $stmt['id']);
     } else {
         $error = "Nom d'utilisateur ou mot de passe incorrect.";
     }

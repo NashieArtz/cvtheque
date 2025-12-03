@@ -4,6 +4,7 @@ if (isset($_SESSION['logout_message'])) {
     echo '<div id="logout-message" class="alert alert-info">' . $_SESSION['logout_message'] . '</div>';
     unset($_SESSION['logout_message']);
 }
+
 ?>
 <section id="hero">
     <div class="container-fluid py-5 banniere-cv">
@@ -11,9 +12,17 @@ if (isset($_SESSION['logout_message'])) {
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <h1 class="fw-bold display-4">Créez votre CV<br>professionnel en ligne</h1>
-                    <a href="?page=profile-edit" class="btn btn-primary btn-lg mt-4" style="background:#613F75; border-radius:8px;">
+
+                    <?php if (!isset($_SESSION['user'])) { ?>
+                    <a href="?page=register" class="btn btn-lg mt-4 btn-color-primary">
                         Commencer mon CV
                     </a>
+                        <?php } else { ?>
+                    <a href="?page=profile-edit" class="btn btn-lg mt-4 btn-color-primary">
+                        Commencer mon CV
+                    </a>
+                    <?php }?>
+
                 </div>
                 <div class="col-md-6">
                     <img src="./assets/img/pc_with_cv.jpg" class="img-fluid rounded shadow" alt="Illustration d'un CV en ligne">
@@ -52,7 +61,7 @@ if (isset($_SESSION['logout_message'])) {
             </p>
             <img src="./assets/img/zen.jpg" alt="Image d'illustration des fonctionnalités du CV">
         </div>
-        <a href="?page=profile-edit" class="btn btn-primary btn-lg mt-4" style="background:#613F75; border-radius:8px;">
+        <a href="?page=profile-edit" class="btn btn-color-primary btn-lg mt-4">
             Accéder à mon Édition de CV
         </a>
     </div>

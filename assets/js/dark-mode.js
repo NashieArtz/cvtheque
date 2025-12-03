@@ -1,36 +1,25 @@
-(function () {
+const moonSunIcon = document.getElementsByClassName("moon-sun-icon")[0];
 
-    const root = document.documentElement;
+const themeSwitch = document.getElementById('toggle');
+let darkmode = localStorage.getItem('dark');
 
-    function toggleDarkMode() {
-        const currentTheme = root.getAttribute("data-theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-        const checkbox = document.querySelector('[data-theme-toggler]');
-        if (checkbox) {
-            checkbox.checked = newTheme === "dark";
-        }
-    }
+const enableDarkmode = () => {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    moonSunIcon.setAttribute('src', './assets/img/sun.png');
+    themeSwitch.checked = true;
+    localStorage.setItem('dark', 'active');
+}
 
-    function init() {
-        const storedPreference = localStorage.getItem("theme");
-        const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const theme = storedPreference || (systemPrefersDark ? "dark" : "light");
-        root.setAttribute("data-theme", theme);
-        const checkbox = document.querySelector('[data-theme-toggler]');
-        if (checkbox) {
-            checkbox.checked = theme === "dark";
-        }
-    }
+const disableDarkmode = () => {
+    document.documentElement.setAttribute('data-theme', 'light');
+    moonSunIcon.setAttribute('src', './assets/img/moon.png');
+    themeSwitch.checked = false;
+    localStorage.removeItem('dark');
+}
 
-    init();
+if (darkmode === "active") enableDarkmode();
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const togglers = document.querySelectorAll("[data-theme-toggler]");
-        togglers.forEach((toggler) => {
-            toggler.addEventListener("click", toggleDarkMode);
-        });
-    });
-
-})();
+themeSwitch.addEventListener("click", () => {
+    darkmode = localStorage.getItem('dark');
+    darkmode !== "active" ? enableDarkmode() : disableDarkmode();
+})

@@ -61,11 +61,11 @@ function registering() {
         repwdRegister.addEventListener("input", repwdVerify);
         emailRegister.addEventListener("input", emailVerify);
 
-        const form = registerPage.querySelector('form');
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            registerVerify();
-        });
+        // const form = registerPage.querySelector('form');
+        // form.addEventListener('submit', function(e) {
+        //     e.preventDefault();
+        //     e.registerVerify();
+        // });
 
         function updateStyle(element, isValid) {
             if (!element) return;
@@ -145,19 +145,10 @@ function registering() {
             }
         }
 
-        function emailVerify() {
-            const email = emailRegister.value;
-            const validEmail = regexEmail.test(email);
-
-            if (!validEmail) {
-                emailRegisterP.textContent = "Le format de l'email est invalide.";
-                updateStyle(emailRegisterP, false);
-                registerValid.emailValid = false;
-            } else {
-                emailRegisterP.textContent = "";
-                updateStyle(emailRegisterP, true);
-                registerValid.emailValid = true;
-            }
-        }
+        // function registerVerify() {
+        //     if (registerValid.pwdValid && registerValid.emailValid && registerValid.repwdValid && registerValid.usernameValid) {
+        //
+        //     }
+        // }
     }
 }

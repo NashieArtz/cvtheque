@@ -6,7 +6,7 @@ if (isset($_SESSION['welcome_message'])) {
   unset($_SESSION['welcome_message']);
 }
 
-$user_id = $_GET['is'];
+$user_id = $_GET['id'];
 $release = userData($pdo, $user_id);
 foreach ($release as $r) {
 

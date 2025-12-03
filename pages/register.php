@@ -8,7 +8,6 @@ if (isset($_POST) && !empty($_POST)) {
   $email = htmlspecialchars(trim($_POST["email"]));
   $pwd = htmlspecialchars(trim($_POST["pwd"]));
   $repwd = htmlspecialchars(trim($_POST["repwd"]));
-  $role_id = 1;
 
   $sql = "SELECT id FROM user WHERE username = ?";
   $stmt = $pdo->prepare($sql);
@@ -16,7 +15,7 @@ if (isset($_POST) && !empty($_POST)) {
   $userExists = $stmt->fetch();
 
   $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-  $sql = "INSERT INTO `user`(`username`, `email`, `pwd`, `role_id`) VALUES (?, ?, ?, ?)";
+  $sql = "INSERT INTO `user`(`username`, `email`, `pwd`) VALUES (?, ?, ?)";
   $stmt = $pdo->prepare($sql);
   $stmt->execute([$username, $email, $pwd, $role_id]);
   $id = $pdo->lastInsertId();

@@ -1,8 +1,4 @@
 <?php
-include './db.php';
-//parcourir toutes les tables pour en extraire les données
-//pour chaque colonne d'un tableau, récupérer les données
-
 function userAll(PDO $pdo)
 {
   $sql = "SELECT * FROM `user`

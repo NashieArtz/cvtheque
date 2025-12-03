@@ -31,7 +31,11 @@ if (isset($_POST) && !empty($_POST)) {
                     'role_id' => $user['role_id']
             ];
             $_SESSION['welcome_message'] = "Bienvenue " . htmlspecialchars($user['username']) . "!";
-            header('Location: index.php?page=profile&id=' . $user['id']);
+            if ($_SESSION['user']['role_id'] == 3) {
+                header('Location: index.php?page=admin-dashboard');
+            } else {
+                header('Location: index.php?page=profile&id=' . $user['id']);
+            }
             exit;
 
         } else {

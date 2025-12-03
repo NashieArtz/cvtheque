@@ -19,9 +19,6 @@
                     <a class="nav-link nav-link-admin fs-5" href="?page=admin-dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5 nav-link-admin" href="?page=admin-students">Liste Étudiants</a>
-                </li>
-                <li class="nav-item">
                     <a class="btn px-4 py-2 fs-5 btn-admin-secondary" href="?page=logout">
                         Se déconnecter
                     </a>

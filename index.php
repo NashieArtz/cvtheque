@@ -7,7 +7,7 @@ $route = [
         'index' => __DIR__ . '/index.php',
 
     // PAGES
-        'profile-guest' => __DIR__ . '/profile-guest.php',
+        'profile-guest' => __DIR__ . '/pages/profile-guest.php',
         'profile-user' => __DIR__ . '/pages/profile-user.php',
         'profile-edit' => __DIR__ . '/pages/profile-edit.php',
         'profiles-list' => __DIR__ . '/pages/profiles-list.php',

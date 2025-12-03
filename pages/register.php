@@ -4,25 +4,24 @@ include_once './config/db.php';
 include_once './pages/logger.php';
 
 if (isset($_POST) && !empty($_POST)) {
-    $username = htmlspecialchars(trim($_POST["username"]));
-    $email = htmlspecialchars(trim($_POST["email"]));
-    $pwd = htmlspecialchars(trim($_POST["pwd"]));
-    $repwd = htmlspecialchars(trim($_POST["repwd"]));
-    $role_id = 1;
+  $username = htmlspecialchars(trim($_POST["username"]));
+  $email = htmlspecialchars(trim($_POST["email"]));
+  $pwd = htmlspecialchars(trim($_POST["pwd"]));
+  $repwd = htmlspecialchars(trim($_POST["repwd"]));
 
     $sql = "SELECT id FROM user WHERE username = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$username]);
     $userExists = $stmt->fetch();
 
-    $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO `user`(`username`, `email`, `pwd`, `role_id`) VALUES (?, ?, ?, ?)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$username, $email, $pwd, $role_id]);
-    $id = $pdo->lastInsertId();
-    logAction("create", $username, $id);
-    echo '<div class="sub-success"> Your account has been created! We are redirecting you :)) </div>';
-    echo "<script>setTimeout(() => {
+  $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+  $sql = "INSERT INTO `user`(`username`, `email`, `pwd`) VALUES (?, ?, ?)";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute([$username, $email, $pwd, $role_id]);
+  $id = $pdo->lastInsertId();
+  logAction("create", $username, $id);
+  echo '<div class="sub-success"> Your account has been created! We are redirecting you :)) </div>';
+  echo "<script>setTimeout(() => {
       window.location.href = 'index.php';
     }, 2000); </script>";
 }

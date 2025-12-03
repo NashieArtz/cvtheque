@@ -22,6 +22,6 @@ function userData(PDO $pdo, $user_id)
           LEFT JOIN `experience` ON experience.user_id = user.id 
           LEFT JOIN `country` ON user.country_id = country.id 
           LEFT JOIN `address` ON address.user_id = user.id
-          WHERE id = '$user_id'";
-    return $pdo->query($sql)->fetchAll();
+          WHERE user.id ='$user_id'";
+  return $pdo->query($sql)->fetchAll();
 }

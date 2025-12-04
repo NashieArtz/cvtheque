@@ -61,15 +61,15 @@ if (isset($_SESSION['logout_message'])) {
 <section id="3-great-point">
     <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-4 d-flex align-items-center gap-2">
+            <div class="col-12 col-lg-4 d-flex align-items-center gap-2">
                 <img src="./assets/img/smile.png" alt="Icône simplicité">
                 <p class="fw-bold">Facilité d’utilisation</p>
             </div>
-            <div class="col-12 col-md-4 d-flex align-items-center gap-2">
+            <div class="col-12 col-lg-4 d-flex align-items-center gap-2">
                 <img src="./assets/img/share.png" alt="Icône partage">
                 <p class="fw-bold">Générez et partagez votre profil</p>
             </div>
-            <div class="col-12 col-md-4 d-flex align-items-center gap-2">
+            <div class="col-12 col-lg-4 d-flex align-items-center gap-2">
                 <img src="./assets/img/people.png" alt="Icône employeur">
                 <p class="fw-bold">Visibilité auprès de nombreux employeurs</p>
             </div>

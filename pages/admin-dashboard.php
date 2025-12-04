@@ -59,36 +59,6 @@ $stmt->execute($params);
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<style>
-    .card-img-top {
-        height: 200px;
-        object-fit: cover;
-        object-position: center;
-    }
-
-    .user-card.inactive {
-        opacity: 0.6;
-        background-color: #e9ecef;
-        border: 1px dashed #adb5bd;
-    }
-
-    .user-card.inactive .card-img-top {
-        filter: grayscale(100%);
-    }
-
-    .badge-id {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        z-index: 10;
-    }
-</style>
-
 
 <div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">

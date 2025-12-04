@@ -1,275 +1,125 @@
-@font-face {
-  font-family: Product-Sans-Bold-italic;
-  src: url(https://unpkg.com/aks-fonts@1.0.0/Product-Sans/Product-Sans-Bold-italic.ttf);
-}
-
-@font-face {
-  font-family: Product-Sans-Bold;
-  src: url(https://unpkg.com/aks-fonts@1.0.0/Product-Sans/Product-Sans-Bold.ttf);
-}
-
-@font-face {
-  font-family: Product-Sans-Regular;
-  src: url(https://unpkg.com/aks-fonts@1.0.0/Product-Sans/Product-Sans-Regular.ttf);
-}
-
-@font-face {
-  font-family: Product-Sans-italic;
-  src: url(https://unpkg.com/aks-fonts@1.0.0/Product-Sans/Product-Sans-italic.ttf);
-}
-
-*,
-::after,
-::before {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 1.5;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  color: #666;
-}
-
-body {
-  font-family: Product-Sans-Regular;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Forcer le CV à rester au format A4 */
-.cv {
-  width: 210mm;
-  /* largeur A4 */
-  min-height: 297mm;
-  /* hauteur A4 */
-  max-height: 297mm;
-  margin: 0 auto;
-  padding: 30px;
-  overflow: hidden;
-  box-sizing: border-box;
-  border-radius: 5px;
-  background: white;
-  display: flex;
-  flex-direction: column;
+#doc-target {
+    font-family: 'Segoe UI', sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background: white;
 }
 
 .cv-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.cv-wrap {
-  width: 50%;
-  margin-right: 1rem;
-  display: flex;
-  flex-direction: column;
+.cv-wrap-main {
+    width: 65%;
+    padding: 40px;
+    background-color: #fff;
 }
 
-.cv-wrap:nth-child(2n) {
-  width: 35%;
-  margin-right: 0rem;
+.cv-wrap-sidebar {
+    width: 35%;
+    padding: 40px 20px;
+    background-color: #f4f4f4;
+    border-left: 1px solid #ddd;
+    text-align: center;
 }
 
 .cv-name {
-  font-family: Product-Sans-Bold;
-  font-size: 2rem;
-  font-weight: 900;
-  line-height: normal;
-  margin-bottom: 0.5rem;
-  color: black;
-  width: fit-content;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #2c3e50;
+    line-height: 1.2;
 }
 
 .cv-subname {
-  font-family: Product-Sans-Regular;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: normal;
-  margin-bottom: 2rem;
-  color: #b2b2b2;
-  width: fit-content;
+    font-size: 1.2rem;
+    color: #007BFF;
+    margin-bottom: 30px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* .cv-content {} */
-
-.cv-content .head-title {
-  font-family: Product-Sans-Regular;
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: normal;
-  margin-bottom: 0.5rem;
-  color: #b2b2b2;
-  width: fit-content;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+.head-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    color: #2c3e50;
 }
 
 .cv-content-item {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.5rem;
+    margin-bottom: 20px;
 }
 
-.cv-content-item .title {
-  font-family: Product-Sans-Bold;
-  font-size: 1.3rem;
-  font-weight: 900;
-  line-height: normal;
-  margin-bottom: 0.4rem;
-  color: black;
-  width: fit-content;
+.title {
+    font-weight: bold;
+    font-size: 1rem;
 }
 
-.cv-content-item .subtitle {
-  font-family: Product-Sans-Regular;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: normal;
-  margin-bottom: 0.2rem;
-  color: #555555;
-  width: fit-content;
+.subtitle {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.9rem;
 }
 
-.cv-content-item .time {
-  font-family: Product-Sans-Regular;
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: normal;
-  margin-bottom: 0.4rem;
-  color: #b2b2b2;
-  width: fit-content;
+.time {
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 5px;
 }
 
-.cv-content-item .exprecince {
-  font-family: Product-Sans-Regular;
-  font-size: 1.1rem;
-  font-weight: 500;
-  line-height: 1.5;
-  color: #131313;
-  width: fit-content;
-}
-
-.avatar {
-  width: 150px;
-  height: 150px;
-  border-radius: 9999px;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 2rem;
-  box-shadow: 0 5px 30px #00000029;
+.exprecince {
+    font-size: 0.9rem;
+    text-align: justify;
 }
 
 .avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  user-select: none;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
-}
-
-.info .title {
-  font-family: Product-Sans-Regular;
-  font-size: 1.3rem;
-  font-weight: 200;
-  line-height: normal;
-  margin-bottom: 0.5rem;
-  color: #434343;
-  width: fit-content;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .info p {
-  margin-bottom: 0.3rem;
+    margin: 5px 0;
+    font-size: 0.9rem;
+    word-break: break-all;
 }
 
-.info a {
-  font-family: Product-Sans-Regular;
-  font-size: 1.1rem;
-  font-weight: 500;
-  line-height: normal;
-  color: #686868;
-  width: fit-content;
-  text-decoration: none;
+.skill-tag {
+    display: inline-block;
+    background: #e1e8ef;
+    color: #2c3e50;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin: 2px;
 }
 
-.info a:hover {
-  color: #004eff;
+@media print {
+    #container, .edit-btn-wrapper {
+        display: none !important;
+    }
 }
 
-.cv-skills {
-  margin-bottom: 0.5rem;
+.edit-btn-wrapper {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
 }
 
-.cv-skills .head-title {
-  font-family: Product-Sans-Regular;
-  font-size: 1.3rem;
-  font-weight: 200;
-  line-height: normal;
-  margin-bottom: 0.5rem;
-  color: #434343;
-  width: fit-content;
-}
-
-.cv-skills .title {
-  font-family: Product-Sans-Regular;
-  font-size: 1rem;
-  font-weight: 200;
-  line-height: normal;
-  margin-bottom: 0.5rem;
-  color: #b9b2b2;
-  width: fit-content;
-}
-
-.cv-social {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  flex-direction: row;
-  position: relative;
-  margin-top: 1rem;
-}
-
-.cv-social a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 1rem;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
-
-.cv-social a:hover {
-  color: #004eff;
-}
-
-.cv-social a svg {
-  width: 30px;
-  overflow: hidden;
-}
-
-.pdf-mode .cv-row {
-  display: flex !important;
-}
-
-.pdf-mode .cv-wrap {
-  width: 100% !important;
+.btn-quick-edit {
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 20px;
 }

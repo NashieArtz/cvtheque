@@ -7,9 +7,7 @@ FROM user u
 LEFT JOIN address a ON u.id = a.user_id
 WHERE u.is_active = 1";
 
-// Ajout des conditions de recherche
 if (!empty($search)) {
-// Recherche sur le Nom, Prénom, Titre du job ou Ville
     $term = "%$search%";
     $sql .= " AND (u.firstname LIKE :s1 
                 OR u.lastname LIKE :s2 
@@ -24,15 +22,13 @@ if (!empty($search)) {
 }
 
 
-// Ordre d'affichage (les plus récents en premier ou par nom)
 try {
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
     $candidates = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    // En cas d'erreur SQL, on l'affiche proprement pour le débogage
     echo "<div class='alert alert-danger'>Erreur SQL : " . $e->getMessage() . "</div>";
-    $candidates = []; // Tableau vide pour éviter de casser le reste de la page
+    $candidates = [];
 }
 ?>
 
@@ -129,15 +125,3 @@ try {
         <?php endif; ?>
     </div>
 </div>
-
-<style>
-    /* Petit effet CSS pour le survol des cartes */
-    .hover-lift {
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .hover-lift:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
-    }
-</style>

@@ -63,6 +63,8 @@
 <script src="./assets/js/dark-mode.js"></script>
 <script src="./assets/js/footer.js"></script>
 <script src="./assets/js/search.js"></script>
+<script src="./assets/js/resume.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 
 </body>

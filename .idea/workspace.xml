@@ -6,15 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header-admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/profile.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/resume.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/resume.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/resume.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/resume.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/admin-dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin-dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin-students.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/profile-edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-edit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile-guest.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-guest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile-user.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/profiles-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profiles-list.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/resume.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/resume.php" afterDir="false" />
     </list>
@@ -107,7 +105,8 @@
       <workItem from="1764678922288" duration="10973000" />
       <workItem from="1764706203370" duration="3142000" />
       <workItem from="1764750292116" duration="22030000" />
-      <workItem from="1764795884982" duration="8915000" />
+      <workItem from="1764795884982" duration="9235000" />
+      <workItem from="1764837180299" duration="1790000" />
     </task>
     <servers />
   </component>
@@ -134,16 +133,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/assets/js/resume.js</url>
-          <line>1</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -1,7 +1,5 @@
 <?php
-// On suppose que la connexion $pdo est incluse via index.php
 
-// On récupère l'ID
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = intval($_GET['id']);
 } elseif (isset($_SESSION['user']['id'])) {
@@ -11,15 +9,12 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     exit();
 }
 
-// --- 0. TRAITEMENT DE L'EDITION RAPIDE (Quick Edit) ---
 $msg = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_quick_update'])) {
-    // Sécurité : On vérifie que c'est bien l'utilisateur connecté qui modifie SON profil
     if (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id) {
 
         $newJob = htmlspecialchars($_POST['job_title']);
         $newPhone = htmlspecialchars($_POST['phone']);
-        // Ajoute d'autres champs ici si tu veux (ex: description)
 
         $stmtUpdate = $pdo->prepare("UPDATE user SET job_title = ?, phone = ? WHERE id = ?");
         if($stmtUpdate->execute([$newJob, $newPhone, $id])) {
@@ -28,55 +23,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_quick_update']
     }
 }
 
-// 1. Récupération des infos USER (Après l'update pour avoir les données fraîches)
 $stmt = $pdo->prepare("SELECT * FROM `user` WHERE `id` = :id");
 $stmt->execute(['id' => $id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user) { die("Utilisateur introuvable."); }
 
-// 2. Récupération des EXPÉRIENCES
 $stmt2 = $pdo->prepare("SELECT * FROM `experience` WHERE `user_id` = :id ORDER BY date_start DESC");
 $stmt2->execute(['id' => $id]);
 $experiences = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
-// 3. Récupération de l'ÉDUCATION
 $stmt3 = $pdo->prepare("SELECT e.* FROM education e JOIN user_has_education uhe ON e.id = uhe.education_id WHERE uhe.user_id = :id ORDER BY e.date_start DESC");
 $stmt3->execute(['id' => $id]);
 $educations = $stmt3->fetchAll(PDO::FETCH_ASSOC);
 
-// 4. Récupération des SKILLS
 $stmt5 = $pdo->prepare("SELECT s.* FROM skills s JOIN user_has_skills uhs ON s.id = uhs.skills_id WHERE uhs.user_id = :id");
 $stmt5->execute(['id' => $id]);
 $skills = $stmt5->fetchAll(PDO::FETCH_ASSOC);
 
-// Vérification : Est-ce le propriétaire ?
 $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
+
+$pdfFilename = 'CV_' . htmlspecialchars($user['lastname']) . '_' . htmlspecialchars($user['firstname']) . '.pdf';
 ?>
-
-<style>
-    /* ... Ton CSS existant ... */
-    #doc-target { font-family: 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; box-shadow: 0 0 15px rgba(0,0,0,0.1); background: white; }
-    .cv-row { display: flex; flex-wrap: wrap; }
-    .cv-wrap-main { width: 65%; padding: 40px; background-color: #fff; }
-    .cv-wrap-sidebar { width: 35%; padding: 40px 20px; background-color: #f4f4f4; border-left: 1px solid #ddd; text-align: center; }
-    .cv-name { font-size: 2.5rem; font-weight: 700; text-transform: uppercase; color: #2c3e50; line-height: 1.2; }
-    .cv-subname { font-size: 1.2rem; color: #007BFF; margin-bottom: 30px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
-    .head-title { font-size: 1.1rem; font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #007BFF; padding-bottom: 5px; margin-bottom: 20px; margin-top: 30px; color: #2c3e50; }
-    .cv-content-item { margin-bottom: 20px; }
-    .title { font-weight: bold; font-size: 1rem; }
-    .subtitle { font-weight: 600; color: #555; font-size: 0.9rem; }
-    .time { font-size: 0.85rem; color: #888; font-style: italic; margin-bottom: 5px; }
-    .exprecince { font-size: 0.9rem; text-align: justify; }
-    .avatar img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
-    .info p { margin: 5px 0; font-size: 0.9rem; word-break: break-all; }
-    .skill-tag { display: inline-block; background: #e1e8ef; color: #2c3e50; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; margin: 2px; }
-    @media print { #container, .edit-btn-wrapper { display: none !important; } }
-
-    /* Style pour le bouton d'édition rapide */
-    .edit-btn-wrapper { display: inline-block; margin-left: 10px; vertical-align: middle; }
-    .btn-quick-edit { font-size: 0.8rem; padding: 2px 8px; border-radius: 20px; }
-</style>
 
 <div class="container my-5">
 
@@ -209,21 +177,3 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
         </div>
     </div>
 <?php endif; ?>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    function generatePDF() {
-        const element = document.getElementById('doc-target');
-        // On cache temporairement le bouton d'edit pour le PDF s'il est visible via JS (normalement géré par CSS @media print)
-        const opt = {
-            margin:       0,
-            filename:     'CV_<?= htmlspecialchars($user['lastname']) ?>.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
-            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-        };
-        html2pdf().set(opt).from(element).save();
-    }
-</script>

@@ -228,7 +228,7 @@ a {
 
 
 .card-profile {
-    background-color: var(--bg2-color); /* Utilise la couleur de fond secondaire (gris clair ou gris foncé) */
+    background-color: var(--bg2-color);
     color: var(--text-color);
     border: 1px solid rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -239,12 +239,10 @@ a {
     box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-/* Images */
 .card-profile img {
-    border: 3px solid var(--guest-primary); /* Bordure rose/mauve selon ton thème */
+    border: 3px solid var(--guest-primary);
 }
 
-/* Badges de compétences */
 .badge-skill {
     background-color: var(--guest-secondary);
     color: #fff;
@@ -253,7 +251,6 @@ a {
     border-radius: 20px;
 }
 
-/* Bouton Favori (Cœur) */
 .btn-favorite {
     background: transparent;
     border: 1px solid var(--guest-tertiary);
@@ -272,7 +269,6 @@ a {
     color: white;
 }
 
-/* Inputs de recherche adaptés au thème */
 .form-control-theme, .form-select-theme {
     background-color: var(--bg2-color);
     color: var(--text-color);
@@ -284,4 +280,69 @@ a {
     color: var(--text-color);
     border-color: var(--guest-main);
     box-shadow: 0 0 0 0.25rem rgba(97, 63, 117, 0.25);
+}
+
+.hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+.admin-card-img-top {
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.user-card.inactive {
+    opacity: 0.6;
+    background-color: #e9ecef;
+    border: 1px dashed #adb5bd;
+}
+
+.user-card.inactive .admin-card-img-top {
+    filter: grayscale(100%);
+}
+
+.badge-id {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    z-index: 10;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.user-card.inactive {
+    opacity: 0.6;
+    background-color: #e9ecef;
+    border: 1px dashed #adb5bd;
+}
+
+.user-card.inactive .card-img-top {
+    filter: grayscale(100%);
+}
+
+.badge-id {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    z-index: 10;
 }

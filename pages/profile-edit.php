@@ -10,7 +10,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
     $firtname = htmlspecialchars(trim($_POST['firstname']));
     $lastname = htmlspecialchars(trim($_POST['lastname']));
     $job_title = htmlspecialchars(trim($_POST['job_title']));
-    $picture = file_get_contents($_FILES['picture']);
+    $picture = file_get_contents($_POST['picture']);
     $phone = htmlspecialchars(trim($_POST['phone']));
 
     if (isset($_POST['driver_licence'])) $driver_licence = 1;
@@ -24,10 +24,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
     $user_column = ["email", "firstname", "lastname", "job_title", "picture", "phone", "driver_licence", "username", "country_id"];
     $user_values = [$email, $firtname, $lastname, $job_title, $picture, $phone, $driver_licence, $username];
     $address_columns = ["area_code", "city"];
-    $adress_values = [$city, $area_code];
+    $address_values = [$city, $area_code];
 
     update($pdo, "user", $user_column, $user_values);
-    update($pdo, "address", $adress_column, $address_values);
+    update($pdo, "address", $address_column, $address_values);
+    updateSkills($pdo, 'hard_skills');
+    updateSkills($pdo, 'soft_stills');
+    updateSkills($pdo, 'hobbies');
   };
 }
 $user_id = ($_SESSION['user']['id']);
@@ -106,17 +109,9 @@ foreach ($user as $u) {
 
     <section id="skills">
       <h2>Compétences</h2>
-      {
-      $user_id = ($_SESSION['user']['id']);
-      $sql = "SELECT * FROM `skills` WHERE user_id='$user_id'";
-      return $pdo->query($sql)->fetchAll();
-      };
 
-      $skills = selectSkills($pdo);
-      foreach ($skills as $s)
-      ?>
       <label for=" profile-edit-competence-actuelle">Hard Skills
-        <input type="text" name="skills" class="profile-edit-competence-actuelle" id="hardSkills"
+        <input type="text" name="hard_skills" class="profile-edit-competence-actuelle" id="hard_skills"
           placeholder="Ajouter une compétence">
         <button type="submit" id="hardSkillSubmit">Ajouter</button>>
         <section class="skillList">
@@ -124,8 +119,33 @@ foreach ($user as $u) {
           </ul>
         </section>
       </label>
-      <script src="assets/js/skill-edit.js"></script>
+
+      <label for=" profile-edit-competence-actuelle">Soft Skills <input type="text" name="soft_skills"
+          class="profile-edit-competence-actuelle" id="hard_skills" placeholder="Ajouter une compétence">
+        <button type="submit" id="hardSkillSubmit">Ajouter</button>
+        <section class="skillList">
+          <ul is="list">
+          </ul>
+        </section>
+      </label>
+      <label for=" profile-edit-competence-actuelle">Soft Skills <input type="text" name="soft_skills"
+          class="profile-edit-competence-actuelle" id="soft_skills" placeholder="Ajouter une passion">
+        <button type="submit" id="hardSkillSubmit">Ajouter</button>
+        <section class="skillList">
+          <ul is="list">
+          </ul>
+        </section>
+      </label>
+      <label for=" profile-edit-competence-actuelle">Passions <input type="text" name="hobbies"
+          class="profile-edit-competence-actuelle" id="soft_skills" placeholder="Ajouter une compétence">
+        <button type="submit" id="hardSkillSubmit">Ajouter</button>
+        <section class="skillList">
+          <ul is="list">
+          </ul>
+        </section>
+      </label>
     </section>
+
     <h2>Expériences</h2>
 
     <label for=" profile-edit-experience-name">Nom/Titre expérience</label>

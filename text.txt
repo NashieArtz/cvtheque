@@ -1,0 +1,5 @@
+selectionner la compétence dans la table compétence qui correspond à l'entrée dans le formulaire.
+
+si l'entrée existe déjà dans la base de donnée, attribuer l'id de la compétence à l'utilisateur dans la table utilisateur.
+
+si l'entrée n'existe pas dans la base de donnée, ajouter l'entrée comme nouvelle valeur dans la table compétence, puis associer son id au profil de l'utilisateur dans la table utilisateur

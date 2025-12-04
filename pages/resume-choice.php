@@ -3,7 +3,7 @@
         <h1 class="text-center mb-5">Choisissez un modèle de CV</h1>
         <div class="row g-4">
             <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card h-100 text-center">
+                <div class="card h-100 text-center profiles-card">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Modèle 1</h5>
                         <p class="card-text">Un style classique et professionnel.</p>
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card h-100 text-center">
+                <div class="card h-100 text-center profiles-card">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Modèle 2</h5>
                         <p class="card-text">Un design moderne et épuré.</p>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card h-100 text-center">
+                <div class="card h-100 text-center profiles-card">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Modèle 3</h5>
                         <p class="card-text">Idéal pour un CV créatif.</p>
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card h-100 text-center">
+                <div class="card h-100 text-center profiles-card">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Modèle 4</h5>
                         <p class="card-text">Un CV élégant et minimaliste.</p>

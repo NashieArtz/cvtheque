@@ -3,21 +3,26 @@
     <a class="navbar-brand text-white fs-3 logo" href="?page=dashboard">
       Cvthèque
     </a>
-    <div class="collapse navbar-collapse" id="navbarVisiteur">
-      <ul class="navbar-nav ms-auto align-items-center gap-4">
-        <li class="nav-item">
-          <a class="nav-link nav-link-student fs-5" href="?page=dashboard">Accueil</a>
-        </li>
-        <a class="nav-link nav-link-student fs-5" href="?page=resume">Mon CV</a>
-        </li>
-        <a class="btn px-4 py-2 fs-5 btn-student-primary" href="?page=profile-user&id=<?= $_SESSION['user']['id'] ?>">
-          Mon Profil
-        </a>
-        <li class="nav-item">
-          <a class="btn px-4 py-2 fs-5 btn-student-secondary" href="?page=logout">
-            Se déconnecter
-          </a>
-        </li>
+      <div class="collapse navbar-collapse" id="navbarVisiteur">
+          <ul class="navbar-nav ms-auto align-items-center gap-4">
+              <li class="nav-item">
+                  <a class="nav-link nav-link-student fs-5" href="?page=dashboard">Accueil</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link nav-link-student fs-5" href="?page=profiles-list">Voir CVs</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link nav-link-student fs-5" href="?page=resume-choice">Mon CV</a>
+              </li>
+              <a class="btn px-4 py-2 fs-5 btn-student-primary"
+                 href="?page=profile&id=<?=$_SESSION['user']['id']?>">
+                  Mon Profil
+              </a>
+              <li class="nav-item">
+                  <a class="btn px-4 py-2 fs-5 btn-student-secondary"  href="?page=logout">
+                      Se déconnecter
+                  </a>
+              </li>
         <li class="nav-item theme-position">
           <img class="moon-sun-icon" src="./assets/img/moon.png" alt="Logo dark or light mode" height="20px"
             width="20px">

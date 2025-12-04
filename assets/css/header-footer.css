@@ -18,7 +18,7 @@
 }
 
 .nav-link {
-    color: var(--text-color);
+    color: #F1F1F1;
     transition: color 0.3s ease;
 }
 
@@ -38,6 +38,7 @@
     margin: 0 auto;
     cursor: pointer;
     transition: all 0.3s ease;
+    color: var(--text-button);
 }
 
 .btn:hover {
@@ -68,7 +69,9 @@
 .btn-admin-secondary {
     background-color: var(--admin-secondary);
 }
-
+.btn-admin-primary:hover {
+    background-color: var(--admin-hover);
+}
 .btn-admin-secondary:hover {
     background-color: var(--admin-hover);
 }

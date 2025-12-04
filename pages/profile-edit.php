@@ -18,18 +18,17 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
 
     $username = htmlspecialchars(trim($_POST['username']));
     $country = htmlspecialchars(trim($_POST['country']));
+    $country_id = $pdo->query("SELECT id FROM `country` WHERE name='$country'");
     $city = htmlspecialchars(trim($_POST['city']));
     $area_code = htmlspecialchars(trim($_POST['area_code']));
 
-    $user_column = ["email", "firstname", "lastname", "job_title", "picture", "phone", "driver_licence", "username"];
+    $user_column = ["email", "firstname", "lastname", "job_title", "picture", "phone", "driver_licence", "username", "country_id"];
     $user_values = [$email, $firtname, $lastname, $job_title, $picture, $phone, $driver_licence, $username];
     $address_columns = ["area_code", "city"];
     $adress_values = [$city, $area_code];
-    $country_columns = "country";
 
     update($pdo, "user", $user_column, $user_values);
     update($pdo, "address", $adress_column, $address_values);
-    update($pdo, "country", $country_columns, $country);
   };
 }
 $user_id = ($_SESSION['user']['id']);

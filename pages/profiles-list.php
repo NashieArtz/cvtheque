@@ -1,15 +1,40 @@
 <?php
 $search = $_GET['search'] ?? '';
-$filterAvailability = $_GET['filter_availability'] ?? 'all';
+$filterCity = $_GET['filter_city'] ?? '';
+$filterSkill = $_GET['filter_skill'] ?? '';
+$filterLicense = $_GET['filter_license'] ?? 'all';
 $params = [];
 
 $sql = "SELECT u.*, a.city
 FROM user u
 LEFT JOIN address a ON u.id = a.user_id
 WHERE u.is_active = 1";
-if ($filterAvailability === 'looking') {
-    $sql .= " AND u.is_looking_for_job = 1";
+
+if (!empty($filterSkill)) {
+    $sql .= " JOIN user_has_skills uhs ON u.id = uhs.user_id 
+              JOIN skill s ON uhs.skill_id = s.id ";
 }
+
+if ($filterLicense === 'yes') {
+    $sql .= " AND u.driver_licence = 1";
+}
+
+if (!empty($filterCity)) {
+    $sql .= " AND a.city LIKE :city";
+    $params[':city'] = "%$filterCity%";
+}
+
+if (!empty($filterSkill)) {
+    $sql .= " AND s.name LIKE :skill";
+    $params[':skill'] = "%$filterSkill%";
+}
+
+if (!empty($filterSkill)) {
+    $sql .= " GROUP BY u.id, a.city ORDER BY u.id DESC";
+} else {
+    $sql .= " ORDER BY u.id DESC";
+}
+
 
 if (!empty($search)) {
     $term = "%$search%";
@@ -45,59 +70,68 @@ try {
     </div>
 
     <div class="row justify-content-center mb-5">
-        <div class="col-md-10"> <div class="d-flex gap-3 align-items-center">
+        <div class="col-md-10">
+
+            <div class="d-flex align-items-center mb-3">
 
                 <div class="flex-grow-1">
                     <form action="index.php" method="GET" class="card card-body shadow-sm border-0 p-0">
                         <input type="hidden" name="page" value="profiles-list">
-                        <input type="hidden" name="filter_availability" value="<?= htmlspecialchars($filterAvailability) ?>">
+                        <input type="hidden" name="filter_city" value="<?= htmlspecialchars($filterCity) ?>">
+                        <input type="hidden" name="filter_skill" value="<?= htmlspecialchars($filterSkill) ?>">
+                        <input type="hidden" name="filter_license" value="<?= htmlspecialchars($filterLicense) ?>">
 
                         <div class="input-group">
                         <span class="input-group-text bg-white border-end-0">
                             <i class="bi bi-search text-muted"></i>
                         </span>
                             <input type="text" name="search" class="form-control border-start-0 ps-0"
-                                   placeholder="Rechercher un développeur, une ville, un nom..."
+                                   placeholder="Rechercher nom, titre, ville..."
                                    value="<?= htmlspecialchars($search) ?>">
                             <button class="btn btn-primary px-4" type="submit">Rechercher</button>
                         </div>
                     </form>
                 </div>
-
-                <div class="dropdown">
-                    <?php
-                    $buttonText = 'Statut: Tous';
-                    $buttonClass = 'btn-secondary';
-                    if ($filterAvailability === 'available') {
-                        $buttonText = 'Statut: Disponibles';
-                        $buttonClass = 'btn-success';
-                    } elseif ($filterAvailability === 'employed') {
-                        $buttonText = 'Statut: En Poste';
-                        $buttonClass = 'btn-warning';
-                    }
-                    $currentPage = $_GET['page'] ?? 'profiles-list';
-                    ?>
-                    <button class="btn <?= $buttonClass ?> dropdown-toggle shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?= $buttonText ?>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-
-                        <li><a class="dropdown-item <?= $filterAvailability === 'all' ? 'active' : '' ?>"
-                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_availability=all">Tous les profils</a></li>
-
-                        <li><a class="dropdown-item <?= $filterAvailability === 'available' ? 'active' : '' ?>"
-                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_availability=available">Cherche activement</a></li>
-
-                        <li><a class="dropdown-item <?= $filterAvailability === 'employed' ? 'active' : '' ?>"
-                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_availability=employed">Déjà en poste</a></li>
-                    </ul>
-                </div>
             </div>
 
-            <?php if (!empty($search)): ?>
+            <form action="index.php" method="GET" class="d-flex gap-3 align-items-center card card-body shadow-sm border-0 p-3">
+                <input type="hidden" name="page" value="profiles-list">
+                <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+
+                <div class="flex-fill">
+                    <label for="filter_city" class="form-label small text-muted mb-1">Ville</label>
+                    <input type="text" name="filter_city" id="filter_city" class="form-control form-control-sm"
+                           placeholder="Ex: Paris" value="<?= htmlspecialchars($filterCity) ?>">
+                </div>
+
+                <div class="flex-fill">
+                    <label for="filter_skill" class="form-label small text-muted mb-1">Compétence</label>
+                    <input type="text" name="filter_skill" id="filter_skill" class="form-control form-control-sm"
+                           placeholder="Ex: PHP ou React" value="<?= htmlspecialchars($filterSkill) ?>">
+                </div>
+
+                <div style="width: 150px;">
+                    <label for="filter_license" class="form-label small text-muted mb-1">Permis</label>
+                    <select name="filter_license" id="filter_license" class="form-select form-select-sm">
+                        <option value="all">Tous</option>
+                        <option value="yes" <?= $filterLicense === 'yes' ? 'selected' : '' ?>>Avec permis</option>
+                    </select>
+                </div>
+
+                <div class="pt-3">
+                    <button class="btn btn-sm btn-dark" type="submit" style="margin-top: 10px;">
+                        Appliquer les filtres
+                    </button>
+                </div>
+            </form>
+
+            <?php
+            $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill) || $filterLicense !== 'all';
+            if ($isFilterActive):
+                ?>
                 <div class="mt-2 text-center">
-                    <a href="index.php?page=profiles-list&filter_availability=<?= htmlspecialchars($filterAvailability) ?>" class="text-decoration-none text-muted small">
-                        <i class="bi bi-x-circle"></i> Effacer la recherche
+                    <a href="index.php?page=profiles-list" class="text-decoration-none text-muted small">
+                        <i class="bi bi-x-circle"></i> Effacer tous les filtres
                     </a>
                 </div>
             <?php endif; ?>

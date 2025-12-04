@@ -4,15 +4,19 @@ include './config/config.php';
 
 
 $route = [
-        'index' => __DIR__ . '/index.php',
+  'index' => __DIR__ . '/index.php',
 
-    // PAGES
-        'profile-guest' => __DIR__ . '/pages/profile-guest.php',
-        'profile-user' => __DIR__ . '/pages/profile-user.php',
-        'profile-edit' => __DIR__ . '/pages/profile-edit.php',
-        'profiles-list' => __DIR__ . '/pages/profiles-list.php',
-        'dashboard' => __DIR__ . '/pages/dashboard.php',
-        'resume' => __DIR__ . '/pages/resume.php',
+  // PAGES
+  'profile-guest' => __DIR__ . '/pages/profile-guest.php',
+  'profile-user' => __DIR__ . '/pages/profile-user.php',
+  'profile-edit' => __DIR__ . '/pages/profile-edit.php',
+  'profiles-list' => __DIR__ . '/pages/profiles-list.php',
+  'dashboard' => __DIR__ . '/pages/dashboard.php',
+  'resume' => __DIR__ . '/pages/resume.php',
+        'resume2' => __DIR__ . '/pages/resume2.php',
+        'resume3' => __DIR__ . '/pages/resume3.php',
+        'resume4' => __DIR__ . '/pages/resume4.php',
+        'resume-choice' => __DIR__ . '/pages/resume-choice.php',
         'delete' => __DIR__ . '/pages/delete.php',
 
   // Connection

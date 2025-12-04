@@ -19,15 +19,36 @@ if (isset($_SESSION['logout_message'])) {
                 <div class="col-md-6">
                     <h1 class="fw-bold display-4">Créez votre CV<br>professionnel en ligne</h1>
 
-                    <?php if (!isset($_SESSION['user'])) { ?>
-                    <a href="?page=register" class="btn btn-lg mt-4 btn-color-primary">
-                        Commencer mon CV
-                    </a>
-                        <?php } else { ?>
-                    <a href="?page=profile-edit" class="btn btn-lg mt-4 btn-color-primary">
-                        Commencer mon CV
-                    </a>
-                    <?php }?>
+                    <?php
+                    if (isset($_SESSION)) {
+                        if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
+                            $role_id = $_SESSION['user']['role_id'] ?? null;
+
+                            if ($role_id == 1) {
+                                ?>
+                                <a href="?page=profile-edit" class="btn btn-lg mt-4 btn-student-primary">
+                                    Commencer mon CV
+                                </a>
+                                <?php
+                            }
+
+                            if ($role_id == 3) {
+                                ?>
+                                <a href="?page=profile-edit" class="btn btn-lg mt-4 btn-admin-primary">
+                                    Commencer mon CV
+                                </a>
+                                <?php
+                            }
+
+                        } else {
+                            ?>
+                            <a href="?page=register" class="btn btn-lg mt-4 btn-color-primary">
+                                Commencer mon CV
+                            </a>
+                            <?php
+                        }
+                    }
+                    ?>
 
                 </div>
                 <div class="col-md-6">
@@ -40,15 +61,15 @@ if (isset($_SESSION['logout_message'])) {
 <section id="3-great-point">
     <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-4 d-flex align-items-center gap-2">
+            <div class="col-12 col-lg-4 d-flex align-items-center gap-2">
                 <img src="./assets/img/smile.png" alt="Icône simplicité">
                 <p class="fw-bold">Facilité d’utilisation</p>
             </div>
-            <div class="col-12 col-md-4 d-flex align-items-center gap-2">
+            <div class="col-12 col-lg-4 d-flex align-items-center gap-2">
                 <img src="./assets/img/share.png" alt="Icône partage">
                 <p class="fw-bold">Générez et partagez votre profil</p>
             </div>
-            <div class="col-12 col-md-4 d-flex align-items-center gap-2">
+            <div class="col-12 col-lg-4 d-flex align-items-center gap-2">
                 <img src="./assets/img/people.png" alt="Icône employeur">
                 <p class="fw-bold">Visibilité auprès de nombreux employeurs</p>
             </div>

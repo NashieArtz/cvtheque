@@ -100,12 +100,10 @@ foreach ($user as $u) {
 
     <section id="skills">
       <h2>Compétences</h2>
-      <?php
-      function selectSkills(PDO $pdo)
       {
-        $user_id = ($_SESSION['user']['id']);
-        $sql = "SELECT * FROM `skills` WHERE user_id='$user_id'";
-        return $pdo->query($sql)->fetchAll();
+      $user_id = ($_SESSION['user']['id']);
+      $sql = "SELECT * FROM `skills` WHERE user_id='$user_id'";
+      return $pdo->query($sql)->fetchAll();
       };
 
       $skills = selectSkills($pdo);

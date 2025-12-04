@@ -17,8 +17,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
     else $driver_licence = 0;
 
     $username = htmlspecialchars(trim($_POST['username']));
-    $country = htmlspecialchars(trim($_POST['country']));
-    $country_id = $pdo->query("SELECT id FROM `country` WHERE name='$country'");
+    $country_id = htmlspecialchars(trim($_POST['']));
     $city = htmlspecialchars(trim($_POST['city']));
     $area_code = htmlspecialchars(trim($_POST['area_code']));
 
@@ -75,21 +74,24 @@ foreach ($user as $u) {
 
     <h2>Modifier les données de localisation</h2>
     <label for="profile-edit-country">Pays
-      <?php
-      // fonction pour récupérer la liste des pays
-      function selectCountry(PDO $pdo)
-      {
-        $sql = "SELECT * FROM `country`";
-        return $pdo->query($sql)->fetchAll();
-      };
-      $country = selectCountry($pdo);
-      foreach ($country as $c) {
-      ?>
-        <option value="<?= $u['name'] ?> ">
-        </option>
-      <?php
-      };
-      ?>
+      <select>
+        <?php
+        // fonction pour récupérer la liste des pays
+        function selectCountry(PDO $pdo)
+        {
+          $sql = "SELECT * FROM `country`";
+          return $pdo->query($sql)->fetchAll();
+        };
+        $country = selectCountry($pdo);
+        foreach ($country as $c) {
+        ?>
+          <option value="<?= $c['id'] ?>">
+            <?= $c['name'] ?>
+          </option>
+        <?php
+        }
+        ?>
+      </select>
     </label>
     <label for="profile-edit-city">Ville
       <input type="text" name="city" id="profile-edit-city" value="<?= $u['adress']['city'] ?> ">

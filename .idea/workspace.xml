@@ -6,12 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/header-footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/header-footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/release.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/release.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header-student.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-student.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/profile.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/resume.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/resume.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/resume.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/resume.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin-dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin-dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile-edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profiles-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profiles-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/resume.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/resume.php" afterDir="false" />
     </list>
     <list id="b8697c67-535d-4448-bffe-c9fbffdf3e00" name="Changes by coolmathieu" comment="" />
     <list id="899236c5-f74d-4787-ae6d-17bd3a35d9d5" name="Changes by FZYSK" comment="" />
@@ -28,8 +31,8 @@
       <list>
         <option value="package.json" />
         <option value="CSS File" />
-        <option value="PHP File" />
         <option value="JavaScript File" />
+        <option value="PHP File" />
       </list>
     </option>
   </component>
@@ -52,23 +55,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "ange",
-    "last_opened_file_path": "C:/Users/Angel/Coding/Full-Stack/NFS/1bcigit/cvtheque",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ange&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Angel/Coding/Full-Stack/NFS/1bcigit/cvtheque&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Angel\Coding\Full-Stack\NFS\1bcigit\cvtheque\config" />
@@ -97,7 +104,9 @@
       <workItem from="1764623234748" duration="10790000" />
       <workItem from="1764678922288" duration="10973000" />
       <workItem from="1764706203370" duration="3142000" />
-      <workItem from="1764750292116" duration="6627000" />
+      <workItem from="1764750292116" duration="22030000" />
+      <workItem from="1764795884982" duration="9235000" />
+      <workItem from="1764837180299" duration="1790000" />
     </task>
     <servers />
   </component>
@@ -124,16 +133,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/assets/js/resume.js</url>
-          <line>1</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

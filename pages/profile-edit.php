@@ -1,170 +1,258 @@
 <?php
-
 include './config/release.php';
 include './config/update.php';
 
 
-if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
-  if (!empty($_POST) && isset($_POST)) {
+if (!isset($_SESSION['user']) || empty($_SESSION['user']['id'])) {
+    header('Location: index.php?page=login');
+    exit();
+}
+
+$user_id = $_SESSION['user']['id'];
+$message = "";
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $email = htmlspecialchars(trim($_POST['email']));
     $firstname = htmlspecialchars(trim($_POST['firstname']));
     $lastname = htmlspecialchars(trim($_POST['lastname']));
     $job_title = htmlspecialchars(trim($_POST['job_title']));
-
-    if (isset($_FILES['picture']) && $_FILES['picture']['error'] === UPLOAD_ERR_OK) {
-      $picture = file_get_contents($_FILES['picture']['tmp_name']);
-    } else {
-      // Garder l'ancienne image si aucun nouveau fichier n'est uploadé
-      $picture = null; // ou récupérer l'image existante de la base de données
-    };
     $phone = htmlspecialchars(trim($_POST['phone']));
-
-    if (isset($_POST['driver_licence'])) $driver_licence = 1;
-    else $driver_licence = 0;
-
     $username = htmlspecialchars(trim($_POST['username']));
-    $country_id = htmlspecialchars(trim($_POST['country']));
+
+
+    $country_id = !empty($_POST['country']) ? intval($_POST['country']) : null;
     $city = htmlspecialchars(trim($_POST['city']));
     $area_code = htmlspecialchars(trim($_POST['area_code']));
 
-    $user_columns = ["email", "firstname", "lastname", "job_title", "phone", "driver_licence", "username", "country_id"];
-    $user_values = [$email, $firstname, $lastname, $job_title,  $phone, $driver_licence, $username];
-    $address_columns = ["area_code", "city"];
-    $address_values = [$city, $area_code];
 
-    if ($picture !== null) {
-      $user_column[] = "picture";
-      $user_values[] = $picture;
+    $driver_licence = isset($_POST['driver_licence']) ? 1 : 0;
+
+
+    $picture = null;
+    if (isset($_FILES['picture']) && $_FILES['picture']['error'] === UPLOAD_ERR_OK) {
+        $picture = 'data:' . $_FILES['picture']['type'] . ';base64,' . base64_encode(file_get_contents($_FILES['picture']['tmp_name']));
     }
 
-    update($pdo, "user", $user_columns, $user_values);
-    update($pdo, "address", $address_columns, $address_values);
-    updateSkills($pdo, 'hard_skills');
-    updateSkills($pdo, 'soft_skills');
-    updateSkills($pdo, 'hobbies');
-  };
+
+    $user_columns = ["email", "firstname", "lastname", "job_title", "phone", "driver_licence", "username"];
+    $user_values = [$email, $firstname, $lastname, $job_title,  $phone, $driver_licence, $username];
+
+    if ($country_id) {
+        $user_columns[] = "country_id";
+        $user_values[] = $country_id;
+    }
+    if ($picture) {
+        $user_columns[] = "picture";
+        $user_values[] = $picture;
+    }
+
+
+    update($pdo, "user", $user_columns, $user_values, $user_id);
+
+
+    $stmtAddr = $pdo->prepare("UPDATE address SET city = ?, area_code = ? WHERE user_id = ?");
+    $stmtAddr->execute([$city, $area_code, $user_id]);
+
+    if (function_exists('updateSkills')) {
+        updateSkills($pdo, 'hard_skills');
+        updateSkills($pdo, 'soft_skills');
+        updateSkills($pdo, 'hobbies');
+    }
+
+    $message = "<div class='alert alert-success'>Profil mis à jour avec succès !</div>";
 }
-$user_id = ($_SESSION['user']['id']);
-$user = userData($pdo, $user_id);
-foreach ($user as $u) {
-?>
-  <link href="./assets/css/register-login.css" rel="stylesheet">
 
-  <form method="post">
-    <section id="user_data">
+$userResults = userData($pdo, $user_id);
 
-      <label for="profile-edit-image">Photo de profil
-        <input type="file" name="picture" id="profile-edit-image">
-      </label>
-      <label for="profile-edit-name">Nom
-        <input type="text" name="lastname" id="profile-edit-name" value="<?= $u['lastname'] ?>">
-      </label>
-      <label for="profile-edit-forname">Prénom
-        <input type="text" name="firstname" id="profile-edit-forname" value="<?= $u['firstname'] ?>">
-      </label>
-      <label for="profile-edit-username">Nom d'utilisateur
-        <input type="text" name="username" id="profile-edit-username" value="<?= $u['username'] ?>">
-      </label>
-      <label for="profile-edit-password">Mots de passe
-        <input type="password" name="password" id="profile-edit-password" value="0000000000">
-      </label>
-      <label for="profile-edit-Rpassword">Retaper votre Mots de passe
-        <input type="password" name="Rpassword" id="profile-edit-Rpassword">
-      </label>
-      <label for="profile-edit-email">Email
-        <input type="email" name="email" id="profile-edit-email" value="<?= $u['email'] ?>">
-      </label>
-      <label for="profile-edit-job_title">Quel métier souhaitez-vous exercer ?
-        <input type="text" name="job_title" id="profile-edit-job_title" value="<?= $u['job_title'] ?>">
-      </label>
-      <label for="profile-edit-permis">Permis
-        <input type="checkbox" name="driver_licence" id="profile-edit-permis">
-      </label>
-      <label for=" profile-edit-hide-name">Masquer nom et prénom
-        <input type="checkbox" name="hide-name" id="profile-edit-hide-name">
-      </label>
-      <label for="profile-edit-hide-photo">Inclure photo de profil
-        <input type="checkbox" name="hide-photo" id="profile-edit-hide-photo">
-      </label>
-    </section>
+foreach ($userResults as $u) {
+    ?>
 
-    <section id="address">
-      <h2>Modifier les données de localisation</h2>
+    <div class="container py-5">
 
-      <label for="profile-edit-country">Pays
-        <select name="country">
-          <?php
-          // fonction pour récupérer la liste des pays
-          function selectCountry(PDO $pdo)
-          {
-            $sqlCountry = "SELECT * FROM `country`";
-            return $pdo->query($sqlCountry)->fetchAll();
-          };
-          $country = selectCountry($pdo);
-          foreach ($country as $c) {
-          ?>
-            <option value="<?= $c['id'] ?>">
-              <?= $c['name'] ?>
-            </option>
-          <?php
-          }
-          ?>
-        </select>
-      </label>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold m-0">Mon Profil</h2>
+            <a href="index.php?page=profile-user" class="btn btn-outline-secondary btn-sm btn-return-dashboard">
+                Retour Dashboard
+            </a>
+        </div>
 
-      <label for="profile-edit-city">Ville</label>
-      <input type="text" name="city" id="profile-edit-city" value="<?= $u['city'] ?>">
+        <?= $message ?>
 
-      <label for="profile-edit-cp">Code Postale</label>
-      <input type="number" name="area_code" id="profile-edit-cp" value="<?= $u['area_code'] ?>">
+        <form method="post" enctype="multipart/form-data" id="profileForm">
+            <div class="row g-4">
 
-    </section>
+                <div class="col-lg-4">
+                    <div class="card shadow-sm border-0 h-100">
+                        <div class="card-body">
+                            <div class="edit-section-title text-center">Identité</div>
 
-    <section id="skills">
+                            <div class="profile-edit-avatar-container">
+                                <?php $imgSrc = !empty($u['picture']) ? $u['picture'] : 'https://via.placeholder.com/150'; ?>
+                                <img src="<?= htmlspecialchars($imgSrc) ?>" id="avatar-preview" class="profile-edit-avatar">
+                                <label for="picture-input" class="btn-upload-icon" title="Changer la photo">
+                                </label>
+                                <input type="file" name="picture" id="picture-input" class="file-input-hidden" onchange="previewImage(event)">
+                            </div>
 
-      <h2>Compétences</h2>
+                            <div class="mb-3">
+                                <label class="form-label small text-muted">Nom d'utilisateur</label>
+                                <input type="text" name="username" class="form-control" value="<?= htmlspecialchars($u['username']) ?>">
+                            </div>
 
-      <label for=" profile-edit-competence-actuelle">Hard Skills
-        <input type="text" name="hard_skills" class="profile-edit-competence-actuelle" id="hard_skills"
-          placeholder="Ajouter une compétence">
-        <button type="submit" id="hardSkillSubmit">Ajouter</button>>
-      </label>
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <label class="form-label small text-muted">Prénom</label>
+                                    <input type="text" name="firstname" class="form-control" value="<?= htmlspecialchars($u['firstname']) ?>">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label class="form-label small text-muted">Nom</label>
+                                    <input type="text" name="lastname" class="form-control" value="<?= htmlspecialchars($u['lastname']) ?>">
+                                </div>
+                            </div>
 
-      <label for=" profile-edit-competence-actuelle">Soft Skills
-        <input type="text" name="soft_skills" class="profile-edit-competence-actuelle"
-          placeholder="Ajouter une compétence">
-        <button type="submit" id="hardSkillSubmit">Ajouter</button>
-      </label>
+                            <div class="mb-3">
+                                <label class="form-label small text-muted">Email</label>
+                                <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($u['email']) ?>">
+                            </div>
 
-      <label for=" profile-edit-competence-actuelle">Soft Skills <input type="text" name="soft_skills"
-          class="profile-edit-competence-actuelle" id="soft_skills" placeholder="Ajouter une passion">
-        <button type="submit" id="hardSkillSubmit">Ajouter</button>
-      </label>
-      <label for=" profile-edit-competence-actuelle">Passions <input type="text" name="hobbies"
-          class="profile-edit-competence-actuelle" id="soft_skills" placeholder="Ajouter une compétence">
-        <button type="submit" id="hardSkillSubmit">Ajouter</button>
-      </label>
+                            <div class="mb-3">
+                                <label class="form-label small text-muted">Téléphone</label>
+                                <input type="text" name="phone" class="form-control" value="<?= htmlspecialchars($u['phone']) ?>">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    </section>
+                <div class="col-lg-4">
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-body">
+                            <div class="edit-section-title">Infos Professionnelles</div>
 
-    <section id="experience">
+                            <div class="mb-3">
+                                <label class="form-label small text-muted">Poste Visé</label>
+                                <input type="text" name="job_title" class="form-control" value="<?= htmlspecialchars($u['job_title']) ?>">
+                            </div>
 
-      <h2>Expériences</h2>
-      <label for=" profile-edit-experience-name">Nom/Titre expérience</label>
-      <input type="text" name="experience-name" id="profile-edit-experience-name">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="driver_licence" id="driver_licence" <?= $u['driver_licence'] ? 'checked' : '' ?>>
+                                <label class="form-check-label" for="driver_licence">Permis de conduire</label>
+                            </div>
+                        </div>
+                    </div>
 
-      <label for="profile-edit-experience-year">Année expérience</label>
-      <input type="text" name="experience-year" id="profile-edit-experience-year">
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-body">
+                            <div class="edit-section-title">Localisation</div>
 
-      <input type="submit" name="submit-experience-modifie" id="profile-edit-modifie-experience"
-        value="Modifier & Supprimer">
-      <label></label>
-      <input type="submit" name="submit-experience-add" id="profile-edit-add-experience" value="Ajouter expérience">
+                            <div class="mb-3">
+                                <label class="form-label small text-muted">Pays</label>
+                                <select name="country" class="form-select">
+                                    <option value="">Sélectionner...</option>
+                                    <?php
+                                    $countries = $pdo->query("SELECT * FROM country ORDER BY name ASC")->fetchAll();
+                                    foreach ($countries as $c) {
+                                        $selected = (isset($u['country_id']) && $u['country_id'] == $c['id']) ? 'selected' : '';
+                                        echo "<option value='{$c['id']}' $selected>{$c['name']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
 
-      <input type="submit" name="submit-save-all" id="profile-edit-save-button" value="Sauvegarder le Profil">
-    </section>
-  </form>
+                            <div class="row">
+                                <div class="col-7 mb-3">
+                                    <label class="form-label small text-muted">Ville</label>
+                                    <input type="text" name="city" class="form-control" value="<?= htmlspecialchars($u['city']) ?>">
+                                </div>
+                                <div class="col-5 mb-3">
+                                    <label class="form-label small text-muted">CP</label>
+                                    <input type="text" name="area_code" class="form-control" value="<?= htmlspecialchars($u['area_code']) ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<?php
-}
-?>
+                <div class="col-lg-4">
+                    <div class="card shadow-sm border-0 h-100">
+                        <div class="card-body">
+                            <div class="edit-section-title">Compétences</div>
+
+                            <div class="mb-4">
+                                <label class="form-label small fw-bold">Hard Skills</label>
+                                <div class="skills-input-wrapper">
+                                    <input type="text" id="input-hard" class="form-control form-control-sm" placeholder="Ex: PHP, SQL">
+                                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="addSkillTag('hard')">
+                                        +
+                                    </button>
+                                </div>
+                                <div id="list-hard" class="skills-list-container">
+                                    <?php
+                                    if (isset($u['skills']) && is_array($u['skills'])) {
+                                        foreach ($u['skills'] as $s) {
+                                            if(!empty($s['hard_skills'])) {
+                                                echo '<div class="skill-tag-item"><span>'.htmlspecialchars($s['hard_skills']).'</span><span class="skill-tag-remove" onclick="this.parentElement.remove()">✕</span></div>';
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                                <input type="hidden" name="hard_skills" id="hidden-hard">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label small fw-bold">Soft Skills</label>
+                                <div class="skills-input-wrapper">
+                                    <input type="text" id="input-soft" class="form-control form-control-sm" placeholder="Ex: Rigueur">
+                                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="addSkillTag('soft')">
+                                        +
+                                    </button>
+                                </div>
+                                <div id="list-soft" class="skills-list-container">
+                                    <?php
+                                    if (isset($u['skills']) && is_array($u['skills'])) {
+                                        foreach ($u['skills'] as $s) {
+                                            if(!empty($s['soft_skills'])) {
+                                                echo '<div class="skill-tag-item"><span>'.htmlspecialchars($s['soft_skills']).'</span><span class="skill-tag-remove" onclick="this.parentElement.remove()">✕</span></div>';
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                                <input type="hidden" name="soft_skills" id="hidden-soft">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label small fw-bold">Hobbies</label>
+                                <div class="skills-input-wrapper">
+                                    <input type="text" id="input-hobbies" class="form-control form-control-sm" placeholder="Ex: Football">
+                                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="addSkillTag('hobbies')">
+                                        +
+                                    </button>
+                                </div>
+                                <div id="list-hobbies" class="skills-list-container">
+                                    <?php
+                                    ?>
+                                </div>
+                                <input type="hidden" name="hobbies" id="hidden-hobbies">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-4 mb-5">
+                <div class="col-12 text-center">
+                    <button type="submit" name="submit-save-all" class="btn btn-primary btn-lg px-5 shadow" onclick="prepareTagsForSubmit()">
+                        Sauvegarder le Profil
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+<?php } ?>

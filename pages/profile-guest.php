@@ -6,14 +6,15 @@ if (isset($_SESSION['welcome_message'])) {
     unset($_SESSION['welcome_message']);
 }
 
+// Sécurité de intval(), GET la 1ère valeur de l'URL
 $user_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-$sqlUser = "SELECT u.*, a.city, a.area_code, a.street_name, c.name as country_name 
-            FROM user u 
+$sql = "SELECT u.*, a.city, a.area_code, a.street_name, c.name as country_name 
+            FROM user u
             LEFT JOIN address a ON u.id = a.user_id 
             LEFT JOIN country c ON u.country_id = c.id 
             WHERE u.id = ?";
-$stmt = $pdo->prepare($sqlUser);
+$stmt = $pdo->prepare($sql);
 $stmt->execute([$user_id]);
 $r = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -118,6 +119,11 @@ $skills = $stmtSkills->fetchAll(PDO::FETCH_ASSOC);
                                         <?php if (!empty($skill['soft_skills'])): ?>
                                             <li class="list-inline-item mb-2">
                                                 <span class="badge bg-secondary fs-6"><?= htmlspecialchars($skill['soft_skills']) ?></span>
+                                            </li>
+                                        <?php endif; ?>
+                                        <?php if (!empty($skill['hobbies'])): ?>
+                                            <li class="list-inline-item mb-2">
+                                                <span class="badge bg-secondary fs-6"><?= htmlspecialchars($skill['hobbies']) ?></span>
                                             </li>
                                         <?php endif; ?>
                                     <?php endforeach; ?>

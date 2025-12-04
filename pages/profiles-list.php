@@ -1,11 +1,30 @@
 <?php
+// Récupération des paramètres envoyés en GET
 $search = $_GET['search'] ?? '';
+$filterCity = $_GET['filter_city'] ?? '';
+$filterSkill = $_GET['filter_skill'] ?? '';
+$filterLicense = $_GET['filter_license'] ?? 'all';
+
 $params = [];
 
-$sql = "SELECT u.*, a.city
-FROM user u
-LEFT JOIN address a ON u.id = a.user_id
-WHERE u.is_active = 1";
+// On utilise GROUP_CONCAT pour récupérer toutes les compétences d'un coup dans une seule colonne "skills_list"
+$sql = "SELECT u.*, a.city, 
+        GROUP_CONCAT(DISTINCT s.hard_skills SEPARATOR ',') as skills_list
+        FROM user u
+        LEFT JOIN address a ON u.id = a.user_id
+        LEFT JOIN user_has_skills uhs ON u.id = uhs.user_id 
+        LEFT JOIN skills s ON uhs.skills_id = s.id
+        WHERE u.is_active = 1";
+
+// Filtres
+if ($filterLicense === 'yes') {
+    $sql .= " AND u.driver_licence = 1";
+}
+
+if (!empty($filterCity)) {
+    $sql .= " AND a.city LIKE :city";
+    $params[':city'] = "%$filterCity%";
+}
 
 if (!empty($search)) {
     $term = "%$search%";
@@ -21,106 +40,148 @@ if (!empty($search)) {
     $params[':s5'] = $term;
 }
 
+$sql .= " GROUP BY u.id";
+
+if (!empty($filterSkill)) {
+    $sql .= " HAVING skills_list LIKE :skill";
+    $params[':skill'] = "%$filterSkill%";
+}
+
+$sql .= " ORDER BY u.id DESC";
 
 try {
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
-    $candidates = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "<div class='alert alert-danger'>Erreur SQL : " . $e->getMessage() . "</div>";
-    $candidates = [];
+    $users = [];
 }
-?>
 
+$isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill) || $filterLicense !== 'all';
+?>
 
 <div class="container py-5">
 
-    <div class="text-center mb-5">
-        <h1 class="fw-bold">Nos Talents</h1>
-        <p class="text-muted">Découvrez les profils disponibles pour vos opportunités.</p>
-    </div>
+    <h3 class="fw-bold mb-4">Liste de profils</h3>
 
     <div class="row justify-content-center mb-5">
-        <div class="col-md-8">
-            <form action="index.php" method="GET" class="card card-body shadow-sm border-0">
+        <div class="col-md-12">
+
+            <form action="index.php" method="GET" class="search-bar-container">
                 <input type="hidden" name="page" value="profiles-list">
 
-                <div class="input-group">
-                    <span class="input-group-text bg-white border-end-0">
-                        <i class="bi bi-search text-muted"></i>
-                    </span>
-                    <input type="text" name="search" class="form-control border-start-0 ps-0"
-                           placeholder="Rechercher un développeur, une ville, un nom..."
-                           value="<?= htmlspecialchars($search) ?>">
-                    <button class="btn btn-primary px-4" type="submit">Rechercher</button>
+                <div class="d-flex flex-wrap gap-3 align-items-center search-bar-div">
+
+                    <button class="btn btn-purple px-4 py-2" type="button" data-bs-toggle="collapse" data-bs-target="#filtersCollapse">
+                        <i class="bi bi-funnel-fill me-2"></i> Filter
+                    </button>
+
+                    <div class="flex-grow-1 position-relative">
+                        <input type="text" name="search" class="form-control input-search-custom"
+                               placeholder="Rechercher par mot-clé (Nom, Titre, Ville...)"
+                               value="<?= htmlspecialchars($search) ?>">
+                        <button type="submit" class="btn search-btn">
+                            <i class="bi bi-search search-text">Rechercher</i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="collapse mt-3 <?= ($filterCity || $filterSkill || $filterLicense !== 'all') ? 'show' : '' ?>" id="filtersCollapse">
+                    <div class="row g-3 pt-2">
+                        <div class="col-md-3">
+                            <input type="text" name="filter_city" class="form-control" placeholder="Ville" value="<?= htmlspecialchars($filterCity) ?>">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="filter_skill" class="form-control" placeholder="Compétence (ex: PHP)" value="<?= htmlspecialchars($filterSkill) ?>">
+                        </div>
+                        <div class="col-md-3">
+                            <select name="filter_license" class="form-select">
+                                <option value="all">Permis : Indifférent</option>
+                                <option value="yes" <?= $filterLicense === 'yes' ? 'selected' : '' ?>>Permis B Requis</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-dark w-100">Appliquer</button>
+                        </div>
+                    </div>
+
+                    <?php if ($isFilterActive): ?>
+                        <div class="mt-2 text-end">
+                            <a href="index.php?page=profiles-list" class="text-decoration-none text-muted small">
+                                <i class="bi bi-x-circle"></i> Réinitialiser la recherche
+                            </a>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </form>
 
-            <?php if (!empty($search)): ?>
-                <div class="mt-2 text-center">
-                    <a href="index.php?page=profiles-list" class="text-decoration-none text-muted small">
-                        <i class="bi bi-x-circle"></i> Effacer la recherche
-                    </a>
-                </div>
-            <?php endif; ?>
         </div>
     </div>
 
     <div class="row g-4">
-        <?php foreach ($candidates as $candidate): ?>
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm border-0 hover-lift">
+        <?php foreach ($users as $u): ?>
+            <div class="col-md-4">
+                <div class="card-profile-horizontal">
 
-                    <div class="position-relative text-center pt-4 pb-2 bg-light rounded-top">
-                        <?php
-                        $imgSrc = !empty($candidate['picture']) ? htmlspecialchars($candidate['picture']) : 'https://via.placeholder.com/150?text=Candidat';
-                        ?>
-                        <img src="<?= $imgSrc ?>" alt="Avatar"
-                             class="rounded-circle shadow-sm"
-                             style="width: 120px; height: 120px; object-fit: cover; border: 4px solid white;">
-                    </div>
+                    <div class="profile-header">
+                        <div class="profile-nanimg-container">
+                            <?php
+                            $imgSrc = !empty($u['picture']) ? htmlspecialchars($u['picture']) : 'https://via.placeholder.com/150?text=IMG';
+                            ?>
+                            <img src="<?= $imgSrc ?>" alt="Avatar" class="profile-img-left">
+                        </div>
 
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold mb-1">
-                            <?= htmlspecialchars($candidate['firstname']) ?> <?= htmlspecialchars($candidate['lastname']) ?>
-                        </h5>
-
-                        <p class="text-primary fw-medium mb-2">
-                            <?= !empty($candidate['job_title']) ? htmlspecialchars($candidate['job_title']) : 'En recherche d\'opportunité' ?>
-                        </p>
-
-                        <?php if (!empty($candidate['city'])): ?>
-                            <p class="text-muted small mb-3">
-                                <i class="bi bi-geo-alt-fill text-danger"></i> <?= htmlspecialchars($candidate['city']) ?>
-                            </p>
-                        <?php else: ?>
-                            <p class="text-muted small mb-3">&nbsp;</p> <?php endif; ?>
-
-                        <hr class="my-3 opacity-25">
-
-                        <div class="d-grid gap-2">
-                            <a href="index.php?page=profile-guest&id=<?= $candidate['id'] ?>"
-                               class="btn btn-outline-primary">
-                                <i class="bi bi-person-badge"></i> Voir le Profil
-                            </a>
-
-                            <a href="index.php?page=resume&id=<?= $candidate['id'] ?>" class="btn btn-dark">
-                                <i class="bi bi-file-earmark-text"></i> Consulter le CV
-                            </a>
+                        <div class="profile-info">
+                            <h5><?= htmlspecialchars($u['lastname']) ?> <?= htmlspecialchars($u['firstname']) ?></h5>
+                            <div class="profile-job">
+                                <?= !empty($u['job_title']) ? htmlspecialchars($u['job_title']) : 'Poste Visé' ?>
+                            </div>
+                            <div class="profile-location">
+                                <?= !empty($u['city']) ? htmlspecialchars($u['city']) : 'Ville non renseignée' ?>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="skills-section">
+                        <div class="skills-title">Compétences</div>
+                        <ul class="skills-list">
+                            <?php
+                            if (!empty($u['skills_list'])) {
+                                $skills = explode(',', $u['skills_list']);
+                                $skillsToShow = array_slice($skills, 0, 3);
+                                foreach ($skillsToShow as $skillName) {
+                                    echo "<li>" . htmlspecialchars(trim($skillName)) . "</li>";
+                                }
+                                if (count($skills) > 3) {
+                                    echo "<li style='list-style: none; color: #888;'>... et " . (count($skills) - 3) . " autres</li>";
+                                }
+                            } else {
+                                echo "<li style='list-style: none; font-style: italic; color: #999;'>Aucune compétence listée</li>";
+                            }
+                            ?>
+                        </ul>
+                    </div>
+
+                    <!-- Footer : Actions -->
+                    <div class="card-footer-custom">
+                        <a href="index.php?page=resume&id=<?= $u['id'] ?>" class="link-cv">
+                            Voir CV
+                        </a>
+                        <a href="index.php?page=profile-guest&id=<?= $u['id'] ?>" class="btn-view-profile">
+                            <i class="bi bi-star"></i> Voir Profil
+                        </a>
+                    </div>
+
                 </div>
             </div>
         <?php endforeach; ?>
 
-        <?php if (empty($candidates)): ?>
+        <?php if (empty($users)): ?>
             <div class="col-12 text-center py-5">
-                <div class="mb-3">
-                    <i class="bi bi-people text-muted" style="font-size: 3rem;"></i>
-                </div>
                 <h3 class="text-muted">Aucun profil trouvé.</h3>
-                <p>Essayez de modifier vos critères de recherche.</p>
-                <a href="index.php?page=profiles-list" class="btn btn-outline-secondary mt-2">Voir tous les profils</a>
+                <p>Essayez de modifier vos critères.</p>
+                <a href="index.php?page=profiles-list" class="btn btn-outline-secondary">Tout effacer</a>
             </div>
         <?php endif; ?>
     </div>

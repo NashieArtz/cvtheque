@@ -196,9 +196,3 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
         </section>
     </div>
 </div>
-        <!--Add External Libraries - JQuery and jspdf
-        check out url - https://scotch.io/@nagasaiaytha/generate-pdf-from-html-using-jquery-and-jspdf
-        -->
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="./assets/js/resume.js"></script>

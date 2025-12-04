@@ -6,20 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/check-username.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/check-username.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/search_profile.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/db.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/update.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/404.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/404.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header-student.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-student.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin-dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin-dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile-edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-edit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile-guest.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-guest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile-user.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profiles-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profiles-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/404.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/resume2.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/resume2.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/resume3.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/resume3.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/resume4.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/resume4.php" afterDir="false" />
     </list>
     <list id="b8697c67-535d-4448-bffe-c9fbffdf3e00" name="Changes by coolmathieu" comment="" />
     <list id="899236c5-f74d-4787-ae6d-17bd3a35d9d5" name="Changes by FZYSK" comment="" />
@@ -67,7 +59,7 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ange&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Angel/Coding/Full-Stack/NFS/1bcigit/cvtheque&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
@@ -111,7 +103,9 @@
       <workItem from="1764706203370" duration="3142000" />
       <workItem from="1764750292116" duration="22030000" />
       <workItem from="1764795884982" duration="9235000" />
-      <workItem from="1764837180299" duration="25649000" />
+      <workItem from="1764837180299" duration="26113000" />
+      <workItem from="1764871897411" duration="1091000" />
+      <workItem from="1764873105709" duration="31000" />
     </task>
     <servers />
   </component>

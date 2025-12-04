@@ -1,11 +1,15 @@
 <?php
 $search = $_GET['search'] ?? '';
+$filterAvailability = $_GET['filter_availability'] ?? 'all';
 $params = [];
 
 $sql = "SELECT u.*, a.city
 FROM user u
 LEFT JOIN address a ON u.id = a.user_id
 WHERE u.is_active = 1";
+if ($filterAvailability === 'looking') {
+    $sql .= " AND u.is_looking_for_job = 1";
+}
 
 if (!empty($search)) {
     $term = "%$search%";
@@ -41,24 +45,58 @@ try {
     </div>
 
     <div class="row justify-content-center mb-5">
-        <div class="col-md-8">
-            <form action="index.php" method="GET" class="card card-body shadow-sm border-0">
-                <input type="hidden" name="page" value="profiles-list">
+        <div class="col-md-10"> <div class="d-flex gap-3 align-items-center">
 
-                <div class="input-group">
-                    <span class="input-group-text bg-white border-end-0">
-                        <i class="bi bi-search text-muted"></i>
-                    </span>
-                    <input type="text" name="search" class="form-control border-start-0 ps-0"
-                           placeholder="Rechercher un développeur, une ville, un nom..."
-                           value="<?= htmlspecialchars($search) ?>">
-                    <button class="btn btn-primary px-4" type="submit">Rechercher</button>
+                <div class="flex-grow-1">
+                    <form action="index.php" method="GET" class="card card-body shadow-sm border-0 p-0">
+                        <input type="hidden" name="page" value="profiles-list">
+                        <input type="hidden" name="filter_availability" value="<?= htmlspecialchars($filterAvailability) ?>">
+
+                        <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                            <input type="text" name="search" class="form-control border-start-0 ps-0"
+                                   placeholder="Rechercher un développeur, une ville, un nom..."
+                                   value="<?= htmlspecialchars($search) ?>">
+                            <button class="btn btn-primary px-4" type="submit">Rechercher</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+
+                <div class="dropdown">
+                    <?php
+                    $buttonText = 'Statut: Tous';
+                    $buttonClass = 'btn-secondary';
+                    if ($filterAvailability === 'available') {
+                        $buttonText = 'Statut: Disponibles';
+                        $buttonClass = 'btn-success';
+                    } elseif ($filterAvailability === 'employed') {
+                        $buttonText = 'Statut: En Poste';
+                        $buttonClass = 'btn-warning';
+                    }
+                    $currentPage = $_GET['page'] ?? 'profiles-list';
+                    ?>
+                    <button class="btn <?= $buttonClass ?> dropdown-toggle shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?= $buttonText ?>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+
+                        <li><a class="dropdown-item <?= $filterAvailability === 'all' ? 'active' : '' ?>"
+                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_availability=all">Tous les profils</a></li>
+
+                        <li><a class="dropdown-item <?= $filterAvailability === 'available' ? 'active' : '' ?>"
+                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_availability=available">Cherche activement</a></li>
+
+                        <li><a class="dropdown-item <?= $filterAvailability === 'employed' ? 'active' : '' ?>"
+                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_availability=employed">Déjà en poste</a></li>
+                    </ul>
+                </div>
+            </div>
 
             <?php if (!empty($search)): ?>
                 <div class="mt-2 text-center">
-                    <a href="index.php?page=profiles-list" class="text-decoration-none text-muted small">
+                    <a href="index.php?page=profiles-list&filter_availability=<?= htmlspecialchars($filterAvailability) ?>" class="text-decoration-none text-muted small">
                         <i class="bi bi-x-circle"></i> Effacer la recherche
                     </a>
                 </div>

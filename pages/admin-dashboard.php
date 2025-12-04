@@ -65,37 +65,70 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>Administration des Profils</h1>
     </div>
 
-    <div class="card mb-4">
-        <div class="card-body">
-            <form method="GET" class="row g-3 align-items-end">
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-10">
+            <div class="d-flex gap-3 align-items-center">
 
-                <div class="col-md-6">
-                    <label for="search" class="form-label">Rechercher</label>
-                    <input type="text" class="form-control" id="search" name="search"
-                           placeholder="Nom, prénom, poste..."
-                           value="<?= htmlspecialchars($search) ?>">
+                <div class="flex-grow-1">
+                    <form action="index.php" method="GET" class="card card-body shadow-sm border-0 p-0">
+                        <input type="hidden" name="page" value="profiles-list">
+                        <input type="hidden" name="filter_status" value="<?= htmlspecialchars($filterStatus) ?>">
+
+                        <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                            <input type="text" name="search" class="form-control border-start-0 ps-0"
+                                   placeholder="Rechercher un développeur, une ville, un nom..."
+                                   value="<?= htmlspecialchars($search) ?>">
+                            <button class="btn btn-primary px-4" type="submit">Rechercher</button>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="col-md-4">
-                    <label for="filter_status" class="form-label">Filtrer par statut</label>
-                    <select class="form-select" id="filter_status" name="filter_status">
-                        <option value="all" <?= $filterStatus === 'all' ? 'selected' : '' ?>>Tout voir</option>
-                        <option value="active" <?= $filterStatus === 'active' ? 'selected' : '' ?>>Profils Actifs
-                        </option>
-                        <option value="inactive" <?= $filterStatus === 'inactive' ? 'selected' : '' ?>>Profils
-                            Inactifs
-                        </option>
-                    </select>
-                </div>
+                <div class="dropdown">
+                    <?php
+                    $buttonText = 'Statut: Tous';
+                    $buttonClass = 'btn-secondary';
+                    if ($filterStatus === 'active') {
+                        $buttonText = 'Statut: Actifs';
+                        $buttonClass = 'btn-success';
+                    } elseif ($filterStatus === 'inactive') {
+                        $buttonText = 'Statut: Inactifs';
+                        $buttonClass = 'btn-danger';
+                    }
 
-                <div class="col-md-2 d-grid gap-2">
-                    <button type="submit" class="btn btn-primary">
-                        Filtrer
+                    $currentPage = $_GET['page'] ?? 'profiles-list';
+                    ?>
+                    <button class="btn <?= $buttonClass ?> dropdown-toggle shadow-sm" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <?= $buttonText ?>
                     </button>
-                    <a href="index.php?page=admin-dashboard" class="btn btn-outline-secondary btn-sm">Réinitialiser</a>
-                </div>
+                    <ul class="dropdown-menu dropdown-menu-end">
 
-            </form>
+                        <li><a class="dropdown-item <?= $filterStatus === 'all' ? 'active' : '' ?>"
+                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_status=all">Tous
+                                les profils</a></li>
+
+                        <li><a class="dropdown-item <?= $filterStatus === 'active' ? 'active' : '' ?>"
+                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_status=active">Profils
+                                Actifs</a></li>
+
+                        <li><a class="dropdown-item <?= $filterStatus === 'inactive' ? 'active' : '' ?>"
+                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_status=inactive">Profils
+                                Inactifs</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <?php if (!empty($search)): ?>
+                <div class="mt-2 text-center">
+                    <a href="index.php?page=profiles-list&filter_status=<?= htmlspecialchars($filterStatus) ?>"
+                       class="text-decoration-none text-muted small">
+                        <i class="bi bi-x-circle"></i> Effacer la recherche
+                    </a>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 

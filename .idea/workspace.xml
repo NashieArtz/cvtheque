@@ -6,6 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/check-username.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/check-username.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/search_profile.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/db.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/update.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/header-student.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-student.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin-dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin-dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile-edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile-guest.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-guest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile-user.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/profiles-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profiles-list.php" afterDir="false" />
     </list>
     <list id="b8697c67-535d-4448-bffe-c9fbffdf3e00" name="Changes by coolmathieu" comment="" />
@@ -23,8 +36,8 @@
       <list>
         <option value="package.json" />
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="PHP File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -98,7 +111,7 @@
       <workItem from="1764706203370" duration="3142000" />
       <workItem from="1764750292116" duration="22030000" />
       <workItem from="1764795884982" duration="9235000" />
-      <workItem from="1764837180299" duration="4469000" />
+      <workItem from="1764837180299" duration="25649000" />
     </task>
     <servers />
   </component>

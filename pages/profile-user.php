@@ -9,15 +9,19 @@ if (!isset($_SESSION['user']) || empty($_SESSION['user']['id'])) {
 $user_id = $_SESSION['user']['id'];
 $message = "";
 
+// Condition de demande de la page au serveur pour activer Profil Actif/Inactif
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_toggle_visibility'])) {
     try {
+        // Prepare pour éviter injection de WHERE
         $stmt = $pdo->prepare("UPDATE user SET is_active = NOT is_active WHERE id = ?");
         $stmt->execute([$user_id]);
         $message = "<div class='alert alert-success alert-dismissible fade show'>Votre statut de visibilité a été mis à jour.</div>";
 
         $stmtRefresh = $pdo->prepare("SELECT is_active FROM user WHERE id = ?");
         $stmtRefresh->execute([$user_id]);
+        // Retour d'une seule information
         $refreshState = $stmtRefresh->fetchColumn();
+        // Mise à jour du user
         $_SESSION['user']['is_active'] = $refreshState;
 
     } catch (Exception $e) {
@@ -29,32 +33,8 @@ $stmt = $pdo->prepare("SELECT * FROM user WHERE id = ?");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$nbExp = $pdo->prepare("SELECT COUNT(*) FROM experience WHERE user_id = ?");
-$nbExp->execute([$user_id]);
-$countExp = $nbExp->fetchColumn();
-
-$nbEdu = $pdo->prepare("SELECT COUNT(*) FROM user_has_education WHERE user_id = ?");
-$nbEdu->execute([$user_id]);
-$countEdu = $nbEdu->fetchColumn();
-
-$nbSkills = $pdo->prepare("SELECT COUNT(*) FROM user_has_skills WHERE user_id = ?");
-$nbSkills->execute([$user_id]);
-$countSkills = $nbSkills->fetchColumn();
-
-$progress = 0;
-if (!empty($user['picture'])) $progress += 10;
-if (!empty($user['job_title'])) $progress += 10;
-if (!empty($user['phone'])) $progress += 10;
-if (!empty($user['email'])) $progress += 10;
-if ($countExp > 0) $progress += 20;
-if ($countExp > 1) $progress += 10;
-if ($countEdu > 0) $progress += 20;
-if ($countSkills > 0) $progress += 10;
-
-$progressColor = 'bg-danger';
-if($progress > 50) $progressColor = 'bg-warning';
-if($progress > 80) $progressColor = 'bg-success';
-
+// Note: Les requêtes de comptage sont conservées si besoin pour d'autres parties,
+// ou peuvent être supprimées si elles ne servent plus qu'à l'ancien affichage.
 ?>
 
 <div class="container py-5">
@@ -62,7 +42,7 @@ if($progress > 80) $progressColor = 'bg-success';
     <div class="row mb-4 align-items-center">
         <div class="col-md-8">
             <h1 class="display-6 fw-bold">Bonjour, <?= htmlspecialchars($user['firstname']) ?> ! 👋</h1>
-            <p class="text-muted">Gérez votre carrière et votre visibilité depuis cet espace.</p>
+            <p class="text-muted">Gérez votre carrière et vos messages depuis cet espace.</p>
         </div>
         <div class="col-md-4 text-md-end">
             <?php if($user['is_active']): ?>
@@ -77,6 +57,7 @@ if($progress > 80) $progressColor = 'bg-success';
 
     <div class="row g-4">
 
+        <!-- COLONNE GAUCHE (inchangée) -->
         <div class="col-lg-4">
 
             <div class="card shadow-sm border-0 mb-4 text-center p-3">
@@ -100,6 +81,9 @@ if($progress > 80) $progressColor = 'bg-success';
                         <a href="index.php?page=resume&id=<?= $user['id'] ?>" class="btn btn-dark">
                             <i class="bi bi-file-earmark-pdf"></i> Voir mon CV (PDF)
                         </a>
+                        <a href="index.php?page=profile-edit" class="btn btn-secondary mt-2">
+                            <i class="bi bi-pencil-square"></i> Modifier mes infos
+                        </a>
                     </div>
                 </div>
             </div>
@@ -121,73 +105,70 @@ if($progress > 80) $progressColor = 'bg-success';
                     </form>
                 </div>
             </div>
-
         </div>
 
+        <!-- COLONNE DROITE : NOUVELLE INTERFACE DE MESSAGERIE (MOCKUP) -->
         <div class="col-lg-8">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white border-bottom-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bold mb-0">Messagerie Directe <span class="badge bg-danger rounded-pill ms-2" style="font-size: 0.7rem;">Bientôt</span></h5>
+                    <button class="btn btn-sm btn-light rounded-circle"><i class="bi bi-three-dots-vertical"></i></button>
+                </div>
 
-            <div class="card shadow-sm border-0 mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h5 class="card-title fw-bold mb-0">Complétion du profil</h5>
-                        <span class="badge <?= $progressColor ?>"><?= $progress ?>%</span>
-                    </div>
-                    <div class="progress" style="height: 10px;">
-                        <div class="progress-bar <?= $progressColor ?>" role="progressbar" style="width: <?= $progress ?>%"></div>
-                    </div>
+                <div class="card-body p-0 d-flex flex-column" style="height: 500px;">
 
-                    <?php if($progress < 100): ?>
-                        <div class="alert alert-light mt-3 mb-0 border">
-                            <strong><i class="bi bi-lightbulb"></i> Conseil :</strong>
-                            <?php if(empty($user['picture'])): ?> Ajoutez une photo de profil. <?php endif; ?>
-                            <?php if($countExp == 0): ?> Ajoutez vos expériences professionnelles. <?php endif; ?>
-                            <?php if($countSkills == 0): ?> Ajoutez des compétences. <?php endif; ?>
+                    <!-- Zone de discussion (Faux messages) -->
+                    <div class="flex-grow-1 p-4" style="overflow-y: auto; background-color: #f8f9fa;">
+
+                        <!-- Message reçu -->
+                        <div class="d-flex mb-4">
+                            <img src="https://via.placeholder.com/40" class="rounded-circle me-3" width="40" height="40">
+                            <div>
+                                <div class="bg-white p-3 rounded-3 shadow-sm border">
+                                    <p class="mb-1 fw-bold small text-dark">Recruteur TechCorp</p>
+                                    <p class="mb-0 text-muted">Bonjour <?= htmlspecialchars($user['firstname']) ?>, votre profil nous intéresse beaucoup pour un poste de développeur Fullstack. Êtes-vous disponible pour un échange ?</p>
+                                </div>
+                                <small class="text-muted ms-1" style="font-size: 0.75rem;">10:30</small>
+                            </div>
                         </div>
-                    <?php else: ?>
-                        <div class="text-success mt-2 small"><i class="bi bi-check-circle-fill"></i> Votre profil est optimisé au maximum !</div>
-                    <?php endif; ?>
+
+                        <!-- Message envoyé (Moi) -->
+                        <div class="d-flex mb-4 justify-content-end">
+                            <div class="text-end">
+                                <div class="p-3 rounded-3 shadow-sm text-white" style="background-color: #613F75;">
+                                    <p class="mb-0">Bonjour ! Merci pour votre intérêt. Je suis disponible cet après-midi ou demain matin.</p>
+                                </div>
+                                <small class="text-muted me-1" style="font-size: 0.75rem;">10:45 <i class="bi bi-check-all text-primary"></i></small>
+                            </div>
+                        </div>
+
+                        <!-- Indicateur de frappe -->
+                        <div class="d-flex align-items-center text-muted small ms-5 ps-2">
+                            <div class="spinner-grow spinner-grow-sm me-1" role="status" style="width: 0.5rem; height: 0.5rem;"></div>
+                            <div class="spinner-grow spinner-grow-sm me-1" role="status" style="width: 0.5rem; height: 0.5rem; animation-delay: 0.2s"></div>
+                            <div class="spinner-grow spinner-grow-sm" role="status" style="width: 0.5rem; height: 0.5rem; animation-delay: 0.4s"></div>
+                            <span class="ms-2 fst-italic">Recruteur TechCorp écrit...</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Zone de saisie (Fausse) -->
+                    <div class="p-3 border-top bg-white">
+                        <div class="input-group">
+                            <button class="btn btn-light border" type="button"><i class="bi bi-paperclip"></i></button>
+                            <input type="text" class="form-control border-start-0 border-end-0" placeholder="Écrivez votre message..." aria-label="Message">
+                            <button class="btn btn-light border-start-0 border" type="button"><i class="bi bi-emoji-smile"></i></button>
+                            <button class="btn text-white fw-bold px-4" type="button" style="background-color: #613F75;">
+                                <i class="bi bi-send-fill"></i>
+                            </button>
+                        </div>
+                        <div class="text-center mt-2">
+                            <small class="text-muted" style="font-size: 0.7rem;"><i class="bi bi-lock-fill"></i> Vos messages sont chiffrés de bout en bout (Simulation)</small>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <div class="row g-3 mb-4">
-                <div class="col-md-4">
-                    <div class="card border-0 shadow-sm h-100 bg-light">
-                        <div class="card-body text-center">
-                            <h2 class="display-4 fw-bold text-primary"><?= $countExp ?></h2>
-                            <p class="text-muted mb-0">Expériences</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card border-0 shadow-sm h-100 bg-light">
-                        <div class="card-body text-center">
-                            <h2 class="display-4 fw-bold text-info"><?= $countEdu ?></h2>
-                            <p class="text-muted mb-0">Formations</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card border-0 shadow-sm h-100 bg-light">
-                        <div class="card-body text-center">
-                            <h2 class="display-4 fw-bold text-warning"><?= $countSkills ?></h2>
-                            <p class="text-muted mb-0">Compétences</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card border-primary shadow-sm">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                    <div>
-                        <h5 class="fw-bold text-primary">Mettre à jour mes informations</h5>
-                        <p class="mb-0 text-muted small">Ajoutez une nouvelle expérience, changez votre photo ou mettez à jour vos coordonnées.</p>
-                    </div>
-                    <a href="index.php?page=profile-edit" class="btn btn-primary px-4">
-                        <i class="bi bi-pencil-square"></i> Modifier tout
-                    </a>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>

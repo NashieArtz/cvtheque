@@ -1,9 +1,13 @@
 <?php
 include './config/roles/admin.php';
-
+// On inclut la logique de recherche centralisée
+// Assurez-vous que ce fichier existe bien dans config/search_logic.php suite à nos échanges précédents
+// Si vous ne l'avez pas créé, remettez la logique SQL directe ici.
+include_once './config/search_logic.php';
 
 $message = "";
 
+// --- 1. TRAITEMENT DES ACTIONS (POST) ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userId = intval($_POST['user_id']);
 
@@ -32,166 +36,210 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$search = $_GET['search'] ?? '';
-$filterStatus = $_GET['filter_status'] ?? 'all';
+// --- 2. PRÉPARATION DES FILTRES (GET) ---
+$filters = [
+        'search' => $_GET['search'] ?? '',
+        'filter_status' => $_GET['filter_status'] ?? 'all',
+        'filter_city' => $_GET['filter_city'] ?? '',
+        'filter_skill' => $_GET['filter_skill'] ?? '',
+        'filter_license' => $_GET['filter_license'] ?? 'all'
+];
 
-$sql = "SELECT u.*, r.name as role_name 
-        FROM user u 
-        LEFT JOIN role r ON u.role_id = r.id 
-        WHERE 1=1";
-$params = [];
+$search = $filters['search'];
+$filterStatus = $filters['filter_status'];
+$filterCity = $filters['filter_city'];
+$filterSkill = $filters['filter_skill'];
+$filterLicense = $filters['filter_license'];
 
-if (!empty($search)) {
-    $sql .= " AND (u.firstname LIKE :search OR u.lastname LIKE :search OR u.job_title LIKE :search)";
-    $params[':search'] = "%$search%";
-}
+// --- 3. RECHERCHE (APPEL FONCTION CENTRALISÉE) ---
+// true = mode admin (voit tout, peut filtrer par statut)
+// Si vous n'avez pas le fichier search_logic.php, remplacez cette ligne par votre bloc SQL complet précédent
+$users = searchProfiles($pdo, $filters, true);
 
-if ($filterStatus === 'active') {
-    $sql .= " AND u.is_active = 1";
-} elseif ($filterStatus === 'inactive') {
-    $sql .= " AND (u.is_active = 0 OR u.is_active IS NULL)";
-}
-
-$sql .= " ORDER BY u.id DESC";
-
-$stmt = $pdo->prepare($sql);
-$stmt->execute($params);
-$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill) || $filterLicense !== 'all' || $filterStatus !== 'all';
 ?>
-
 
 <div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Administration des Profils</h1>
-    </div>
-
-    <div class="row justify-content-center mb-5">
-        <div class="col-md-10">
-            <div class="d-flex gap-3 align-items-center">
-
-                <div class="flex-grow-1">
-                    <form action="index.php" method="GET" class="card card-body shadow-sm border-0 p-0">
-                        <input type="hidden" name="page" value="profiles-list">
-                        <input type="hidden" name="filter_status" value="<?= htmlspecialchars($filterStatus) ?>">
-
-                        <div class="input-group">
-                        <span class="input-group-text bg-white border-end-0">
-                            <i class="bi bi-search text-muted"></i>
-                        </span>
-                            <input type="text" name="search" class="form-control border-start-0 ps-0"
-                                   placeholder="Rechercher un développeur, une ville, un nom..."
-                                   value="<?= htmlspecialchars($search) ?>">
-                            <button class="btn btn-primary px-4" type="submit">Rechercher</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="dropdown">
-                    <?php
-                    $buttonText = 'Statut: Tous';
-                    $buttonClass = 'btn-secondary';
-                    if ($filterStatus === 'active') {
-                        $buttonText = 'Statut: Actifs';
-                        $buttonClass = 'btn-success';
-                    } elseif ($filterStatus === 'inactive') {
-                        $buttonText = 'Statut: Inactifs';
-                        $buttonClass = 'btn-danger';
-                    }
-
-                    $currentPage = $_GET['page'] ?? 'profiles-list';
-                    ?>
-                    <button class="btn <?= $buttonClass ?> dropdown-toggle shadow-sm" type="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                        <?= $buttonText ?>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-
-                        <li><a class="dropdown-item <?= $filterStatus === 'all' ? 'active' : '' ?>"
-                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_status=all">Tous
-                                les profils</a></li>
-
-                        <li><a class="dropdown-item <?= $filterStatus === 'active' ? 'active' : '' ?>"
-                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_status=active">Profils
-                                Actifs</a></li>
-
-                        <li><a class="dropdown-item <?= $filterStatus === 'inactive' ? 'active' : '' ?>"
-                               href="index.php?page=<?= urlencode($currentPage) ?>&search=<?= urlencode($search) ?>&filter_status=inactive">Profils
-                                Inactifs</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <?php if (!empty($search)): ?>
-                <div class="mt-2 text-center">
-                    <a href="index.php?page=profiles-list&filter_status=<?= htmlspecialchars($filterStatus) ?>"
-                       class="text-decoration-none text-muted small">
-                        <i class="bi bi-x-circle"></i> Effacer la recherche
-                    </a>
-                </div>
-            <?php endif; ?>
-        </div>
+        <h3 class="fw-bold m-0">Administration des Profils</h3>
+        <span class="badge bg-primary fs-6 rounded-pill px-3"><?= count($users) ?> profils</span>
     </div>
 
     <?= $message ?>
 
+    <!-- BARRE DE RECHERCHE ADMIN -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-12">
+
+            <form action="index.php" method="GET" class="search-bar-container">
+                <input type="hidden" name="page" value="admin-dashboard">
+
+                <div class="d-flex flex-wrap gap-3 align-items-center">
+
+                    <button class="btn btn-purple px-4 py-2" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filtersCollapse">
+                        <i class="bi bi-funnel-fill me-2"></i> Filter
+                    </button>
+
+                    <div class="flex-grow-1 position-relative">
+                        <input type="text" name="search" class="form-control input-search-custom"
+                               placeholder="Rechercher par mot-clé (Nom, Email, Ville...)"
+                               value="<?= htmlspecialchars($search) ?>">
+                        <button type="submit" class="btn-search-icon">
+                            <i class="bi bi-search me-1"></i> Rechercher
+                        </button>
+                    </div>
+                </div>
+
+                <div class="collapse mt-3 <?= ($isFilterActive) ? 'show' : '' ?>" id="filtersCollapse">
+                    <div class="row g-3 pt-2">
+                        <div class="col-md-3">
+                            <input type="text" name="filter_city" class="form-control" placeholder="Ville"
+                                   value="<?= htmlspecialchars($filterCity) ?>">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="filter_skill" class="form-control" placeholder="Compétence"
+                                   value="<?= htmlspecialchars($filterSkill) ?>">
+                        </div>
+                        <div class="col-md-2">
+                            <select name="filter_license" class="form-select">
+                                <option value="all">Permis : Tous</option>
+                                <option value="yes" <?= $filterLicense === 'yes' ? 'selected' : '' ?>>Requis</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select name="filter_status"
+                                    class="form-select <?= $filterStatus !== 'all' ? 'border-primary' : '' ?>">
+                                <option value="all">Statut : Tous</option>
+                                <option value="active" <?= $filterStatus === 'active' ? 'selected' : '' ?>>Actifs
+                                </option>
+                                <option value="inactive" <?= $filterStatus === 'inactive' ? 'selected' : '' ?>>
+                                    Inactifs
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-dark w-100">Appliquer</button>
+                        </div>
+                    </div>
+
+                    <?php if ($isFilterActive): ?>
+                        <div class="mt-2 text-end">
+                            <a href="index.php?page=admin-dashboard" class="text-decoration-none text-muted small">
+                                <i class="bi bi-x-circle"></i> Effacer les filtres
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- GRILLE DES PROFILS ADMIN -->
     <div class="row g-4">
         <?php foreach ($users as $user): ?>
             <?php
             $isActive = isset($user['is_active']) ? $user['is_active'] : 1;
             ?>
-            <div class="col-md-6 col-lg-3">
-                <div class="card h-100 shadow-sm user-card <?= $isActive ? '' : 'inactive' ?>">
+            <div class="col-md-6">
+                <!-- Ajout de la classe 'border-danger' si inactif pour repérage rapide -->
+                <div class="card-profile-horizontal position-relative <?= !$isActive ? 'border-danger' : '' ?>">
 
-                    <span class="badge-id">#<?= $user['id'] ?></span>
+                    <?php if (!$isActive): ?>
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-danger">INACTIF</span>
+                        </div>
+                    <?php endif; ?>
 
-                    <?php
-                    $imgSrc = !empty($user['picture']) ? htmlspecialchars($user['picture']) : 'https://via.placeholder.com/300?text=Pas+d+image';
-                    ?>
-                    <img src="<?= $imgSrc ?>" class="card-img-top" alt="Avatar">
-
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-center">
-                            <?= htmlspecialchars($user['firstname']) ?> <?= htmlspecialchars($user['lastname']) ?>
-                        </h5>
-
-                        <p class="card-text text-center text-muted small mb-2">
-                            <?= !empty($user['job_title']) ? htmlspecialchars($user['job_title']) : 'Aucun poste défini' ?>
-                        </p>
-
-                        <div class="text-center mb-3">
-                            <?php if ($isActive): ?>
-                                <span class="badge bg-success">Actif</span>
-                            <?php else: ?>
-                                <span class="badge bg-danger">Inactif</span>
-                            <?php endif; ?>
-                            <span class="badge bg-info text-dark"><?= htmlspecialchars($user['role_name'] ?? 'Role inconnu') ?></span>
+                    <div class="profile-header">
+                        <div class="profile-img-container">
+                            <?php
+                            $imgSrc = !empty($user['picture']) ? htmlspecialchars($user['picture']) : 'https://via.placeholder.com/150?text=IMG';
+                            ?>
+                            <img src="<?= $imgSrc ?>" alt="Avatar" class="profile-img-left"
+                                 style="<?= !$isActive ? 'filter: grayscale(100%); opacity: 0.7;' : '' ?>">
                         </div>
 
-                        <div class="mt-auto">
-                            <a href="index.php?page=profile-guest&id=<?= $user['id'] ?>"
-                               class="btn btn-primary w-100 mb-2">
-                                <i class="bi bi-pencil"></i> Voir / Éditer
-                            </a>
+                        <div class="profile-info flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h5><?= htmlspecialchars($user['lastname']) ?> <?= htmlspecialchars($user['firstname']) ?></h5>
 
-                            <hr>
+                                    <!-- Badge Rôle -->
+                                    <span class="badge bg-info text-dark mb-2" style="font-size: 0.75rem;">
+                                        <?= htmlspecialchars($user['role_name'] ?? 'Utilisateur') ?>
+                                    </span>
+                                </div>
+                                <span class="badge bg-secondary">#<?= $user['id'] ?></span>
+                            </div>
 
-                            <form method="POST" class="d-flex gap-2">
-                                <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-
-                                <button type="submit" name="action_toggle"
-                                        class="btn btn-sm w-50 <?= $isActive ? 'btn-outline-warning' : 'btn-outline-success' ?>">
-                                    <?= $isActive ? 'Désactiver' : 'Activer' ?>
-                                </button>
-
-                                <button type="submit" name="action_delete" class="btn btn-sm btn-outline-danger w-50"
-                                        onclick="return confirm('Attention: Supprimer ce profil effacera aussi son adresse, ses expériences et ses compétences. Continuer ?');">
-                                    Supprimer
-                                </button>
-                            </form>
+                            <div class="profile-job">
+                                <?= !empty($user['job_title']) ? htmlspecialchars($user['job_title']) : 'Aucun poste défini' ?>
+                            </div>
+                            <div class="profile-location">
+                                <i class="bi bi-geo-alt me-1"></i> <?= !empty($user['city']) ? htmlspecialchars($user['city']) : 'Ville non renseignée' ?>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="skills-section">
+                        <div class="skills-title">Compétences</div>
+                        <ul class="skills-list">
+                            <?php
+                            if (!empty($user['skills_list'])) {
+                                $skills = explode(',', $user['skills_list']);
+                                $skillsToShow = array_slice($skills, 0, 3);
+                                foreach ($skillsToShow as $skillName) {
+                                    echo "<li>" . htmlspecialchars(trim($skillName)) . "</li>";
+                                }
+                                if (count($skills) > 3) {
+                                    echo "<li style='list-style: none; color: #888; font-size:0.8rem;'>+ " . (count($skills) - 3) . " autres</li>";
+                                }
+                            } else {
+                                echo "<li style='list-style: none; font-style: italic; color: #999;'>Aucune compétence</li>";
+                            }
+                            ?>
+                        </ul>
+                    </div>
+
+                    <!-- FOOTER ACTIONS ADMIN -->
+                    <div class="card-footer-custom mt-auto pt-3 border-top">
+                        <!-- Formulaire pour les boutons d'action -->
+                        <form method="POST" class="d-flex w-100 gap-2 align-items-center">
+                            <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+
+                            <!-- Lien Voir -->
+                            <a href="index.php?page=profile-guest&id=<?= $user['id'] ?>"
+                               class="btn btn-outline-primary" title="Voir le profil public">
+                                Voir
+                            </a>
+
+                            <!-- Bouton Activer/Désactiver -->
+                            <button type="submit" name="action_toggle"
+                                    class="btn btn-sm w-50 <?= $isActive ? 'btn-outline-warning' : 'btn-outline-success' ?> flex-grow-1"
+                                    title="<?= $isActive ? 'Désactiver ce compte' : 'Activer ce compte' ?>">
+                                <i class="bi <?= $isActive ? 'bi-pause-circle' : 'bi-play-circle' ?>"></i>
+                                <?= $isActive ? 'Désactiver' : 'Activer' ?>
+                            </button>
+
+                            <!-- Bouton Supprimer -->
+                            <button type="submit" name="action_delete" class="btn btn-sm btn-outline-danger"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer définitivement cet utilisateur et toutes ses données ?');"
+                                    title="Supprimer définitivement">
+                                Supprimer
+                            </button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         <?php endforeach; ?>
+
+        <?php if (empty($users)): ?>
+            <div class="col-12 text-center py-5">
+                <h3 class="text-muted">Aucun profil trouvé.</h3>
+                <a href="index.php?page=admin-dashboard" class="btn btn-outline-secondary">Réinitialiser</a>
+            </div>
+        <?php endif; ?>
     </div>
 </div>

@@ -346,3 +346,286 @@ a {
     font-size: 0.8rem;
     z-index: 10;
 }
+
+/* --- STYLES PROFILS LIST - DESIGN FIGMA --- */
+
+/* Conteneur de la carte horizontale */
+.card-profile-horizontal {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-profile-horizontal:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    border-color: var(--guest-secondary);
+}
+
+/* Partie supérieure : Image + Infos principales */
+.profile-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.profile-img-container {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.profile-img-left {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info h5 {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.profile-job {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 5px;
+}
+
+.profile-location {
+    font-size: 0.9rem;
+    color: #777;
+    font-weight: 500;
+}
+
+/* Section Compétences */
+.skills-section {
+    margin-top: 10px;
+    flex-grow: 1;
+}
+
+.skills-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 8px;
+}
+
+.skills-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 0;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.skills-list li {
+    margin-bottom: 4px;
+}
+
+/* Footer de la carte (Boutons) */
+.card-footer-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.link-cv {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.link-cv:hover {
+    text-decoration: underline;
+}
+
+.btn-view-profile {
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-view-profile:hover {
+    background-color: var(--text-color-inverse);
+}
+
+/* Barre de recherche unifiée */
+.search-bar-container {
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.btn-purple {
+    background-color: var(--guest-main);
+    color: white;
+    border: none;
+}
+
+.btn-purple:hover {
+    background-color: var(--guest-main);
+    color: white;
+}
+
+.input-search-custom {
+    background-color: #F3F3F6;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+.input-search-custom:focus {
+    background-color: #fff;
+    box-shadow: 0 0 0 2px var(--guest-main);
+}
+
+.search-btn {
+    width: 30% !important;
+}
+
+.search-text {
+    color: var(--text-color-inverse);
+}
+
+/* --- STYLES PROFILE EDIT --- */
+
+.section-title {
+    color: var(--guest-main);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+    text-transform: uppercase;
+}
+
+/* Avatar Upload */
+.profile-edit-avatar-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1rem auto;
+}
+
+.profile-edit-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.btn-upload-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: var(--guest-main);
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid white;
+    transition: transform 0.2s;
+}
+
+.btn-upload-icon:hover {
+    transform: scale(1.1);
+    background-color: var(--guest-hover);
+}
+
+.file-input-hidden {
+    display: none;
+}
+
+/* Zone Skills Tags */
+.skills-input-wrapper {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.skills-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px dashed #ced4da;
+    min-height: 45px;
+}
+
+.skill-tag-item {
+    background-color: var(--guest-secondary);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: fadeIn 0.3s ease;
+}
+
+.skill-tag-remove {
+    cursor: pointer;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    transition: background 0.2s;
+}
+
+.skill-tag-remove:hover {
+    background: rgba(255,255,255,0.5);
+    color: #c00;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+form {
+    max-width: 3000px !important;
+}
+
+.btn.btn-return-dashboard {
+    margin: 0;
+}

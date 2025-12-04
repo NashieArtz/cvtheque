@@ -71,34 +71,35 @@ foreach ($user as $u) {
     <label for="profile-edit-hide-photo">Inclure photo de profil
       <input type="checkbox" name="hide-photo" id="profile-edit-hide-photo">
     </label>
-
-    <h2>Modifier les données de localisation</h2>
-    <label for="profile-edit-country">Pays
-      <select>
-        <?php
-        // fonction pour récupérer la liste des pays
-        function selectCountry(PDO $pdo)
-        {
-          $sql = "SELECT * FROM `country`";
-          return $pdo->query($sql)->fetchAll();
-        };
-        $country = selectCountry($pdo);
-        foreach ($country as $c) {
-        ?>
-          <option value="<?= $c['id'] ?>">
-            <?= $c['name'] ?>
-          </option>
-        <?php
-        }
-        ?>
-      </select>
-    </label>
-    <label for="profile-edit-city">Ville
-      <input type="text" name="city" id="profile-edit-city" value="<?= $u['adress']['city'] ?> ">
-    </label>
-    <label for="profile-edit-cp">Code Postale
-      <input type="number" name="area_code" id="profile-edit-cp" value="<?= $u['address']['area_code'] ?>">
-    </label>
+    <section id=address>
+      <h2>Modifier les données de localisation</h2>
+      <label for="profile-edit-country">Pays
+        <select>
+          <?php
+          // fonction pour récupérer la liste des pays
+          function selectCountry(PDO $pdo)
+          {
+            $sql = "SELECT * FROM `country`";
+            return $pdo->query($sql)->fetchAll();
+          };
+          $country = selectCountry($pdo);
+          foreach ($country as $c) {
+          ?>
+            <option value="<?= $c['id'] ?>">
+              <?= $c['name'] ?>
+            </option>
+          <?php
+          }
+          ?>
+        </select>
+      </label>
+      <label for="profile-edit-city">Ville
+        <input type="text" name="city" id="profile-edit-city" value="<?= $u['address']['city'] ?> ">
+      </label>
+      <label for="profile-edit-cp">Code Postale
+        <input type="number" name="area_code" id="profile-edit-cp" value="<?= $u['address']['area_code'] ?>">
+      </label>
+    </section>
 
     <section id="skills">
       <h2>Compétences</h2>

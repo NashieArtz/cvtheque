@@ -7,29 +7,40 @@ include './config/update.php';
 if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
   if (!empty($_POST) && isset($_POST)) {
     $email = htmlspecialchars(trim($_POST['email']));
-    $firtname = htmlspecialchars(trim($_POST['firstname']));
+    $firstname = htmlspecialchars(trim($_POST['firstname']));
     $lastname = htmlspecialchars(trim($_POST['lastname']));
     $job_title = htmlspecialchars(trim($_POST['job_title']));
-    $picture = file_get_contents($_POST['picture']);
+
+    if (isset($_FILES['picture']) && $_FILES['picture']['error'] === UPLOAD_ERR_OK) {
+      $picture = file_get_contents($_FILES['picture']['tmp_name']);
+    } else {
+      // Garder l'ancienne image si aucun nouveau fichier n'est uploadé
+      $picture = null; // ou récupérer l'image existante de la base de données
+    };
     $phone = htmlspecialchars(trim($_POST['phone']));
 
     if (isset($_POST['driver_licence'])) $driver_licence = 1;
     else $driver_licence = 0;
 
     $username = htmlspecialchars(trim($_POST['username']));
-    $country_id = htmlspecialchars(trim($_POST['']));
+    $country_id = htmlspecialchars(trim($_POST['country']));
     $city = htmlspecialchars(trim($_POST['city']));
     $area_code = htmlspecialchars(trim($_POST['area_code']));
 
-    $user_column = ["email", "firstname", "lastname", "job_title", "picture", "phone", "driver_licence", "username", "country_id"];
-    $user_values = [$email, $firtname, $lastname, $job_title, $picture, $phone, $driver_licence, $username];
+    $user_columns = ["email", "firstname", "lastname", "job_title", "phone", "driver_licence", "username", "country_id"];
+    $user_values = [$email, $firstname, $lastname, $job_title,  $phone, $driver_licence, $username];
     $address_columns = ["area_code", "city"];
     $address_values = [$city, $area_code];
 
-    update($pdo, "user", $user_column, $user_values);
-    update($pdo, "address", $address_column, $address_values);
+    if ($picture !== null) {
+      $user_column[] = "picture";
+      $user_values[] = $picture;
+    }
+
+    update($pdo, "user", $user_columns, $user_values);
+    update($pdo, "address", $address_columns, $address_values);
     updateSkills($pdo, 'hard_skills');
-    updateSkills($pdo, 'soft_stills');
+    updateSkills($pdo, 'soft_skills');
     updateSkills($pdo, 'hobbies');
   };
 }
@@ -77,16 +88,17 @@ foreach ($user as $u) {
       </label>
     </section>
 
-    <section id=address>
+    <section id="address">
       <h2>Modifier les données de localisation</h2>
+
       <label for="profile-edit-country">Pays
-        <select>
+        <select name="country">
           <?php
           // fonction pour récupérer la liste des pays
           function selectCountry(PDO $pdo)
           {
-            $sql = "SELECT * FROM `country`";
-            return $pdo->query($sql)->fetchAll();
+            $sqlCountry = "SELECT * FROM `country`";
+            return $pdo->query($sqlCountry)->fetchAll();
           };
           $country = selectCountry($pdo);
           foreach ($country as $c) {
@@ -99,68 +111,60 @@ foreach ($user as $u) {
           ?>
         </select>
       </label>
-      <label for="profile-edit-city">Ville
-        <input type="text" name="city" id="profile-edit-city" value="<?= $u['address']['city'] ?> ">
-      </label>
-      <label for="profile-edit-cp">Code Postale
-        <input type="number" name="area_code" id="profile-edit-cp" value="<?= $u['address']['area_code'] ?>">
-      </label>
+
+      <label for="profile-edit-city">Ville</label>
+      <input type="text" name="city" id="profile-edit-city" value="<?= $u['city'] ?>">
+
+      <label for="profile-edit-cp">Code Postale</label>
+      <input type="number" name="area_code" id="profile-edit-cp" value="<?= $u['area_code'] ?>">
+
     </section>
 
     <section id="skills">
+
       <h2>Compétences</h2>
 
       <label for=" profile-edit-competence-actuelle">Hard Skills
         <input type="text" name="hard_skills" class="profile-edit-competence-actuelle" id="hard_skills"
           placeholder="Ajouter une compétence">
         <button type="submit" id="hardSkillSubmit">Ajouter</button>>
-        <section class="skillList">
-          <ul is="list">
-          </ul>
-        </section>
+      </label>
+
+      <label for=" profile-edit-competence-actuelle">Soft Skills
+        <input type="text" name="soft_skills" class="profile-edit-competence-actuelle"
+          placeholder="Ajouter une compétence">
+        <button type="submit" id="hardSkillSubmit">Ajouter</button>
       </label>
 
       <label for=" profile-edit-competence-actuelle">Soft Skills <input type="text" name="soft_skills"
-          class="profile-edit-competence-actuelle" id="hard_skills" placeholder="Ajouter une compétence">
-        <button type="submit" id="hardSkillSubmit">Ajouter</button>
-        <section class="skillList">
-          <ul is="list">
-          </ul>
-        </section>
-      </label>
-      <label for=" profile-edit-competence-actuelle">Soft Skills <input type="text" name="soft_skills"
           class="profile-edit-competence-actuelle" id="soft_skills" placeholder="Ajouter une passion">
         <button type="submit" id="hardSkillSubmit">Ajouter</button>
-        <section class="skillList">
-          <ul is="list">
-          </ul>
-        </section>
       </label>
       <label for=" profile-edit-competence-actuelle">Passions <input type="text" name="hobbies"
           class="profile-edit-competence-actuelle" id="soft_skills" placeholder="Ajouter une compétence">
         <button type="submit" id="hardSkillSubmit">Ajouter</button>
-        <section class="skillList">
-          <ul is="list">
-          </ul>
-        </section>
       </label>
+
     </section>
 
-    <h2>Expériences</h2>
+    <section id="experience">
 
-    <label for=" profile-edit-experience-name">Nom/Titre expérience</label>
-    <input type="text" name="experience-name" id="profile-edit-experience-name">
+      <h2>Expériences</h2>
+      <label for=" profile-edit-experience-name">Nom/Titre expérience</label>
+      <input type="text" name="experience-name" id="profile-edit-experience-name">
 
-    <label for="profile-edit-experience-year">Année expérience</label>
-    <input type="text" name="experience-year" id="profile-edit-experience-year">
+      <label for="profile-edit-experience-year">Année expérience</label>
+      <input type="text" name="experience-year" id="profile-edit-experience-year">
 
-    <input type="submit" name="submit-experience-modifie" id="profile-edit-modifie-experience"
-      value="Modifier & Supprimer">
-    <label></label>
-    <input type="submit" name="submit-experience-add" id="profile-edit-add-experience" value="Ajouter expérience">
+      <input type="submit" name="submit-experience-modifie" id="profile-edit-modifie-experience"
+        value="Modifier & Supprimer">
+      <label></label>
+      <input type="submit" name="submit-experience-add" id="profile-edit-add-experience" value="Ajouter expérience">
 
-    <input type="submit" name="submit-save-all" id="profile-edit-save-button" value="Sauvegarder le Profil">
-
+      <input type="submit" name="submit-save-all" id="profile-edit-save-button" value="Sauvegarder le Profil">
+    </section>
   </form>
 
-<?php } ?>
+<?php
+}
+?>

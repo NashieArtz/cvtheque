@@ -17,8 +17,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
     else $driver_licence = 0;
 
     $username = htmlspecialchars(trim($_POST['username']));
-    $country = htmlspecialchars(trim($_POST['country']));
-    $country_id = $pdo->query("SELECT id FROM `country` WHERE name='$country'");
+    $country_id = htmlspecialchars(trim($_POST['']));
     $city = htmlspecialchars(trim($_POST['city']));
     $area_code = htmlspecialchars(trim($_POST['area_code']));
 
@@ -38,65 +37,72 @@ foreach ($user as $u) {
   <link href="./assets/css/register-login.css" rel="stylesheet">
 
   <form method="post">
+    <section id="user_data">
 
-    <label for="profile-edit-image">Photo de profil
-      <input type="file" name="picture" id="profile-edit-image">
-    </label>
-    <label for="profile-edit-name">Nom
-      <input type="text" name="lastname" id="profile-edit-name" value="<?= $u['lastname'] ?>">
-    </label>
-    <label for="profile-edit-forname">Prénom
-      <input type="text" name="firstname" id="profile-edit-forname" value="<?= $u['firstname'] ?>">
-    </label>
-    <label for="profile-edit-username">Nom d'utilisateur
-      <input type="text" name="username" id="profile-edit-username" value="<?= $u['username'] ?>">
-    </label>
-    <label for="profile-edit-password">Mots de passe
-      <input type="password" name="password" id="profile-edit-password" value="0000000000">
-    </label>
-    <label for="profile-edit-Rpassword">Retaper votre Mots de passe
-      <input type="password" name="Rpassword" id="profile-edit-Rpassword">
-    </label>
-    <label for="profile-edit-email">Email
-      <input type="email" name="email" id="profile-edit-email" value="<?= $u['email'] ?>">
-    </label>
-    <label for="profile-edit-job_title">Quel métier souhaitez-vous exercer ?
-      <input type="text" name="job_title" id="profile-edit-job_title" value="<?= $u['job_title'] ?>">
-    </label>
-    <label for="profile-edit-permis">Permis
-      <input type="checkbox" name="driver_licence" id="profile-edit-permis">
-    </label>
-    <label for=" profile-edit-hide-name">Masquer nom et prénom
-      <input type="checkbox" name="hide-name" id="profile-edit-hide-name">
-    </label>
-    <label for="profile-edit-hide-photo">Inclure photo de profil
-      <input type="checkbox" name="hide-photo" id="profile-edit-hide-photo">
-    </label>
+      <label for="profile-edit-image">Photo de profil
+        <input type="file" name="picture" id="profile-edit-image">
+      </label>
+      <label for="profile-edit-name">Nom
+        <input type="text" name="lastname" id="profile-edit-name" value="<?= $u['lastname'] ?>">
+      </label>
+      <label for="profile-edit-forname">Prénom
+        <input type="text" name="firstname" id="profile-edit-forname" value="<?= $u['firstname'] ?>">
+      </label>
+      <label for="profile-edit-username">Nom d'utilisateur
+        <input type="text" name="username" id="profile-edit-username" value="<?= $u['username'] ?>">
+      </label>
+      <label for="profile-edit-password">Mots de passe
+        <input type="password" name="password" id="profile-edit-password" value="0000000000">
+      </label>
+      <label for="profile-edit-Rpassword">Retaper votre Mots de passe
+        <input type="password" name="Rpassword" id="profile-edit-Rpassword">
+      </label>
+      <label for="profile-edit-email">Email
+        <input type="email" name="email" id="profile-edit-email" value="<?= $u['email'] ?>">
+      </label>
+      <label for="profile-edit-job_title">Quel métier souhaitez-vous exercer ?
+        <input type="text" name="job_title" id="profile-edit-job_title" value="<?= $u['job_title'] ?>">
+      </label>
+      <label for="profile-edit-permis">Permis
+        <input type="checkbox" name="driver_licence" id="profile-edit-permis">
+      </label>
+      <label for=" profile-edit-hide-name">Masquer nom et prénom
+        <input type="checkbox" name="hide-name" id="profile-edit-hide-name">
+      </label>
+      <label for="profile-edit-hide-photo">Inclure photo de profil
+        <input type="checkbox" name="hide-photo" id="profile-edit-hide-photo">
+      </label>
+    </section>
 
-    <h2>Modifier les données de localisation</h2>
-    <label for="profile-edit-country">Pays
-      <?php
-      // fonction pour récupérer la liste des pays
-      function selectCountry(PDO $pdo)
-      {
-        $sql = "SELECT * FROM `country`";
-        return $pdo->query($sql)->fetchAll();
-      };
-      $country = selectCountry($pdo);
-      foreach ($country as $c) {
-      ?>
-        <option value="<?= $u['name'] ?> ">
-        </option>
-      <?php
-      };
-      ?>
-    </label>
-    <label for="profile-edit-city">Ville
-      <input type="text" name="city" id="profile-edit-city" value="<?= $u['adress']['city'] ?> ">
-    </label>
-    <label for="profile-edit-cp">Code Postale
-      <input type="number" name="area_code" id="profile-edit-cp" value="<?= $u['address']['area_code'] ?>">
-    </label>
+    <section id=address>
+      <h2>Modifier les données de localisation</h2>
+      <label for="profile-edit-country">Pays
+        <select>
+          <?php
+          // fonction pour récupérer la liste des pays
+          function selectCountry(PDO $pdo)
+          {
+            $sql = "SELECT * FROM `country`";
+            return $pdo->query($sql)->fetchAll();
+          };
+          $country = selectCountry($pdo);
+          foreach ($country as $c) {
+          ?>
+            <option value="<?= $c['id'] ?>">
+              <?= $c['name'] ?>
+            </option>
+          <?php
+          }
+          ?>
+        </select>
+      </label>
+      <label for="profile-edit-city">Ville
+        <input type="text" name="city" id="profile-edit-city" value="<?= $u['address']['city'] ?> ">
+      </label>
+      <label for="profile-edit-cp">Code Postale
+        <input type="number" name="area_code" id="profile-edit-cp" value="<?= $u['address']['area_code'] ?>">
+      </label>
+    </section>
 
     <section id="skills">
       <h2>Compétences</h2>

@@ -1,94 +1,46 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
-
-    // --- 1. Fonction pour mettre à jour les infos simples (table 'user') ---
-    function update(PDO $pdo, $table, $columns, $values, $id)
+    function update(PDO $pdo, $table, $column, $new_value, $user_id)
     {
-        if (empty($columns) || empty($values)) {
-            return;
+        if (isset($_POST) && !empty($_POST)) {
+            $colu = '';
+            foreach ($column as $col) {
+                $colu .= "$col = ?, ";
+            }
+            $colu = rtrim($colu, ', ');
+            var_dump($table);
+            $sqlUpdate = "UPDATE $table SET $colu WHERE id=$user_id";
+            $stmt = $pdo->prepare($sqlUpdate);
+            $stmt->execute($new_value);
         }
-
-        $setClauses = [];
-        foreach ($columns as $col) {
-            $setClauses[] = "`$col` = ?";
-        }
-        $setString = implode(', ', $setClauses);
-
-        // Syntaxe standard : UPDATE user SET email = ?, firstname = ? WHERE id = ?
-        $sql = "UPDATE `$table` SET $setString WHERE `id` = ?";
-
-        // On ajoute l'ID à la fin des valeurs pour le 'WHERE'
-        $values[] = $id;
-
-        try {
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute($values);
-        } catch (PDOException $e) {
-            die("Erreur update profil : " . $e->getMessage());
-        }
-    }
-
-    // --- 2. Fonction pour mettre à jour les compétences (tables 'skills' et 'user_has_skills') ---
+    };
     function updateSkills(PDO $pdo, $skillType)
     {
-        // $skillType vaut "hard_skills", "soft_skills" ou "hobbies"
-        if (isset($_POST[$skillType])) {
+        if (isset($_POST) && !empty($_POST)) {
 
-            $user_id = $_SESSION['user']['id'];
-            $content = htmlspecialchars(trim($_POST[$skillType]));
+            $user_id = ($_SESSION['user']['id']);
+            $skillInput = htmlspecialchars(trim($_POST[$skillType]));
+            $sqlSelect = "SELECT id FROM `skills` WHERE $skillType LIKE ?";
+            $stmtSelect = $pdo->prepare($sqlSelect);
+            $stmtSelect->execute(["%$skillInput%"]);
+            $skill_id = $stmtSelect->fetch(PDO::FETCH_COLUMN);
 
-            // Sécurité : On vérifie que le type de skill est valide par rapport aux colonnes de la BDD
-            $allowed_cols = ['hard_skills', 'soft_skills', 'hobbies'];
-            if (!in_array($skillType, $allowed_cols)) {
-                return;
-            }
+            if ($skill_id) {
+                $sqlUserSkill = "INSERT INTO `user_has_skills` (`user_id`, `skills_id`) VALUES (?, ?)";
+                $stmt = $pdo->prepare($sqlUserSkill);
+                $stmt->execute([$user_id, $skill_id]);
+            } else {
+                $sqlUpdateSkill = "INSERT INTO `skills` (`$skillType`) VALUES (?)";
+                $stmtSkill = $pdo->prepare($sqlUpdateSkill);
+                $stmtSkill->execute([$skillInput]);
 
-            try {
-                // ÉTAPE 1 : On cherche si l'utilisateur a déjà une ligne dans 'skills' pour ce type précis.
-                // On fait une jointure entre skills et user_has_skills
-                $sqlCheck = "SELECT s.id 
-                             FROM `skills` s
-                             JOIN `user_has_skills` uhs ON s.id = uhs.skills_id
-                             WHERE uhs.user_id = ? 
-                             AND s.$skillType IS NOT NULL 
-                             AND s.$skillType != ''
-                             LIMIT 1";
+                $skill_id = $pdo->lastInsertId();
 
-                $stmtCheck = $pdo->prepare($sqlCheck);
-                $stmtCheck->execute([$user_id]);
-                $existingRow = $stmtCheck->fetch();
-
-                if ($existingRow) {
-                    // CAS A : L'utilisateur a déjà ce type de compétence, on MET À JOUR la ligne existante
-                    $skill_id = $existingRow['id'];
-                    $sqlUpdate = "UPDATE `skills` SET `$skillType` = ? WHERE `id` = ?";
-                    $stmtUpdate = $pdo->prepare($sqlUpdate);
-                    $stmtUpdate->execute([$content, $skill_id]);
-
-                } else {
-                    // CAS B : C'est nouveau, on CRÉE une ligne dans skills et on la LIE à l'user
-
-                    // 1. Insertion dans 'skills'
-                    $sqlInsert = "INSERT INTO `skills` (`$skillType`) VALUES (?)";
-                    $stmtInsert = $pdo->prepare($sqlInsert);
-                    $stmtInsert->execute([$content]);
-                    $new_skill_id = $pdo->lastInsertId();
-
-                    // 2. Création du lien dans 'user_has_skills'
-                    $sqlLink = "INSERT INTO `user_has_skills` (`user_id`, `skills_id`) VALUES (?, ?)";
-                    $stmtLink = $pdo->prepare($sqlLink);
-                    $stmtLink->execute([$user_id, $new_skill_id]);
-                }
-
-            } catch (PDOException $e) {
-                die("Erreur update skills ($skillType) : " . $e->getMessage());
+                $sqlUserSkill = "INSERT INTO `user_has_skills` (`user_id`, `skills_id`) VALUES (?, ?)";
+                $stmt = $pdo->prepare($sqlUserSkill);
+                $stmt->execute([$user_id, $skill_id]);
             }
         }
     }
-}
-?>
+};

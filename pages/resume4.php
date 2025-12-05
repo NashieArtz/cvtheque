@@ -57,12 +57,12 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
 
     <div id="container" class="text-center mb-4">
         <?= $msg ?> <button onclick="generatePDF()" class="btn btn-primary btn-lg shadow">
-            <i class="bi bi-file-earmark-pdf"></i> Télécharger en PDF
+             Télécharger en PDF
         </button>
 
         <?php if($isOwner): ?>
             <a href="index.php?page=profile-edit" class="btn btn-outline-secondary">
-                <i class="bi bi-gear"></i> Édition Complète
+                 Édition Complète
             </a>
         <?php endif; ?>
     </div>

@@ -1,6 +1,13 @@
 <?php
+/**
+ * @param PDO $pdo connection PDO
+ * @param array $filters tableau de criètres de recherche
+ * @param bool $isAdmin visiteur par défaut
+ * @return array
+ */
 function searchProfiles(PDO $pdo, array $filters, bool $isAdmin = false): array
 {
+    // Stocker les valeurs propres
     $params = [];
 
     $sql = "SELECT u.*, a.city, r.name as role_name 
@@ -8,13 +15,15 @@ function searchProfiles(PDO $pdo, array $filters, bool $isAdmin = false): array
             LEFT JOIN address a ON u.id = a.user_id 
             LEFT JOIN role r ON u.role_id = r.id 
             WHERE 1=1";
+    // LEFT JOIN: GET l'user même sans adresse/rôle
+    // WHERE 1=1: Empêche de vérifier si on ajoute constamment la 1ère condition/suivante
 
-    // 2. Gestion de la visibilité
     if (!$isAdmin) {
         // Guests ne voit que les profils actifs
         $sql .= " AND u.is_active = 1";
     } elseif (!empty($filters['filter_status']) && $filters['filter_status'] !== 'all') {
         // Filtrage par status
+        // ADMIN peut voir actifs & inactifs
         if ($filters['filter_status'] === 'active') {
             $sql .= " AND u.is_active = 1";
         } elseif ($filters['filter_status'] === 'inactive') {
@@ -22,6 +31,7 @@ function searchProfiles(PDO $pdo, array $filters, bool $isAdmin = false): array
         }
     }
 
+    // Jointure que si user cherche une compétence
     if (!empty($filters['filter_skill'])) {
         $sql .= " JOIN user_has_skills uhs ON u.id = uhs.user_id 
                   JOIN skill s ON uhs.skill_id = s.id ";
@@ -31,6 +41,8 @@ function searchProfiles(PDO $pdo, array $filters, bool $isAdmin = false): array
         $sql .= " AND u.driver_licence = 1";
     }
 
+    // Sécurité PDO ':city' au lieu de mettre la variable directement
+    // Sécurité '%' pour éviter les injections, ne voir que du TXT
     if (!empty($filters['filter_city'])) {
         $sql .= " AND a.city LIKE :city";
         $params[':city'] = "%" . $filters['filter_city'] . "%";
@@ -41,6 +53,8 @@ function searchProfiles(PDO $pdo, array $filters, bool $isAdmin = false): array
         $params[':skill'] = "%" . $filters['filter_skill'] . "%";
     }
 
+    // Barre de recherche globale
+    // Remplir chaque placeholder
     if (!empty($filters['search'])) {
         $term = "%" . $filters['search'] . "%";
         $sql .= " AND (u.firstname LIKE :s1 
@@ -55,7 +69,8 @@ function searchProfiles(PDO $pdo, array $filters, bool $isAdmin = false): array
         $params[':s5'] = $term;
     }
 
-    // Group by & order
+    // Group by & order pour n'avoir qu'un résultat par user
+    // JOIN: Renverrait n lignes par compétences
     if (!empty($filters['filter_skill'])) {
         $sql .= " GROUP BY u.id, a.city, r.name";
     }
@@ -69,4 +84,5 @@ function searchProfiles(PDO $pdo, array $filters, bool $isAdmin = false): array
         return [];
     }
 }
+
 ?>

@@ -64,9 +64,9 @@ $skills = $stmtSkills->fetchAll(PDO::FETCH_ASSOC);
                         <div class="col-12 col-md-3 text-center text-md-end">
                             <?php
                             if (isset($_SESSION['user']) && $_SESSION['user']['role_id'] == 3) {
-                                echo '<a href="index.php?page=profile-edit&id=' . $r['id'] . '" class="btn btn-warning"><i class="fas fa-edit"></i> Éditer (Admin)</a>';
+                                echo '<a href="index.php?page=profile-edit&id=' . $r['id'] . '" class="btn btn-warning"> Éditer (Admin)</a>';
                             } elseif (isset($_SESSION['user']) && $_SESSION['user']['id'] == $r['id']) {
-                                echo '<a href="index.php?page=profile-edit" class="btn btn-secondary"><i class="fas fa-pen"></i> Modifier mon profil</a>';
+                                echo '<a href="index.php?page=profile-edit" class="btn btn-secondary"> Modifier mon profil</a>';
                             }
                             ?>
                         </div>
@@ -81,22 +81,22 @@ $skills = $stmtSkills->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="col-md-6">
                                     <h5 class="fw-bold">Coordonnées</h5>
                                     <p class="mb-1 text-muted">
-                                        <i class="fas fa-envelope me-2"></i> <?= htmlspecialchars($r['email']) ?>
+                                         <?= htmlspecialchars($r['email']) ?>
                                     </p>
                                     <p class="mb-1 text-muted">
-                                        <i class="fas fa-phone me-2"></i> <?= !empty($r['phone']) ? htmlspecialchars($r['phone']) : 'Non renseigné' ?>
+                                         <?= !empty($r['phone']) ? htmlspecialchars($r['phone']) : 'Non renseigné' ?>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
                                     <h5 class="fw-bold">Localisation</h5>
                                     <p class="mb-1 text-muted">
-                                        <i class="fas fa-globe-europe me-2"></i> Pays : <?= !empty($r['country_name']) ? htmlspecialchars($r['country_name']) : 'Non renseigné' ?>
+                                         Pays : <?= !empty($r['country_name']) ? htmlspecialchars($r['country_name']) : 'Non renseigné' ?>
                                     </p>
                                     <p class="mb-1 text-muted">
-                                        <i class="fas fa-city me-2"></i> Ville : <?= !empty($r['city']) ? htmlspecialchars($r['city']) : 'Non renseigné' ?>
+                                         Ville : <?= !empty($r['city']) ? htmlspecialchars($r['city']) : 'Non renseigné' ?>
                                     </p>
                                     <p class="mb-0 text-muted">
-                                        <i class="fas fa-map-pin me-2"></i> CP : <?= !empty($r['area_code']) ? htmlspecialchars($r['area_code']) : '' ?>
+                                         CP : <?= !empty($r['area_code']) ? htmlspecialchars($r['area_code']) : '' ?>
                                     </p>
                                 </div>
                             </div>

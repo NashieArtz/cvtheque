@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ede8a12-f2f2-4c9c-8026-c254202a4ece" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/css/resume2.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/css/resume3.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/css/resume4.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/db.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header-guest.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-guest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header-student.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header-student.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/profile-edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile-edit.php" afterDir="false" />
     </list>
     <list id="b8697c67-535d-4448-bffe-c9fbffdf3e00" name="Changes by coolmathieu" comment="" />
@@ -39,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="aaawd" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,7 +55,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Merging ange",
+    "git-widget-placeholder": "ange",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "C:/Users/Angel/Coding/Full-Stack/NFS/1bcigit/cvtheque",
     "list.type.of.created.stylesheet": "CSS",
@@ -110,7 +103,7 @@
       <workItem from="1764837180299" duration="26113000" />
       <workItem from="1764871897411" duration="1185000" />
       <workItem from="1764883788651" duration="8786000" />
-      <workItem from="1764922087471" duration="13976000" />
+      <workItem from="1764922087471" duration="20163000" />
     </task>
     <servers />
   </component>

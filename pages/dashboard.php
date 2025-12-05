@@ -1,15 +1,11 @@
 <?php
-include'./config/release.php';
+include './config/release.php';
 if (isset($_SESSION['logout_message'])) {
     echo '<div id="logout-message" class="alert alert-info">' . $_SESSION['logout_message'] . '</div>';
     unset($_SESSION['logout_message']);
 }
 
 ?>
-
-
-
-
 
 
 <section id="hero">
@@ -52,7 +48,8 @@ if (isset($_SESSION['logout_message'])) {
 
                 </div>
                 <div class="col-md-6">
-                    <img src="./assets/img/pc_with_cv.jpg" class="img-fluid rounded shadow" alt="Illustration d'un CV en ligne">
+                    <img src="./assets/img/pc_with_cv.jpg" class="img-fluid rounded shadow"
+                         alt="Illustration d'un CV en ligne">
                 </div>
             </div>
         </div>
@@ -98,13 +95,17 @@ if (isset($_SESSION['logout_message'])) {
         <h2>Conseils pour optimiser votre profil</h2>
         <p>
             Pour maximiser vos chances de recrutement, assurez-vous que chaque section de votre profil est complète.
-            N'hésitez pas à détailler vos projets techniques : c'est la meilleure façon de démontrer vos compétences concrètes.
-            Les recruteurs filtrent souvent par niveau de compétence (Débutant, Intermédiaire, Avancé), donc soyez précis et honnête !
+            N'hésitez pas à détailler vos projets techniques : c'est la meilleure façon de démontrer vos compétences
+            concrètes.
+            Les recruteurs filtrent souvent par niveau de compétence (Débutant, Intermédiaire, Avancé), donc soyez
+            précis et honnête !
         </p>
         <h2>Comment les employeurs trouvent-ils mon CV ?</h2>
         <p>
-            Les recruteurs accèdent à la <a href="?page=profiles-list">Liste des Profils</a> et utilisent des filtres par
-            promotion et par compétence clé. Une fois votre profil sélectionné, ils peuvent consulter votre fiche détaillée et vous contacter directement
+            Les recruteurs accèdent à la <a href="?page=profiles-list">Liste des Profils</a> et utilisent des filtres
+            par
+            promotion et par compétence clé. Une fois votre profil sélectionné, ils peuvent consulter votre fiche
+            détaillée et vous contacter directement
             grâce aux coordonnées que vous avez rendues publiques.
         </p>
     </div>
@@ -120,7 +121,8 @@ if (isset($_SESSION['logout_message'])) {
                 </button>
                 <div class="accordion-content">
                     <p>
-                        Vous contrôlez la visibilité de votre profil. Dans la page d'édition (<a href="?page=profile-edit">Mon Profil</a>),
+                        Vous contrôlez la visibilité de votre profil. Dans la page d'édition (<a
+                                href="?page=profile-edit">Mon Profil</a>),
                         vous pouvez choisir de masquer votre profil de la liste publique des recruteurs à tout moment.
                     </p>
                 </div>
@@ -132,8 +134,10 @@ if (isset($_SESSION['logout_message'])) {
                 </button>
                 <div class="accordion-content">
                     <p>
-                        Non, la CVthèque utilise un modèle unique et standardisé pour garantir l'uniformité et la lisibilité
-                        pour l'ensemble de nos recruteurs partenaires. La mise en forme est professionnelle et optimisée.
+                        Non, la CVthèque utilise un modèle unique et standardisé pour garantir l'uniformité et la
+                        lisibilité
+                        pour l'ensemble de nos recruteurs partenaires. La mise en forme est professionnelle et
+                        optimisée.
                     </p>
                 </div>
             </div>
@@ -144,7 +148,8 @@ if (isset($_SESSION['logout_message'])) {
                 </button>
                 <div class="accordion-content">
                     <p>
-                        Toutes les sections (Expériences, Projets, Formations) sont gérables depuis la page <a href="?page=profile-edit">Mon Profil</a>.
+                        Toutes les sections (Expériences, Projets, Formations) sont gérables depuis la page <a
+                                href="?page=profile-edit">Mon Profil</a>.
                         Vous pouvez ajouter, modifier ou supprimer chaque élément séparément.
                     </p>
                 </div>
@@ -156,7 +161,8 @@ if (isset($_SESSION['logout_message'])) {
                 </button>
                 <div class="accordion-content">
                     <p>
-                        Sur la page <a href="?page=login">Connexion</a>, un lien 'Mot de passe oublié' vous permet de lancer
+                        Sur la page <a href="?page=login">Connexion</a>, un lien 'Mot de passe oublié' vous permet de
+                        lancer
                         la procédure de réinitialisation via votre adresse email.
                     </p>
                 </div>
@@ -168,7 +174,8 @@ if (isset($_SESSION['logout_message'])) {
                 </button>
                 <div class="accordion-content">
                     <p>
-                        Vous pouvez consulter la liste de nos entreprises partenaires sur la page <a href="?page=companies-list">Partenaires</a>.
+                        Vous pouvez consulter la liste de nos entreprises partenaires sur la page <a
+                                href="?page=companies-list">Partenaires</a>.
                     </p>
                 </div>
             </div>

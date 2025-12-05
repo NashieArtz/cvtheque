@@ -1,7 +1,61 @@
-head {
-    margin: 0 auto;
-    max-width: 1200px;
+.error-container {
     display: flex;
-    text-align: center;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 80vh; /* Prend 80% de la hauteur de l'écran pour centrer verticalement */
+    text-align: center;
+    padding: 20px;
+}
+
+/* Titre principal 404 */
+.error-code {
+    font-size: 8rem;
+    font-weight: bold;
+    color: #613F75; /* La couleur principale de votre charte (Guest Main) */
+    margin: 0;
+    line-height: 1;
+    text-shadow: 2px 2px 0px #e0e0e0;
+}
+
+/* Message d'erreur */
+.error-message {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    color: #555;
+}
+
+/* Description supplémentaire */
+.error-description {
+    font-size: 1rem;
+    color: #777;
+    max-width: 500px;
+    margin-bottom: 30px;
+}
+
+/* Image d'illustration (optionnelle, style pour celle que vous aviez) */
+.error-image {
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+/* Bouton de retour */
+.btn-home {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #613F75;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-home:hover {
+    background-color: #4e325e;
+    transform: translateY(-2px);
 }

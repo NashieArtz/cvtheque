@@ -3,12 +3,17 @@ function searchProfiles(PDO $pdo, array $filters, bool $isAdmin = false): array
 {
     $params = [];
 
+    // Stocker les valeurs propres
+    $params = [];
+
     $sql = "SELECT u.*, a.city, r.name as role_name 
             FROM user u 
             LEFT JOIN address a ON u.id = a.user_id 
             LEFT JOIN role r ON u.role_id = r.id 
             WHERE 1=1";
-
+    // LEFT JOIN: GET l'user même sans adresse/rôle
+    // WHERE 1=1: Empêche de vérifier si on ajoute constamment la 1ère condition/suivante
+    
     // 2. Gestion de la visibilité
     if (!$isAdmin) {
         // Guests ne voit que les profils actifs

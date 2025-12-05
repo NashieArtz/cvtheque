@@ -1,0 +1,251 @@
+/* ----------------------------------------------------
+   RESET
+---------------------------------------------------- */
+
+/* ----------------------------------------------------
+   CONTAINER GLOBAL
+---------------------------------------------------- */
+.responsive {
+    max-width: 1100px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
+        width: 210mm;
+        /* largeur A4 */
+        min-height: 297mm;
+        /* hauteur A4 */
+        max-height: 297mm;
+        margin: 0 auto;
+        padding: 30px;
+        box-sizing: border-box;
+        background: white;
+        flex-direction: column;
+}
+
+/* ----------------------------------------------------
+   HEADER
+---------------------------------------------------- */
+.CV-header {
+    height: 260px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.head-top, .head-center, .head-bottom {
+    position: absolute;
+    width: 100%;
+    height: 33%;
+    left: 0;
+    z-index: 1;
+}
+
+.head-top {
+    top: 0;
+    background: linear-gradient(120deg, #1976d2, #42a5f5);
+}
+
+.head-center {
+    top: 33%;
+    background: linear-gradient(120deg, #42a5f5, #64b5f6);
+}
+
+.head-bottom {
+    top: 66%;
+    background: linear-gradient(120deg, #64b5f6, #90caf9);
+}
+
+.head-words {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 80px;
+    transform: translateY(-50%);
+    color: #fff;
+}
+
+.head-words h3 {
+    font-size: 42px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.head-words p {
+    font-size: 20px;
+    opacity: .9;
+}
+
+/* ----------------------------------------------------
+   PHOTO DE PROFIL
+---------------------------------------------------- */
+.head-image {
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    width: 180px;
+    height: 180px;
+    z-index: 3; /* met l'image au-dessus des bandeaux */
+
+}
+
+.head-background {
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 6px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.head-this img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* ----------------------------------------------------
+   SECTION PRINCIPALE
+---------------------------------------------------- */
+.section-CV3 {
+    display: grid;
+    grid-template-columns: 320px auto;
+    gap: 0;
+}
+
+/* ----------------------------------------------------
+   ASIDE (Gauche)
+---------------------------------------------------- */
+aside {
+    background: #f7f9fc;
+    padding: 30px;
+    border-right: 1px solid #e6e9ef;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1976d2;
+    margin-bottom: 12px;
+}
+
+.title h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.title i {
+    font-size: 20px;
+}
+
+/* Profil */
+.profile-bottom p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Contact */
+.contact-bottom ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.p-left p {
+    font-weight: 600;
+    color: #1976d2;
+}
+
+/* Compétences */
+.skills-bottom ul li {
+    margin-bottom: 14px;
+}
+
+.skills-name p {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.skills-line {
+    width: 100%;
+    height: 8px;
+    background: #e0e7ef;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.skills-line-this {
+    height: 100%;
+    width: 80%; /* MODIFIABLE selon niveau */
+    background: #1976d2;
+    border-radius: 5px;
+}
+
+/* ----------------------------------------------------
+   ARTICLE (droite)
+---------------------------------------------------- */
+article {
+    padding: 40px 50px;
+}
+
+article .history {
+    border-left: 3px solid #1976d2;
+    padding-left: 25px;
+}
+
+.history-parts {
+    margin-bottom: 30px;
+}
+
+.history-parts p:first-child {
+    font-weight: bold;
+    color: #1976d2;
+    margin-bottom: 4px;
+}
+
+.history-parts h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.history-parts p:last-child {
+    color: #555;
+    line-height: 1.6;
+}
+.responsive p, .responsive h3{
+    color: #0F1203;
+}
+
+/* ----------------------------------------------------
+   RESPONSIVE
+---------------------------------------------------- */
+@media (max-width: 900px) {
+    .section-CV3 {
+        grid-template-columns: 1fr;
+    }
+
+    .CV-header {
+        height: 360px;
+    }
+
+    .head-image {
+        right: 50%;
+        transform: translateX(50%);
+        top: 150px;
+    }
+
+    .head-words {
+        left: 50%;
+        transform: translate(-50%, -30%);
+        text-align: center;
+    }
+
+    aside {
+        border-right: none;
+        border-bottom: 1px solid #e6e9ef;
+    }
+}

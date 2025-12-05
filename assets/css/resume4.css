@@ -1,0 +1,77 @@
+.cv-pastel {
+    width: 210mm;
+    /* largeur A4 */
+    min-height: 297mm;
+    /* hauteur A4 */
+    max-height: 297mm;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.cv-pastel header {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(120deg, #ffe1e9, #e3f2ff, #eafff1);
+}
+
+.cv-pastel .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+}
+
+.cv-pastel h1 {
+    font-size: 32px;
+    margin-top: 15px;
+    color: #0F1203;
+}
+
+.cv-pastel p {
+    opacity: .7;
+    color: #0F1203;
+}
+.cv-pastel li {
+    color: #0F1203;
+}
+.cv-pastel h4 {
+    color: #0F1203;
+}
+.cv-pastel strong {
+    color: #0F1203;
+}
+/* Layout */
+.cv-pastel .grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    padding: 30px;
+}
+
+.cv-pastel aside h3 {
+    color: #50fe3d;
+    margin-top: 25px;
+}
+
+.cv-pastel aside ul li {
+    margin: 6px 0;
+}
+
+/* Main */
+.cv-pastel section h2 {
+    font-size: 24px;
+    color: #50fe3d;
+    margin-bottom: 10px;
+}
+
+.cv-pastel .box {
+    background: #f8faff;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-left: 4px solid #90f9c1;
+}

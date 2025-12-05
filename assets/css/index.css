@@ -629,3 +629,8 @@ form {
 .btn.btn-return-dashboard {
     margin: 0;
 }
+
+.card {
+    background-color: var(--bg2-color);
+    color: var(--text-color);
+}

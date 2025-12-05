@@ -10,6 +10,9 @@
   <link href="./assets/css/header-footer.css" rel="stylesheet">
   <link href="./assets/css/register-login.css" rel="stylesheet">
   <link href="./assets/css/resume.css" rel="stylesheet">
+    <link href="./assets/css/resume2.css" rel="stylesheet">
+    <link href="./assets/css/resume3.css" rel="stylesheet">
+    <link href="./assets/css/resume4.css" rel="stylesheet">
 
 </head>
 

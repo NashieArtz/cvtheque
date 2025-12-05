@@ -16,7 +16,7 @@
                     <a class="nav-link nav-link-student fs-5" href="?page=profiles-list">Voir CVs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-student fs-5" href="?page=resume">Mon CV</a>
+                    <a class="nav-link nav-link-student fs-5" href="?page=resume-choice">Mon CV</a>
                 </li>
                 <a class="btn px-4 py-2 fs-5 btn-student-primary"
                    href="?page=profile-user&id=<?= $_SESSION['user']['id'] ?>">

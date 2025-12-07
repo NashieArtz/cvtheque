@@ -107,8 +107,8 @@ Le rendu PDF
 
 ## 📝 Auteur
 
-Ange WU - Développeur Fullstack - www.linkedin.com/in/ange-wu-959357229
-Florent Zysk - Développeur Back-End - https://www.linkedin.com/in/florentzysk/
+Ange WU - Développeur Fullstack - www.linkedin.com/in/ange-wu-959357229 \n
+Florent Zysk - Développeur Back-End - https://www.linkedin.com/in/florentzysk/ \n
 Mathieu Leboucher - Développeur Front-End - https://www.linkedin.com/in/mathieu-leboucher-24b57139b/
 
 Projet réalisé dans le cadre de la formation Développement Web à la Need For School.

@@ -57,12 +57,12 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
 
     <div id="container" class="text-center mb-4">
         <?= $msg ?> <button onclick="generatePDF()" class="btn btn-primary btn-lg shadow">
-            <i class="bi bi-file-earmark-pdf"></i> Télécharger en PDF
+             Télécharger en PDF
         </button>
 
         <?php if($isOwner): ?>
             <a href="index.php?page=profile-edit" class="btn btn-outline-secondary">
-                <i class="bi bi-gear"></i> Édition Complète
+                 Édition Complète
             </a>
         <?php endif; ?>
     </div>
@@ -77,13 +77,13 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
           <ul class="skills">
     <?php foreach ($skills as $skill): ?>
         <?php if (!empty($skill['hard_skills'])): ?>
-            <li><i class="icon fas fa-check-circle text-darkblue"></i> <strong><?= htmlspecialchars($skill['hard_skills']) ?></strong></li>
+            <li> <strong><?= htmlspecialchars($skill['hard_skills']) ?></strong></li>
         <?php endif; ?>
     <?php endforeach; ?>
         <h3>Soft skills</h3>
               <?php foreach ($skills as $skill): ?>
         <?php if (!empty($skill['soft_skills'])): ?>
-            <li><i class="icon fas fa-check-circle text-darkblue"></i> <?= htmlspecialchars($skill['soft_skills']) ?></li>
+            <li> <?= htmlspecialchars($skill['soft_skills']) ?></li>
         <?php endif; ?>
               <?php endforeach; ?>
 </ul>
@@ -94,9 +94,9 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
           <h1><?= htmlspecialchars($user['firstname']) ?> <span class="text-blue text-uppercase"><?= htmlspecialchars($user['lastname']) ?></span></h1>
           <p><?= !empty($user['job_title']) ? htmlspecialchars($user['job_title']) : 'Candidat' ?></p>
           <ul class="infos">
-            <li><i class="icon fas fa-at text-blue"></i> <a class="a-CV2" href="mailto:<?= htmlspecialchars($user['email']) ?>"><?= htmlspecialchars($user['email']) ?></a></li>
-            <li><i class="icon fas fa-phone text-blue"></i> <?= !empty($user['phone']) ? htmlspecialchars($user['phone']) : '' ?></li>
-            <li><i class="icon fas fa-map-marker-alt text-blue"></i> <?= !empty($user['address']) ? htmlspecialchars($user['address']) : '' ?></li>
+            <li> <a class="a-CV2" href="mailto:<?= htmlspecialchars($user['email']) ?>"><?= htmlspecialchars($user['email']) ?></a></li>
+            <li> <?= !empty($user['phone']) ? htmlspecialchars($user['phone']) : '' ?></li>
+            <li> <?= !empty($user['address']) ? htmlspecialchars($user['address']) : '' ?></li>
           </ul>
         </div>
         <div class="content">
@@ -105,7 +105,7 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
             <?php foreach ($experiences as $experience): ?>
                 <p>
                     <strong><?= htmlspecialchars($experience['date_start']) ?>
-                    <i class="fas fa-long-arrow-alt-right"></i>
+                    
                     <?= $experience['date_end'] ? htmlspecialchars($experience['date_end']) : 'Présent' ?></strong><br>
                     <em><?= htmlspecialchars($experience['jobtitle']) ?></em> — <?= htmlspecialchars($experience['employer']) ?>
                 </p>
@@ -130,7 +130,7 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
             <?php foreach ($educations as $edu): ?>
             <p>
               <strong><?= htmlspecialchars($edu['date_start']) ?>
-              <i class="fas fa-long-arrow-alt-right"></i>
+              
               <?= htmlspecialchars($edu['date_end']) ?></strong><br>
               <em><?= htmlspecialchars($edu['diploma']) ?></em>, <?= htmlspecialchars($edu['school']) ?>
             </p>

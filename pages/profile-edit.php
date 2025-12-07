@@ -35,22 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $picture = 'data:' . $_FILES['picture']['type'] . ';base64,' . base64_encode(file_get_contents($_FILES['picture']['tmp_name']));
     }
 
+    $user_columns = ['email', 'firstname', 'lastname', 'job_title', 'phone', 'driver_licence', 'country_id', 'username'];
+    $user_values = [$email, $firstname, $lastname, $job_title, $phone, $driver_licence, $country_id, $username];
 
-    $user_columns = ["email", "firstname", "lastname", "job_title", "phone", "driver_licence", "username"];
-    $user_values = [$email, $firstname, $lastname, $job_title,  $phone, $driver_licence, $username];
-
-    if ($country_id) {
-        $user_columns[] = "country_id";
-        $user_values[] = $country_id;
-    }
     if ($picture) {
-        $user_columns[] = "picture";
+        $user_columns[] = 'picture';
         $user_values[] = $picture;
     }
-
-
-    update($pdo, "user", $user_columns, $user_values, $user_id);
-
+    $table_update = "`user`";
+    update($pdo, $table_update, $user_columns, $user_values, $user_id);
 
     $stmtAddr = $pdo->prepare("UPDATE address SET city = ?, area_code = ? WHERE user_id = ?");
     $stmtAddr->execute([$city, $area_code, $user_id]);
@@ -65,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $userResults = userData($pdo, $user_id);
-
 foreach ($userResults as $u) {
     ?>
 
@@ -91,9 +83,9 @@ foreach ($userResults as $u) {
                             <div class="profile-edit-avatar-container">
                                 <?php $imgSrc = !empty($u['picture']) ? $u['picture'] : 'https://via.placeholder.com/150'; ?>
                                 <img src="<?= htmlspecialchars($imgSrc) ?>" id="avatar-preview" class="profile-edit-avatar">
-                                <label for="picture-input" class="btn-upload-icon" title="Changer la photo">
-                                </label>
-                                <input type="file" name="picture" id="picture-input" class="file-input-hidden" onchange="previewImage(event)">
+                                <label for="picture-input" class="btn-upload-icon" title="Changer la photo">+</label>
+                                <input type="file" name="picture" id="picture-input" class="file-input-hidden"
+                                       onchange="previewImage(event)">
                             </div>
 
                             <div class="mb-3">
@@ -104,7 +96,8 @@ foreach ($userResults as $u) {
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <label class="form-label small text-muted">Prénom</label>
-                                    <input type="text" name="firstname" class="form-control" value="<?= htmlspecialchars($u['firstname']) ?>">
+                                    <input type="text" name="firstname" class="form-control"
+                                           value="<?= htmlspecialchars($u['firstname']) ?>">
                                 </div>
                                 <div class="col-6 mb-3">
                                     <label class="form-label small text-muted">Nom</label>
@@ -136,7 +129,8 @@ foreach ($userResults as $u) {
                             </div>
 
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" name="driver_licence" id="driver_licence" <?= $u['driver_licence'] ? 'checked' : '' ?>>
+                                <input class="form-check-input" type="checkbox" name="driver_licence" id="driver_licence"
+                                        <?= $u['driver_licence'] ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="driver_licence">Permis de conduire</label>
                             </div>
                         </div>
@@ -161,13 +155,14 @@ foreach ($userResults as $u) {
                             </div>
 
                             <div class="row">
-                                <div class="col-7 mb-3">
+                                <div class="col-7 mb-3">selected
                                     <label class="form-label small text-muted">Ville</label>
                                     <input type="text" name="city" class="form-control" value="<?= htmlspecialchars($u['city']) ?>">
                                 </div>
                                 <div class="col-5 mb-3">
                                     <label class="form-label small text-muted">CP</label>
-                                    <input type="text" name="area_code" class="form-control" value="<?= htmlspecialchars($u['area_code']) ?>">
+                                    <input type="text" name="area_code" class="form-control"
+                                           value="<?= htmlspecialchars($u['area_code']) ?>">
                                 </div>
                             </div>
                         </div>
@@ -182,7 +177,7 @@ foreach ($userResults as $u) {
                             <div class="mb-4">
                                 <label class="form-label small fw-bold">Hard Skills</label>
                                 <div class="skills-input-wrapper">
-                                    <input type="text" id="input-hard" class="form-control form-control-sm" placeholder="Ex: PHP, SQL">
+                                    <input type="text" id="input-hard" class="form-control form-control-sm" name="hard_skills" placeholder="Ex: PHP, SQL">
                                     <button type="button" class="btn btn-sm btn-outline-primary" onclick="addSkillTag('hard')">
                                         +
                                     </button>
@@ -191,8 +186,8 @@ foreach ($userResults as $u) {
                                     <?php
                                     if (isset($u['skills']) && is_array($u['skills'])) {
                                         foreach ($u['skills'] as $s) {
-                                            if(!empty($s['hard_skills'])) {
-                                                echo '<div class="skill-tag-item"><span>'.htmlspecialchars($s['hard_skills']).'</span><span class="skill-tag-remove" onclick="this.parentElement.remove()">✕</span></div>';
+                                            if (!empty($s['hard_skills'])) {
+                                                echo '<div class="skill-tag-item"><span>' . htmlspecialchars($s['hard_skills']) . '</span><span class="skill-tag-remove" onclick="this.parentElement.remove()">✕</span></div>';
                                             }
                                         }
                                     }
@@ -204,7 +199,7 @@ foreach ($userResults as $u) {
                             <div class="mb-4">
                                 <label class="form-label small fw-bold">Soft Skills</label>
                                 <div class="skills-input-wrapper">
-                                    <input type="text" id="input-soft" class="form-control form-control-sm" placeholder="Ex: Rigueur">
+                                    <input type="text" id="input-soft" name="soft_skills" class="form-control form-control-sm" placeholder="Ex: Rigueur">
                                     <button type="button" class="btn btn-sm btn-outline-primary" onclick="addSkillTag('soft')">
                                         +
                                     </button>
@@ -213,8 +208,8 @@ foreach ($userResults as $u) {
                                     <?php
                                     if (isset($u['skills']) && is_array($u['skills'])) {
                                         foreach ($u['skills'] as $s) {
-                                            if(!empty($s['soft_skills'])) {
-                                                echo '<div class="skill-tag-item"><span>'.htmlspecialchars($s['soft_skills']).'</span><span class="skill-tag-remove" onclick="this.parentElement.remove()">✕</span></div>';
+                                            if (!empty($s['soft_skills'])) {
+                                                echo '<div class="skill-tag-item"><span>' . htmlspecialchars($s['soft_skills']) . '</span><span class="skill-tag-remove" onclick="this.parentElement.remove()">✕</span></div>';
                                             }
                                         }
                                     }
@@ -226,7 +221,7 @@ foreach ($userResults as $u) {
                             <div class="mb-4">
                                 <label class="form-label small fw-bold">Hobbies</label>
                                 <div class="skills-input-wrapper">
-                                    <input type="text" id="input-hobbies" class="form-control form-control-sm" placeholder="Ex: Football">
+                                    <input type="text" id="input-hobbies" name="hobbies" class="form-control form-control-sm" placeholder="Ex: Football">
                                     <button type="button" class="btn btn-sm btn-outline-primary" onclick="addSkillTag('hobbies')">
                                         +
                                     </button>
@@ -246,7 +241,8 @@ foreach ($userResults as $u) {
 
             <div class="row mt-4 mb-5">
                 <div class="col-12 text-center">
-                    <button type="submit" name="submit-save-all" class="btn btn-primary btn-lg px-5 shadow" onclick="prepareTagsForSubmit()">
+                    <button type="submit" name="submit-save-all" class="btn btn-primary btn-lg px-5 shadow"
+                            onclick="prepareTagsForSubmit()">
                         Sauvegarder le Profil
                     </button>
                 </div>
@@ -256,3 +252,127 @@ foreach ($userResults as $u) {
     </div>
 
 <?php } ?>
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // Fonction pour initialiser un gestionnaire de tags
+        function initTagManager(type) {
+            // Cibleer les éléments par leur ID
+            const input = document.getElementById('input-' + type);
+            const addButton = input ? input.nextElementSibling : null;
+            const listContainer = document.getElementById('list-' + type);
+            const hiddenInput = document.getElementById('hidden-' + type);
+
+            // Sécurité si un élément manque
+            if (!input || !listContainer || !hiddenInput) return;
+
+            // Fonction pour ajouter un tag visuel
+            function addTag(text) {
+                // Si l'user n'a rien tapé
+                if (!text) return;
+
+                // Vérifier les doublons
+                const currentTags = getTags();
+                // Vérifier que tag n'existe pas déjà
+                if (currentTags.includes(text.toLowerCase())) return;
+
+                // Création du tag HTML
+                const tag = document.createElement('div');
+                tag.className = 'skill-tag-item';
+                tag.style.cssText = 'display:inline-flex; align-items:center; background:#613F75; color:white; padding:5px 10px; border-radius:15px; margin:2px; font-size:0.9em;';
+
+                const textSpan = document.createElement('span');
+                textSpan.textContent = text;
+
+                const removeSpan = document.createElement('span');
+                removeSpan.className = 'skill-tag-remove';
+                removeSpan.innerHTML = '&times;';
+                removeSpan.style.cursor = 'pointer';
+
+                // Éviter injection
+                tag.appendChild(textSpan);
+                tag.appendChild(removeSpan);
+
+                // Ajout de l'événement de suppression sur la croix
+                // GET la petite croix
+                tag.querySelector('.skill-tag-remove').addEventListener('click', function () {
+                    // Supprimer visuellement
+                    tag.remove();
+                    // Mettre à jour
+                    updateHiddenInput();
+                });
+
+                // Faire apparaitre le tag
+                listContainer.appendChild(tag);
+                updateHiddenInput();
+                // Reset du champ
+                input.value = '';
+            }
+
+            // Fonction pour récupérer la liste actuelle des tags (pour la vérification doublons)
+            function getTags() {
+                const tags = [];
+                listContainer.querySelectorAll('.skill-tag-item span:first-child').forEach(span => {
+                    tags.push(span.innerText.trim().toLowerCase());
+                });
+                // Return la table
+                return tags;
+            }
+
+            // Fonction pour mettre à jour l'input caché envoyé au serveur
+            function updateHiddenInput() {
+                const tags = [];
+                listContainer.querySelectorAll('.skill-tag-item span:first-child').forEach(span => {
+                    // On garde la casse originale pour l'envoi
+                    tags.push(span.innerText.trim());
+                });
+                // Format "HTML,CSS,PHP"
+                hiddenInput.value = tags.join(',');
+            }
+
+            if (addButton) {
+                addButton.addEventListener('click', function (e) {
+                    // Empêche le submit du formulaire global
+                    e.preventDefault();
+                    addTag(input.value.trim());
+                });
+            }
+
+            // Bloquer l'envoi du form avec key:ENTER
+            input.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addTag(input.value.trim());
+                }
+            });
+
+            // on recrée les tags visuels au chargement si php a déjà rempli l'input
+            if (hiddenInput.value) {
+                const existingTags = hiddenInput.value.split(',');
+                existingTags.forEach(tag => addTag(tag.trim()));
+            }
+        }
+
+        // Initialisation pour les 3 types de compétences
+        initTagManager('hard');
+        initTagManager('soft');
+        initTagManager('hobbies');
+    });
+
+    // Fonction pour la prévisualisation de l'image
+    function previewImage(event) {
+        // Lire les fichiers de l'ordi
+        const reader = new FileReader();
+        // Lecture terminée --> func()
+        reader.onload = function () {
+            const output = document.getElementById('avatar-preview');
+            if (output) output.src = reader.result;
+        };
+        // Récup le premier fichier dans input et déclenche lecture du fichier
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

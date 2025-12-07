@@ -57,12 +57,12 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
 
     <div id="container" class="text-center mb-4">
         <?= $msg ?> <button onclick="generatePDF()" class="btn btn-primary btn-lg shadow">
-            <i class="bi bi-file-earmark-pdf"></i> Télécharger en PDF
+             Télécharger en PDF
         </button>
 
         <?php if($isOwner): ?>
             <a href="index.php?page=profile-edit" class="btn btn-outline-secondary">
-                <i class="bi bi-gear"></i> Édition Complète
+                 Édition Complète
             </a>
         <?php endif; ?>
     </div>
@@ -80,7 +80,7 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
             <div class="head-image">
                 <div class="head-background">
                     <div class="head-this">
-                        <img src="<?= $user['picture'] ?>" alt="photo de profil" />
+                        
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
                 <div class="contact">
                     <div class="contact-top">
                         <div class="title">
-                            <i class="fas fa-phone"></i>
+                            
                             <h3>Contact</h3>
                         </div>
                     </div>
@@ -119,7 +119,7 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
                 <div class="skills">
                     <div class="skills-top">
                         <div class="title">
-                            <i class="fas fa-check-circle"></i>
+                            
                             <h3>Compétences</h3>
                         </div>
                     </div>
@@ -140,7 +140,7 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
             <article>
                 <div class="education">
                     <div class="education-top">
-                        <div class="icon-left"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="icon-left">
                         <div class="title-right"><h3>Éducation</h3></div>
                     </div>
                     <div class="education-bottom">
@@ -158,7 +158,7 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
 
                 <div class="experience">
                     <div class="experience-top">
-                        <div class="icon-left"><i class="fas fa-briefcase"></i></div>
+                        <div class="icon-left">
                         <div class="title-right"><h3>Expérience</h3></div>
                     </div>
                     <div class="experience-bottom">
@@ -176,7 +176,7 @@ $isOwner = (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $id);
 
                 <div class="languages">
                     <div class="languages-top">
-                        <div class="icon-left"><i class="fas fa-language"></i></div>
+                        <div class="icon-left">
                         <div class="title-right"><h3>Soft skills</h3></div>
                     </div>
                     <div id="scrolls" class="languages-bottom">

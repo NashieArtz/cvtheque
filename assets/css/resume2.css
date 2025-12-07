@@ -1,0 +1,126 @@
+/* GENERAL */
+.a-CV2{
+    text-decoration: none;
+    color: #c44444;
+}
+
+
+
+.cv-container h1{
+    margin: 0 0 1rem;
+    font-size: 2.5rem;
+    margin-bottom: .5rem;
+}
+
+.cv-container h2{
+    margin: 0 0 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.text-blue{
+    color: #c44444;
+}
+
+.text-darkblue{
+    color: #002060;
+}
+
+.text-uppercase{
+    text-transform: uppercase;
+}
+
+.icon{
+    margin-right: .5rem;
+}
+
+.section{
+    margin-bottom: 1.5rem;
+}
+
+/* LEFT COLUMN */
+.left-column{
+    grid-area: left-column;
+    padding: 50px;
+    background-color: #c44444;
+    color: white;
+}
+
+.portait{
+    border-radius: 50%;
+    max-width: 150px;
+    margin: auto;
+    display: block;
+    margin-bottom: 50px;
+}
+
+.skills{
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    margin: 0 0 1rem;
+}
+
+/* RIGHT COLUMN */
+.right-column{
+    grid-area: right-column;
+    display: grid;
+    grid-template-rows: 250px 1fr;
+    grid-template-areas:
+    "header"
+    "content";
+}
+
+/* HEADER */
+.header{
+    grid-area: header;
+    padding: 50px;
+    background-color: #F2F2F2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.infos{
+    columns: 2;
+    list-style-type: none;
+    padding: 0;
+}
+
+/* CONTENT */
+.content{
+    grid-area: content;
+    padding: 50px;
+}
+
+.experience-list{
+    list-style-type: circle;
+}
+
+
+.cv-container  {
+    width: 210mm;
+    /* largeur A4 */
+    min-height: 297mm;
+    /* hauteur A4 */
+    max-height: 297mm;
+    margin: 0 auto;
+    padding: 30px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: white;
+    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "left-column right-column right-column";
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    font-family: Roboto;
+    font-weight: 300;
+    font-size: .9rem;
+    line-height: 1.5;
+}
+.right-column p, .right-column h1, .right-column h2, .right-column h3, .right-column a, .right-column li {
+    color: #0F1203;
+}

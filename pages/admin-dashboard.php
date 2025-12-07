@@ -1,27 +1,29 @@
 <?php
 include './config/roles/admin.php';
-// On inclut la logique de recherche centralisée
-// Assurez-vous que ce fichier existe bien dans config/search_logic.php suite à nos échanges précédents
-// Si vous ne l'avez pas créé, remettez la logique SQL directe ici.
-include_once './config/search_logic.php';
+include_once './config/search-logic.php';
 
 $message = "";
 
-// --- 1. TRAITEMENT DES ACTIONS (POST) ---
+// Sécurité de intval(), GET la 1ère valeur de l'URL
+// REQUEST_METHOD: Check si l'user a envoyé une requête, avec données ou non
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userId = intval($_POST['user_id']);
 
     if (isset($_POST['action_delete'])) {
         try {
+            // Soit toutes passent, soit aucune
+            // Suppression des données liées, puis le user
             $pdo->beginTransaction();
             $pdo->prepare("DELETE FROM user_has_skills WHERE user_id = ?")->execute([$userId]);
             $pdo->prepare("DELETE FROM user_has_education WHERE user_id = ?")->execute([$userId]);
             $pdo->prepare("DELETE FROM experience WHERE user_id = ?")->execute([$userId]);
             $pdo->prepare("DELETE FROM address WHERE user_id = ?")->execute([$userId]);
             $pdo->prepare("DELETE FROM user WHERE id = ?")->execute([$userId]);
+            // Validation des suppressions
             $pdo->commit();
             $message = "<div class='alert alert-success'>Utilisateur supprimé.</div>";
         } catch (Exception $e) {
+            // Annuler en cas d'erreur
             $pdo->rollBack();
             $message = "<div class='alert alert-danger'>Erreur: " . $e->getMessage() . "</div>";
         }
@@ -36,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// --- 2. PRÉPARATION DES FILTRES (GET) ---
+// GET les filtres en paramètres
 $filters = [
         'search' => $_GET['search'] ?? '',
         'filter_status' => $_GET['filter_status'] ?? 'all',
@@ -51,11 +53,10 @@ $filterCity = $filters['filter_city'];
 $filterSkill = $filters['filter_skill'];
 $filterLicense = $filters['filter_license'];
 
-// --- 3. RECHERCHE (APPEL FONCTION CENTRALISÉE) ---
-// true = mode admin (voit tout, peut filtrer par statut)
-// Si vous n'avez pas le fichier search_logic.php, remplacez cette ligne par votre bloc SQL complet précédent
+
 $users = searchProfiles($pdo, $filters, true);
 
+// Check si un filtre est utilisé
 $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill) || $filterLicense !== 'all' || $filterStatus !== 'all';
 ?>
 
@@ -67,7 +68,6 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
 
     <?= $message ?>
 
-    <!-- BARRE DE RECHERCHE ADMIN -->
     <div class="row justify-content-center mb-5">
         <div class="col-md-12">
 
@@ -78,15 +78,15 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
 
                     <button class="btn btn-purple px-4 py-2" type="button" data-bs-toggle="collapse"
                             data-bs-target="#filtersCollapse">
-                        <i class="bi bi-funnel-fill me-2"></i> Filter
+                         Filter
                     </button>
 
                     <div class="flex-grow-1 position-relative">
                         <input type="text" name="search" class="form-control input-search-custom"
                                placeholder="Rechercher par mot-clé (Nom, Email, Ville...)"
                                value="<?= htmlspecialchars($search) ?>">
-                        <button type="submit" class="btn-search-icon">
-                            <i class="bi bi-search me-1"></i> Rechercher
+                        <button type="submit" class="search-btn">
+                             Rechercher
                         </button>
                     </div>
                 </div>
@@ -126,7 +126,7 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
                     <?php if ($isFilterActive): ?>
                         <div class="mt-2 text-end">
                             <a href="index.php?page=admin-dashboard" class="text-decoration-none text-muted small">
-                                <i class="bi bi-x-circle"></i> Effacer les filtres
+                                 Effacer les filtres
                             </a>
                         </div>
                     <?php endif; ?>
@@ -135,14 +135,13 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
         </div>
     </div>
 
-    <!-- GRILLE DES PROFILS ADMIN -->
     <div class="row g-4">
         <?php foreach ($users as $user): ?>
             <?php
+        // Condition faire apparaitre l'user
             $isActive = isset($user['is_active']) ? $user['is_active'] : 1;
             ?>
             <div class="col-md-6">
-                <!-- Ajout de la classe 'border-danger' si inactif pour repérage rapide -->
                 <div class="card-profile-horizontal position-relative <?= !$isActive ? 'border-danger' : '' ?>">
 
                     <?php if (!$isActive): ?>
@@ -165,7 +164,6 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
                                 <div>
                                     <h5><?= htmlspecialchars($user['lastname']) ?> <?= htmlspecialchars($user['firstname']) ?></h5>
 
-                                    <!-- Badge Rôle -->
                                     <span class="badge bg-info text-dark mb-2" style="font-size: 0.75rem;">
                                         <?= htmlspecialchars($user['role_name'] ?? 'Utilisateur') ?>
                                     </span>
@@ -177,7 +175,7 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
                                 <?= !empty($user['job_title']) ? htmlspecialchars($user['job_title']) : 'Aucun poste défini' ?>
                             </div>
                             <div class="profile-location">
-                                <i class="bi bi-geo-alt me-1"></i> <?= !empty($user['city']) ? htmlspecialchars($user['city']) : 'Ville non renseignée' ?>
+                                 <?= !empty($user['city']) ? htmlspecialchars($user['city']) : 'Ville non renseignée' ?>
                             </div>
                         </div>
                     </div>
@@ -187,6 +185,7 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
                         <ul class="skills-list">
                             <?php
                             if (!empty($user['skills_list'])) {
+                                // explode(): Faire exploser chaine de txt en tableau avec séparateur
                                 $skills = explode(',', $user['skills_list']);
                                 $skillsToShow = array_slice($skills, 0, 3);
                                 foreach ($skillsToShow as $skillName) {
@@ -202,19 +201,15 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
                         </ul>
                     </div>
 
-                    <!-- FOOTER ACTIONS ADMIN -->
                     <div class="card-footer-custom mt-auto pt-3 border-top">
-                        <!-- Formulaire pour les boutons d'action -->
                         <form method="POST" class="d-flex w-100 gap-2 align-items-center">
                             <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
 
-                            <!-- Lien Voir -->
                             <a href="index.php?page=profile-guest&id=<?= $user['id'] ?>"
                                class="btn btn-outline-primary" title="Voir le profil public">
                                 Voir
                             </a>
 
-                            <!-- Bouton Activer/Désactiver -->
                             <button type="submit" name="action_toggle"
                                     class="btn btn-sm w-50 <?= $isActive ? 'btn-outline-warning' : 'btn-outline-success' ?> flex-grow-1"
                                     title="<?= $isActive ? 'Désactiver ce compte' : 'Activer ce compte' ?>">
@@ -222,7 +217,6 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
                                 <?= $isActive ? 'Désactiver' : 'Activer' ?>
                             </button>
 
-                            <!-- Bouton Supprimer -->
                             <button type="submit" name="action_delete" class="btn btn-sm btn-outline-danger"
                                     onclick="return confirm('Êtes-vous sûr de vouloir supprimer définitivement cet utilisateur et toutes ses données ?');"
                                     title="Supprimer définitivement">

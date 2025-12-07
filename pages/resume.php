@@ -50,12 +50,12 @@ $pdfFilename = 'CV_' . htmlspecialchars($user['lastname']) . '_' . htmlspecialch
 
     <div id="container" class="text-center mb-4">
         <?= $msg ?> <button onclick="generatePDF()" class="btn btn-primary btn-lg shadow">
-            <i class="bi bi-file-earmark-pdf"></i> Télécharger en PDF
+             Télécharger en PDF
         </button>
 
         <?php if($isOwner): ?>
             <a href="index.php?page=profile-edit" class="btn btn-outline-secondary">
-                <i class="bi bi-gear"></i> Édition Complète
+                 Édition Complète
             </a>
         <?php endif; ?>
     </div>
@@ -74,7 +74,7 @@ $pdfFilename = 'CV_' . htmlspecialchars($user['lastname']) . '_' . htmlspecialch
                     <?php if($isOwner): ?>
                         <div class="edit-btn-wrapper">
                             <button type="button" class="btn btn-sm btn-outline-primary btn-quick-edit" data-bs-toggle="modal" data-bs-target="#quickEditModal">
-                                <i class="bi bi-pencil-fill"></i> Modifier
+                                 Modifier
                             </button>
                         </div>
                     <?php endif; ?>
@@ -100,7 +100,7 @@ $pdfFilename = 'CV_' . htmlspecialchars($user['lastname']) . '_' . htmlspecialch
                             <div class="title"><?= htmlspecialchars($edu['diploma']) ?></div>
                             <div class="subtitle"><?= htmlspecialchars($edu['school']) ?></div>
                             <div class="time"><?= htmlspecialchars($edu['date_start']) ?> - <?= $edu['date_end'] ?></div>
-                            <?php if(!empty($edu['current_studies'])): ?><div class="exprecince small"><?= htmlspecialchars($edu['current_studies']) ?></div><?php endif; ?>
+                            <?php if(!empty($edu['current_studies'])): ?><div class="experience small"><?= htmlspecialchars($edu['current_studies']) ?></div><?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -119,6 +119,11 @@ $pdfFilename = 'CV_' . htmlspecialchars($user['lastname']) . '_' . htmlspecialch
                     <?php if(!empty($user['phone'])): ?>
                         <p><a href="tel:<?= htmlspecialchars($user['phone']) ?>"><?= htmlspecialchars($user['phone']) ?></a></p>
                     <?php endif; ?>
+
+                    <?php if($user['driver_licence'] == 1): ?>
+                    <p>A le permis</p>
+                    <?php endif; ?>
+
                 </div>
 
                 <div class="cv-skills">

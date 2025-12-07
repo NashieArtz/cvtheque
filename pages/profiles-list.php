@@ -1,12 +1,4 @@
 <?php
-// Récupération des paramètres envoyés en GET
-$search = $_GET['search'] ?? '';
-$filterCity = $_GET['filter_city'] ?? '';
-$filterSkill = $_GET['filter_skill'] ?? '';
-$filterLicense = $_GET['filter_license'] ?? 'all';
-
-$params = [];
-
 // On utilise GROUP_CONCAT pour récupérer toutes les compétences d'un coup dans une seule colonne "skills_list"
 $sql = "SELECT u.*, a.city, 
         GROUP_CONCAT(DISTINCT s.hard_skills SEPARATOR ',') as skills_list
@@ -16,16 +8,21 @@ $sql = "SELECT u.*, a.city,
         LEFT JOIN skills s ON uhs.skills_id = s.id
         WHERE u.is_active = 1";
 
+
+// Récupération des paramètres envoyés en GET
+$search = $_GET['search'] ?? '';
+$filterCity = $_GET['filter_city'] ?? '';
+$filterSkill = $_GET['filter_skill'] ?? '';
+$filterLicense = $_GET['filter_license'] ?? 'all';
+$params = [];
 // Filtres
 if ($filterLicense === 'yes') {
     $sql .= " AND u.driver_licence = 1";
 }
-
 if (!empty($filterCity)) {
     $sql .= " AND a.city LIKE :city";
     $params[':city'] = "%$filterCity%";
 }
-
 if (!empty($search)) {
     $term = "%$search%";
     $sql .= " AND (u.firstname LIKE :s1 
@@ -39,14 +36,11 @@ if (!empty($search)) {
     $params[':s4'] = $term;
     $params[':s5'] = $term;
 }
-
 $sql .= " GROUP BY u.id";
-
 if (!empty($filterSkill)) {
     $sql .= " HAVING skills_list LIKE :skill";
     $params[':skill'] = "%$filterSkill%";
 }
-
 $sql .= " ORDER BY u.id DESC";
 
 try {
@@ -74,7 +68,7 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
                 <div class="d-flex flex-wrap gap-3 align-items-center search-bar-div">
 
                     <button class="btn btn-purple px-4 py-2" type="button" data-bs-toggle="collapse" data-bs-target="#filtersCollapse">
-                        <i class="bi bi-funnel-fill me-2"></i> Filter
+                        Filter
                     </button>
 
                     <div class="flex-grow-1 position-relative">
@@ -82,7 +76,7 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
                                placeholder="Rechercher par mot-clé (Nom, Titre, Ville...)"
                                value="<?= htmlspecialchars($search) ?>">
                         <button type="submit" class="btn search-btn">
-                            <i class="bi bi-search search-text">Rechercher</i>
+                            Rechercher
                         </button>
                     </div>
                 </div>
@@ -109,7 +103,7 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
                     <?php if ($isFilterActive): ?>
                         <div class="mt-2 text-end">
                             <a href="index.php?page=profiles-list" class="text-decoration-none text-muted small">
-                                <i class="bi bi-x-circle"></i> Réinitialiser la recherche
+                                 Réinitialiser la recherche
                             </a>
                         </div>
                     <?php endif; ?>
@@ -169,7 +163,7 @@ $isFilterActive = !empty($search) || !empty($filterCity) || !empty($filterSkill)
                             Voir CV
                         </a>
                         <a href="index.php?page=profile-guest&id=<?= $u['id'] ?>" class="btn-view-profile">
-                            <i class="bi bi-star"></i> Voir Profil
+                             Voir Profil
                         </a>
                     </div>
 
